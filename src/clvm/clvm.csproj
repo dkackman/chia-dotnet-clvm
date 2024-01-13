@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>chia-dotnet-clvm</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>C# chia CLVM</Title>
+    <Description>A dotnet native Chia CLVM implementation</Description>
+    <PackageIcon>chia-leaf-logo-384x384.png</PackageIcon>
+    <PackageTags>chia; xch; clvm</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <IncludeSymbols>True</IncludeSymbols>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Authors>dkackman</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\chia-leaf-logo-384x384.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
