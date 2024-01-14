@@ -1,10 +1,9 @@
-using System;
-
 namespace chia.dotnet.clvm;
+
 public class Position
 {
-    public int Line { get; set; }
-    public int Column { get; set; }
+    public int Line { get; init; }
+    public int Column { get; init; }
 
     public Position(string source, int index)
     {
