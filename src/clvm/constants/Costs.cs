@@ -1,59 +1,58 @@
+using System.Numerics;
+
 namespace chia.dotnet.clvm;
 
-public static partial class Constants
+public static class Costs
 {
-    public static readonly IReadOnlyDictionary<string, ulong> Costs = new Dictionary<string, ulong>
-    {
-        {"if", 33},
-        {"cons", 50},
-        {"first", 30},
-        {"rest", 30},
-        {"listp", 19},
-        {"mallocPerByte", 10},
-        {"arithBase", 99},
-        {"arithPerByte", 3},
-        {"arithPerArg", 320},
-        {"logBase", 100},
-        {"logPerByte", 3},
-        {"logPerArg", 264},
-        {"grsBase", 117},
-        {"grsPerByte", 1},
-        {"eqBase", 117},
-        {"eqPerByte", 1},
-        {"grBase", 498},
-        {"grPerByte", 2},
-        {"divmodBase", 1116},
-        {"divmodPerByte", 6},
-        {"divBase", 988},
-        {"divPerByte", 4},
-        {"sha256Base", 87},
-        {"sha256PerByte", 2},
-        {"sha256PerArg", 134},
-        {"pointAddBase", 101094},
-        {"pointAddPerArg", 1343980},
-        {"pubkeyBase", 1325730},
-        {"pubkeyPerByte", 38},
-        {"mulBase", 92},
-        {"mulPerOp", 885},
-        {"mulLinearPerByte", 6},
-        {"mulSquarePerByteDivider", 128},
-        {"strlenBase", 173},
-        {"strlenPerByte", 1},
-        {"pathLookupBase", 40},
-        {"pathLookupPerLeg", 4},
-        {"pathLookupPerZeroByte", 4},
-        {"concatBase", 142},
-        {"concatPerByte", 3},
-        {"concatPerArg", 135},
-        {"boolBase", 200},
-        {"boolPerArg", 300},
-        {"ashiftBase", 596},
-        {"ashiftPerByte", 3},
-        {"lshiftBase", 277},
-        {"lshiftPerByte", 3},
-        {"lognotBase", 331},
-        {"lognotPerByte", 3},
-        {"apply", 90},
-        {"quote", 20},
-    };
+    public static readonly  BigInteger If = 33;
+    public static readonly  BigInteger Cons = 50;
+    public static readonly  BigInteger First = 30;
+    public static readonly  BigInteger Rest = 30;
+    public static readonly  BigInteger Listp = 19;
+    public static readonly  BigInteger MallocPerByte = 10;
+    public static readonly  BigInteger ArithBase = 99;
+    public static readonly  BigInteger ArithPerByte = 3;
+    public static readonly  BigInteger ArithPerArg = 320;
+    public static readonly  BigInteger LogBase = 100;
+    public static readonly  BigInteger LogPerByte = 3;
+    public static readonly  BigInteger LogPerArg = 264;
+    public static readonly  BigInteger GrsBase = 117;
+    public static readonly  BigInteger GrsPerByte = 1;
+    public static readonly  BigInteger EqBase = 117;
+    public static readonly  BigInteger EqPerByte = 1;
+    public static readonly  BigInteger GrBase = 498;
+    public static readonly  BigInteger GrPerByte = 2;
+    public static readonly  BigInteger DivmodBase = 1116;
+    public static readonly  BigInteger DivmodPerByte = 6;
+    public static readonly  BigInteger DivBase = 988;
+    public static readonly  BigInteger DivPerByte = 4;
+    public static readonly  BigInteger Sha256Base = 87;
+    public static readonly  BigInteger Sha256PerByte = 2;
+    public static readonly  BigInteger Sha256PerArg = 134;
+    public static readonly  BigInteger PointAddBase = 101094;
+    public static readonly  BigInteger PointAddPerArg = 1343980;
+    public static readonly  BigInteger PubkeyBase = 1325730;
+    public static readonly  BigInteger PubkeyPerByte = 38;
+    public static readonly  BigInteger MulBase = 92;
+    public static readonly  BigInteger MulPerOp = 885;
+    public static readonly  BigInteger MulLinearPerByte = 6;
+    public static readonly  BigInteger MulSquarePerByteDivider = 128;
+    public static readonly  BigInteger StrlenBase = 173;
+    public static readonly  BigInteger StrlenPerByte = 1;
+    public static readonly  BigInteger PathLookupBase = 40;
+    public static readonly  BigInteger PathLookupPerLeg = 4;
+    public static readonly  BigInteger PathLookupPerZeroByte = 4;
+    public static readonly  BigInteger ConcatBase = 142;
+    public static readonly  BigInteger ConcatPerByte = 3;
+    public static readonly  BigInteger ConcatPerArg = 135;
+    public static readonly  BigInteger BoolBase = 200;
+    public static readonly  BigInteger BoolPerArg = 300;
+    public static readonly  BigInteger AshiftBase = 596;
+    public static readonly  BigInteger AshiftPerByte = 3;
+    public static readonly  BigInteger LshiftBase = 277;
+    public static readonly  BigInteger LshiftPerByte = 3;
+    public static readonly  BigInteger LognotBase = 331;
+    public static readonly  BigInteger LognotPerByte = 3;
+    public static readonly  BigInteger Apply = 90;
+    public static readonly  BigInteger Quote = 20;
 }
