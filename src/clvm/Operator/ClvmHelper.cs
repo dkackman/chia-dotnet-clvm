@@ -5,7 +5,7 @@ namespace chia.dotnet.clvm;
 public static class ClvmHelper
 {
     public enum ArgumentType { Atom, Cons }
-    
+
     public static BigInteger Mod(BigInteger value, BigInteger modulus) => ((value % modulus) + modulus) % modulus;
 
     public static int LimbsForBigInt(BigInteger value)
@@ -57,7 +57,7 @@ public static class ClvmHelper
         int length,
         ArgumentType? type = null)
     {
-        var list = program.ToList(); // Assuming Program.ToList() returns List<Program>
+        var list = program.ToList();
         if (list.Count != length)
         {
             throw new Exception($"Expected {length} arguments in {name} operator{program.PositionSuffix}.");
@@ -68,12 +68,24 @@ public static class ClvmHelper
     }
 
     public static IList<Program> ToList(
+            this Program program,
+            string name,
+            ArgumentType? type = null)
+    {
+        var list = program.ToList();
+
+        ValidateListType(list, type, name);
+
+        return list;
+    }
+
+    public static IList<Program> ToList(
         this Program program,
         string name,
         int[] lengthRange,
         ArgumentType? type = null)
     {
-        var list = program.ToList(); // Assuming Program.ToList() returns List<Program>
+        var list = program.ToList();
         if (lengthRange.Length != 2 || list.Count < lengthRange[0] || list.Count > lengthRange[1])
         {
             var rangeDescription = lengthRange[1] == int.MaxValue ? $"at least {lengthRange[0]}" : $"between {lengthRange[0]} and {lengthRange[1]}";

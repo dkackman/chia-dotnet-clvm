@@ -2,7 +2,7 @@ namespace chia.dotnet.clvm;
 
 public static class KeywordConstants
 {
-    private static IReadOnlyDictionary<string, ulong> keywords = new Dictionary<string, ulong>
+    public static readonly IReadOnlyDictionary<string, ulong> Keywords = new Dictionary<string, ulong>
     {
         {"q", 0x01},
         {"a", 0x02},
@@ -38,6 +38,4 @@ public static class KeywordConstants
         {".", 0x23},
         {"softfork", 0x24},
     };
-
-    public static IReadOnlyDictionary<string, ulong> Keywords { get => keywords; set => keywords = value; }
 }

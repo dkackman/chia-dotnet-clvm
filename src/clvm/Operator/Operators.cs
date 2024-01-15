@@ -35,7 +35,18 @@ public static class Operators
         { "pubkey_for_exp", new Operator(PubkeyForExp ) },
         { "point_add", new Operator(PointAdd) },
         { "strlen", new Operator(Strlen ) },
-        { "substr", new Operator(Substr) }
+        { "substr", new Operator(Substr) },
+        { "concat", new Operator(Concat) },
+        { "ash", new Operator(Ash) },
+        { "lsh", new Operator(Lsh) },
+        { "logand", new Operator(Logand) },
+        { "logior", new Operator(Logior) },
+        { "logxor", new Operator(Logxor) },
+        { "lognot", new Operator(Lognot) },
+        { "not", new Operator(Not) },
+        { "any", new Operator(Any) },
+        { "all", new Operator(All) },
+        { "softfork", new Operator(Softfork) },
     };
 
     private static ProgramOutput I(Program args)
@@ -255,13 +266,13 @@ public static class Operators
     private static ProgramOutput PubkeyForExp(Program args)
     {
         var list = args.ToList("pubkey_for_exp", 1, ClvmHelper.ArgumentType.Atom);
-        var value = ClvmHelper.Mod(list[0].ToBigInt(), Constants.N); 
-        var exponent = PrivateKey.FromBytes(value.BigIntToBytes(32, Endian.Big)); 
+        var value = ClvmHelper.Mod(list[0].ToBigInt(), Constants.N);
+        var exponent = PrivateKey.FromBytes(value.BigIntToBytes(32, Endian.Big));
         var cost = Costs.PubkeyBase + (ulong)list[0].Atom.Length * Costs.PubkeyPerByte;
 
         return ClvmHelper.MallocCost(new ProgramOutput
         {
-            Value = Program.FromBytes(exponent.GetG1().ToBytes()), 
+            Value = Program.FromBytes(exponent.GetG1().ToBytes()),
             Cost = cost
         });
     }
@@ -273,13 +284,13 @@ public static class Operators
         var point = JacobianPoint.InfinityG1();
         foreach (var item in list)
         {
-            point = point.Add(JacobianPoint.FromBytes(item.Atom, false)); 
+            point = point.Add(JacobianPoint.FromBytes(item.Atom, false));
             cost += Costs.PointAddPerArg;
         }
 
         return ClvmHelper.MallocCost(new ProgramOutput
         {
-            Value = Program.FromBytes(point.ToBytes()), 
+            Value = Program.FromBytes(point.ToBytes()),
             Cost = cost
         });
     }
@@ -316,4 +327,162 @@ public static class Operators
         };
     }
 
+    private static ProgramOutput Concat(Program args)
+    {
+        var list = args.ToList("concat", null, ClvmHelper.ArgumentType.Atom);
+        var cost = Costs.ConcatBase;
+        var bytes = new List<byte>();
+        foreach (var item in list)
+        {
+            bytes.AddRange(item.Atom);
+            cost += Costs.ConcatPerArg;
+        }
+        cost += (ulong)bytes.Count * Costs.ConcatPerByte;
+
+        return ClvmHelper.MallocCost(new ProgramOutput
+        {
+            Value = Program.FromBytes(bytes.ToArray()), // Assuming FromBytes method is defined in Program
+            Cost = cost
+        });
+    }
+
+    private static ProgramOutput Ash(Program args)
+    {
+        var list = args.ToList("ash", 2, ClvmHelper.ArgumentType.Atom);
+        if (list[1].Atom.Length > 4)
+            throw new Exception($"Shift must be 32 bits in \"ash\" operator{args.PositionSuffix}.");
+
+        BigInteger shift = list[1].ToBigInt();
+        if (BigInteger.Abs(shift) > 65535)
+            throw new Exception($"Shift too large in \"ash\" operator{args.PositionSuffix}.");
+
+        BigInteger value = list[0].ToBigInt();
+        value = shift >= 0 ? value << (int)shift : value >> (int)-shift;
+        var cost = Costs.AshiftBase + (list[0].Atom.Length + ClvmHelper.LimbsForBigInt(value)) * Costs.AshiftPerByte;
+
+        return ClvmHelper.MallocCost(new ProgramOutput
+        {
+            Value = Program.FromBigInt(value),
+            Cost = cost
+        });
+    }
+
+    private static ProgramOutput Lsh(Program args)
+    {
+        var list = args.ToList("lsh", 2, ClvmHelper.ArgumentType.Atom);
+        if (list[1].Atom.Length > 4)
+            throw new Exception($"Shift must be 32 bits in \"lsh\" operator{args.PositionSuffix}.");
+
+        BigInteger shift = list[1].ToBigInt();
+        if (BigInteger.Abs(shift) > 65535)
+            throw new Exception($"Shift too large in \"lsh\" operator{args.PositionSuffix}.");
+
+        BigInteger value = list[0].Atom.BytesToBigInt();
+        if (value < BigInteger.Zero) value = -value;
+        value = shift >= 0 ? value << (int)shift : value >> (int)-shift;
+        var cost = Costs.LshiftBase + (list[0].Atom.Length + ClvmHelper.LimbsForBigInt(value)) * Costs.LshiftPerByte;
+
+        return ClvmHelper.MallocCost(new ProgramOutput
+        {
+            Value = Program.FromBigInt(value),
+            Cost = cost
+        });
+    }
+
+    private static ProgramOutput Logand(Program args)
+    {
+        return ClvmHelper.BinopReduction("logand", BigInteger.MinusOne, args, (a, b) => a & b);
+    }
+
+    private static ProgramOutput Logior(Program args)
+    {
+        return ClvmHelper.BinopReduction("logior", BigInteger.Zero, args, (a, b) => a | b);
+    }
+
+    private static ProgramOutput Logxor(Program args)
+    {
+        return ClvmHelper.BinopReduction("logxor", BigInteger.Zero, args, (a, b) => a ^ b);
+    }
+    private static ProgramOutput Lognot(Program args)
+    {
+        var items = args.ToList("lognot", 1, ClvmHelper.ArgumentType.Atom);
+        var cost = Costs.LognotBase + (ulong)items[0].Atom.Length * Costs.LognotPerByte;
+
+        return ClvmHelper.MallocCost(new ProgramOutput
+        {
+            Value = Program.FromBigInt(~items[0].ToBigInt()),
+            Cost = cost
+        });
+    }
+
+    private static ProgramOutput Not(Program args)
+    {
+        var items = args.ToList("not", 1);
+        var cost = Costs.BoolBase;
+
+        return new ProgramOutput
+        {
+            Value = Program.FromBool(items[0].IsNull),
+            Cost = cost
+        };
+    }
+
+    private static ProgramOutput Any(Program args)
+    {
+        var list = args.ToList("any");
+        var cost = Costs.BoolBase + (ulong)list.Count * Costs.BoolPerArg;
+        bool result = false;
+        foreach (var item in list)
+        {
+            if (!item.IsNull)
+            {
+                result = true;
+                break;
+            }
+        }
+
+        return new ProgramOutput
+        {
+            Value = Program.FromBool(result),
+            Cost = cost
+        };
+    }
+
+    private static ProgramOutput All(Program args)
+    {
+        var list = args.ToList("all");
+        var cost = Costs.BoolBase + (ulong)list.Count * Costs.BoolPerArg;
+        bool result = true;
+        foreach (var item in list)
+        {
+            if (item.IsNull)
+            {
+                result = false;
+                break;
+            }
+        }
+
+        return new ProgramOutput
+        {
+            Value = Program.FromBool(result),
+            Cost = cost
+        };
+    }
+
+    private static ProgramOutput Softfork(Program args)
+    {
+        var list = args.ToList("softfork", new[] { 1, int.MaxValue });
+        if (!list[0].IsAtom)
+            throw new Exception($"Expected atom argument in \"softfork\" operator at {list[0].PositionSuffix}.");
+
+        BigInteger cost = list[0].ToBigInt();
+        if (cost < BigInteger.One)
+            throw new Exception($"Cost must be greater than zero in \"softfork\" operator{args.PositionSuffix}.");
+
+        return new ProgramOutput
+        {
+            Value = Program.False, // Assuming Program.False is defined
+            Cost = (ulong)cost
+        };
+    }
 }
