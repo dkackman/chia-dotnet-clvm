@@ -1,9 +1,47 @@
+using System.Numerics;
+
 namespace chia.dotnet.clvm;
 
 public static class ClvmHelper
 {
     public enum ArgumentType { Atom, Cons }
+    
+    public static BigInteger Mod(BigInteger value, BigInteger modulus) => ((value % modulus) + modulus) % modulus;
 
+    public static int LimbsForBigInt(BigInteger value)
+    {
+        int length = value == 0 ? 0 : value < 0 ? (-value).ToByteArray().Length : value.ToByteArray().Length;
+        if (value < 0) length++;
+        return (length + 7) / 8;
+    }
+
+    public static ProgramOutput BinopReduction(
+        string opName,
+        BigInteger initialValue,
+        Program args,
+        Func<BigInteger, BigInteger, BigInteger> opFunction)
+    {
+        var total = initialValue;
+        var argSize = 0;
+        var cost = Costs.LogBase;
+
+        var list = args.ToList(opName, null, ArgumentType.Atom);
+
+        foreach (var item in list)
+        {
+            total = opFunction(total, item.ToBigInt());
+            argSize += item.Atom.Length;
+            cost += Costs.LogPerArg;
+        }
+
+        cost += argSize * Costs.LogPerByte;
+
+        return MallocCost(new ProgramOutput
+        {
+            Value = Program.FromBigInt(total),
+            Cost = cost
+        });
+    }
     public static ProgramOutput MallocCost(ProgramOutput output)
     {
         return new ProgramOutput

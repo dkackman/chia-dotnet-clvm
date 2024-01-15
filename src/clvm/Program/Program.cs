@@ -5,6 +5,11 @@ namespace chia.dotnet.clvm;
 
 public class Program
 {
+    public static readonly BigInteger cost = 11000000000;
+    public static readonly Program True = FromBytes([1]);
+    public static readonly Program False = FromBytes([]);
+    public static readonly Program Nil = False;
+
     public Program(Cons value)
     {
     }
@@ -16,6 +21,21 @@ public class Program
     public Cons Cons { get; set; }
 
     public IList<Program> ToList(bool strict = false)
+    {
+        throw new NotImplementedException();
+    }
+
+    public BigInteger ToBigInt()
+    {
+        throw new NotImplementedException();
+    }
+
+    public string ToHex()
+    {
+        throw new NotImplementedException();
+    }
+
+    public int ToInt()
     {
         throw new NotImplementedException();
     }
