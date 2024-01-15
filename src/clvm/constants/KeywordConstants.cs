@@ -1,6 +1,6 @@
 namespace chia.dotnet.clvm;
 
-public static partial class Constants
+public static class KeywordConstants
 {
     private static IReadOnlyDictionary<string, ulong> keywords = new Dictionary<string, ulong>
     {
