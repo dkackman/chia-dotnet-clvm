@@ -16,6 +16,6 @@ public static class Parser
     {
         Token token = tokens[0];
         if (Next(tokens) is null)
-            throw new Exception($"Unexpected end of source at {new Position(source, token.Index)}.");
+            throw new ParseError($"Unexpected end of source at {new Position(source, token.Index)}.");
     }
 }
