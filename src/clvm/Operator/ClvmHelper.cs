@@ -2,10 +2,10 @@ using System.Numerics;
 
 namespace chia.dotnet.clvm;
 
+public enum ArgumentType { Atom, Cons }
+
 public static class ClvmHelper
 {
-    public enum ArgumentType { Atom, Cons }
-
     public static BigInteger Mod(BigInteger value, BigInteger modulus) => ((value % modulus) + modulus) % modulus;
 
     public static int LimbsForBigInt(BigInteger value)

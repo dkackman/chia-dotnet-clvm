@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Runtime.InteropServices;
 using chia.dotnet.bls;
 
 namespace chia.dotnet.clvm;
@@ -12,13 +13,56 @@ public class Program
 
     public Program(Cons value)
     {
+        Value = value;
     }
     public Program(byte[] value)
     {
+        Value = value;
     }
 
-    public byte[] Atom { get; set; }
-    public Cons Cons { get; set; }
+
+
+    public object Value { get; }
+
+    public bool IsAtom => Value is byte[];
+    public bool IsCons => Value is Cons;
+
+    public bool IsNull => IsAtom && Atom.Length == 0;
+
+    public byte[] Atom => Value as byte[] ?? throw new InvalidOperationException("Program is not an atom");
+    public Cons Cons => Value as Cons ?? throw new InvalidOperationException("Program is not a cons");
+
+    public Program First => Cons.Item1;
+    public Program Rest => Cons.Item2;
+
+    public static Program FromCons(Program program1, Program program2) => new(new Cons(program1, program2));
+    public static Program FromBytes(byte[] value) => new(value);
+    public static Program FromJacobianPoint(JacobianPoint value) => new(value.ToBytes());
+    public static Program FromPrivateKey(PrivateKey value) => new(value.ToBytes());
+    public static Program FromHex(string value) => new(value.HexStringToByteArray());
+    public static Program FromBool(bool value) => value ? True : False;
+    public static Program FromInt(long value) => new(value.EncodeInt());
+    public static Program FromBigInt(BigInteger value) => new(ByteUtils.EncodeBigInt(value));
+    public static Program FromText(string value) => new(value.ToBytes());
+
+    public static Program FromSource(string value)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static Program FromList(Program[] value)
+    {
+        throw new NotImplementedException();
+    }
+
+    public string PositionSuffix => Position is not null ? $" at {Position}" : "";
+    public Position? Position { get; private set; }
+
+    public Program At(Position position)
+    {
+        Position = position;
+        return this;
+    }
 
     public IList<Program> ToList(bool strict = false)
     {
@@ -36,59 +80,6 @@ public class Program
     }
 
     public int ToInt()
-    {
-        throw new NotImplementedException();
-    }
-
-    public string PositionSuffix { get; set; }
-
-    public bool IsAtom { get; set; }
-    public bool IsCons { get; set; }
-    public bool IsNull { get; set; }
-    public Program First { get; set; }
-    public Program Rest { get; set; }
-
-    public static Program FromHex(string value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromInt(long value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromBigInt(BigInteger value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromBool(bool value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromText(string value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromSource(string value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromBytes(byte[] value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromJacobianPoint(JacobianPoint value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromPrivateKey(PrivateKey value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromList(Program[] value)
-    {
-        throw new NotImplementedException();
-    }
-    public static Program FromCons(Program program1, Program program2)
     {
         throw new NotImplementedException();
     }

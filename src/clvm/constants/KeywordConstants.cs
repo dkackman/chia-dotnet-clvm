@@ -1,8 +1,10 @@
+using System.Numerics;
+
 namespace chia.dotnet.clvm;
 
 public static class KeywordConstants
 {
-    public static readonly IReadOnlyDictionary<string, ulong> Keywords = new Dictionary<string, ulong>
+    public static readonly IReadOnlyDictionary<string, BigInteger> Keywords = new Dictionary<string, BigInteger>
     {
         {"q", 0x01},
         {"a", 0x02},
