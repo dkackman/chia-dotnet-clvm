@@ -45,9 +45,16 @@ public class Program
     public static Program FromBigInt(BigInteger value) => new(ByteUtils.EncodeBigInt(value));
     public static Program FromText(string value) => new(value.ToBytes());
 
-    public static Program FromSource(string value)
+    public static Program FromSource(string source)
     {
-        throw new NotImplementedException();
+        var stream = Parser.TokenStream(source);
+        var tokens = stream.ToList();
+        if (tokens.Count > 0)
+        {
+            return Parser.TokenizeExpr(source, tokens);
+        }
+
+        throw new ParseError("Unexpected end of source.");
     }
 
     public static Program FromList(Program[] value)
@@ -62,6 +69,11 @@ public class Program
     {
         Position = position;
         return this;
+    }
+
+    public ProgramOutput Compile(CompileOptions options = null)
+    {
+        throw new NotImplementedException();
     }
 
     public IList<Program> ToList(bool strict = false)
@@ -83,4 +95,9 @@ public class Program
     {
         throw new NotImplementedException();
     }
+    public string ToSource(bool showKeywords = true)
+    {
+        throw new NotImplementedException();
+    }
 }
+
