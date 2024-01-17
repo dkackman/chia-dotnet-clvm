@@ -31,8 +31,7 @@ public class SerializeTests
 
         foreach (var kvp in data)
         {
-            yield return new object[] { kvp.Key, kvp.Value
-};
+            yield return new object[] { kvp.Key, kvp.Value };
         }
     }
 
@@ -49,7 +48,6 @@ public class SerializeTests
     [Fact]
     public void Serialize_ShouldThrowException()
     {
-        // This test checks for exceptions. Adjust it according to your actual exception logic.
         var input = "((((())))";
 
         var exception = Record.Exception(() =>
@@ -59,8 +57,5 @@ public class SerializeTests
         });
 
         Assert.NotNull(exception);
-        // Optionally, you can assert the type of exception or its message
-        // Assert.IsType<YourExpectedExceptionType>(exception);
-        // Assert.Equal("Expected exception message", exception.Message);
     }
 }
