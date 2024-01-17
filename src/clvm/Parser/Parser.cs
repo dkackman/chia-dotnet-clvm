@@ -47,15 +47,19 @@ public static partial class Parser
     {
         int start = index;
         while (index < text.Length && !IsSpace(text[index]) && text[index] != ')')
+        {
             index++;
-        return new Token { Text = text.Substring(start, index - start), Index = start };
+        }
+        return new Token { Text = text.Substring(start, index - start), Index = index };
     }
 
     public static Program TokenizeCons(string source, List<Token> tokens)
     {
         Token token = tokens[0];
         if (token.Text == ")")
+        {
             return Program.FromBytes(new byte[0]).At(new Position(source, token.Index));
+        }
 
         int consStart = token.Index;
         Program first = TokenizeExpr(source, tokens);

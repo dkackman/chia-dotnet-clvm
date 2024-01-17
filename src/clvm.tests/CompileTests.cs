@@ -1,6 +1,7 @@
 using System.Numerics;
-
 using chia.dotnet.clvm; 
+
+namespace clvm.tests;
 
 public class CompileTests
 {

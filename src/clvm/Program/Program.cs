@@ -20,8 +20,6 @@ public class Program
         Value = value;
     }
 
-
-
     public object Value { get; }
 
     public bool IsAtom => Value is byte[];
@@ -99,5 +97,63 @@ public class Program
     {
         throw new NotImplementedException();
     }
+
+    public byte[] Serialize()
+    {
+        if (this.IsAtom)
+        {
+            if (this.IsNull) return new byte[] { 0x80 };
+            else if (this.Atom.Length == 1 && this.Atom[0] <= 0x7f)
+                return this.Atom;
+            else
+            {
+                var size = this.Atom.Length;
+                var result = new List<byte>();
+                if (size < 0x40) result.Add((byte)(0x80 | size));
+                else if (size < 0x2000)
+                {
+                    result.Add((byte)(0xc0 | (size >> 8)));
+                    result.Add((byte)((size >> 0) & 0xff));
+                }
+                else if (size < 0x100000)
+                {
+                    result.Add((byte)(0xe0 | (size >> 16)));
+                    result.Add((byte)((size >> 8) & 0xff));
+                    result.Add((byte)((size >> 0) & 0xff));
+                }
+                else if (size < 0x8000000)
+                {
+                    result.Add((byte)(0xf0 | (size >> 24)));
+                    result.Add((byte)((size >> 16) & 0xff));
+                    result.Add((byte)((size >> 8) & 0xff));
+                    result.Add((byte)((size >> 0) & 0xff));
+                }
+                else if (size < 0x400000000)
+                {
+                    result.Add((byte)(0xf8 | (size >> 32)));
+                    result.Add((byte)((size >> 24) & 0xff));
+                    result.Add((byte)((size >> 16) & 0xff));
+                    result.Add((byte)((size >> 8) & 0xff));
+                    result.Add((byte)((size >> 0) & 0xff));
+                }
+                else
+                    throw new ArgumentOutOfRangeException(
+                        $"Cannot serialize {this.ToString()} as it is 17,179,869,184 or more bytes in size{this.PositionSuffix}."
+                    );
+                result.AddRange(this.Atom);
+                return result.ToArray();
+            }
+        }
+        else
+        {
+            var result = new List<byte> { 0xff };
+            result.AddRange(this.First.Serialize());
+            result.AddRange(this.Rest.Serialize());
+            return result.ToArray();
+        }
+    }
+    
+
+    public string SerializeHex() => Serialize().ToHex();
 }
 
