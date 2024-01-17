@@ -50,7 +50,7 @@ public class SerializeTests
     public void Serialize_ShouldThrowException()
     {
         // This test checks for exceptions. Adjust it according to your actual exception logic.
-        var input = "Your input that should cause an exception";
+        var input = "((((())))";
 
         var exception = Record.Exception(() =>
         {
