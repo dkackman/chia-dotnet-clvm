@@ -209,8 +209,8 @@ public class Program
 
         var bindings = new Dictionary<string, Operator>
         {
-            { "com", MakeDoCom(RunProgram) },
-            { "opt", MakeDoOpt(RunProgram) },
+            { "com", clvm.Compile.MakeDoCom(RunProgram) },
+            { "opt", Optimize.MakeDoOpt(RunProgram) },
             { "_full_path_for_name", DoFullPathForName },
             { "_read", DoRead },
             { "_write", DoWrite }
