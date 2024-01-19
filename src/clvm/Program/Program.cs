@@ -1,5 +1,5 @@
 using System.Numerics;
-using System.Runtime.InteropServices;
+using System.Text;
 using chia.dotnet.bls;
 
 namespace chia.dotnet.clvm;
@@ -59,6 +59,7 @@ public class Program
     {
         throw new NotImplementedException();
     }
+    public static Program FromList(IList<Program> value) => FromList(value.Cast<Program>().ToArray());
 
     public string PositionSuffix => Position is not null ? $" at {Position}" : "";
     public Position? Position { get; private set; }
@@ -69,11 +70,167 @@ public class Program
         return this;
     }
 
+    public Program Curry(IList<Program> args)
+    {
+        return Program.FromSource(
+            "(a (q #a 4 (c 2 (c 5 (c 7 0)))) (c (q (c (q . 2) (c (c (q . 1) 5) (c (a 6 (c 2 (c 11 (q 1)))) 0))) #a (i 5 (q 4 (q . 4) (c (c (q . 1) 9) (c (a 6 (c 2 (c 13 (c 11 0)))) 0))) (q . 11)) 1) 1))"
+        ).Run(Program.FromCons(this, Program.FromList(args.ToArray()
+        ))).Value;
+    }
+
+    public Tuple<Program, List<Program>> Uncurry()
+    {
+        var uncurryPatternFunction = Program.FromSource("(a (q . (: . function)) (: . core))");
+        var uncurryPatternCore = Program.FromSource("(c (q . (: . parm)) (: . core))");
+
+        var result = Bindings.Match(uncurryPatternFunction, this);
+        if (result == null) return null;
+
+        var fn = result["function"];
+        var core = result["core"];
+
+        var args = new List<Program>();
+
+        while (true)
+        {
+            result = Bindings.Match(uncurryPatternCore, core);
+            if (result == null)
+            {
+                break;
+            }
+
+            args.Add(result["parm"]);
+            core = result["core"];
+        }
+
+        if (core.IsAtom && core.ToBigInt() == 1)
+        {
+            return new Tuple<Program, List<Program>>(fn, args);
+        }
+        return null;
+    }
+
+    public byte[] Hash()
+    {
+        return IsAtom
+            ? Hmac.Hash256(new byte[] { 1 }.Concat(Atom).ToArray())
+            : Hmac.Hash256(new byte[] { 2 }.Concat(First.Hash()).Concat(Rest.Hash()).ToArray());
+    }
+
+    public string HashHex() => Hash().ToHex();
+
+    public Program Define(Program program)
+    {
+        var result = this;
+        if (IsAtom || First.IsCons || First.ToText() != "mod")
+        {
+            result = FromList(new List<Program> { FromText("mod"), Nil, this }.ToArray());
+        }
+        var items = result.ToList();
+        items.Insert(2, program);
+        return FromList(items.ToArray());
+    }
+
+    public Program DefineAll(IList<Program> programs)
+    {
+        var result = this;
+        foreach (var program in programs.AsEnumerable().Reverse())
+        {
+            result = result.Define(program);
+        }
+        return result;
+    }
+
     public ProgramOutput Compile(CompileOptions options = null)
+    {
+        var fullOptions = options ?? new CompileOptions
+        {
+            Strict = false,
+            Operators = DefaultOperators.MakeDefaultOperators(),
+            IncludeFilePaths = new Dictionary<string, IDictionary<string, string>>()
+        };
+
+        if (fullOptions.Strict)
+        {
+            fullOptions.Operators.Unknown = (_operator, args) =>
+            {
+                throw new Exception($"Unimplemented operator {args.PositionSuffix}.");
+            };
+        }
+
+        ProgramOutput DoFullPathForName(Program args)
+        {
+            var fileName = args.First.ToText();
+            foreach (var entry in fullOptions.IncludeFilePaths)
+            {
+                if (entry.Value.ContainsKey(fileName))
+                {
+                    return new ProgramOutput
+                    {
+                        Value = FromText($"{entry.Key}/{fileName}"),
+                        Cost = 1
+                    };
+                }
+            }
+
+            throw new Exception($"Can't open {fileName}{args.PositionSuffix}.");
+        }
+
+        ProgramOutput DoRead(Program args)
+        {
+            var fileName = args.First.ToText();
+            string source = null;
+            foreach (var entry in fullOptions.IncludeFilePaths)
+            {
+                foreach (var file in entry.Value)
+                {
+                    if (fileName == $"{entry.Key}/{file.Key}")
+                    {
+                        source = file.Value;
+                    }
+                }
+            }
+            if (source == null)
+            {
+                throw new Exception($"Can't open {fileName}{args.PositionSuffix}.");
+            }
+            return new ProgramOutput { Value = FromSource(source), Cost = 1 };
+        }
+
+        ProgramOutput DoWrite(Program _args)
+        {
+            return new ProgramOutput { Value = Nil, Cost = 1 };
+        }
+
+        ProgramOutput RunProgram(Program program, Program args)
+        {
+            return program.Run(args, fullOptions);
+        }
+
+        var bindings = new Dictionary<string, Operator>
+        {
+            { "com", MakeDoCom(RunProgram) },
+            { "opt", MakeDoOpt(RunProgram) },
+            { "_full_path_for_name", DoFullPathForName },
+            { "_read", DoRead },
+            { "_write", DoWrite }
+        };
+
+        foreach (var binding in bindings)
+        {
+            fullOptions.Operators.Operators[binding.Key] = binding.Value;
+        }
+
+        return RunProgram(
+            FromSource("(a (opt (com 2)) 3)"),
+            FromList(new List<Program> { this }.ToArray())
+        );
+    }
+
+    public ProgramOutput Run(Program environment, RunOptions options = null)
     {
         throw new NotImplementedException();
     }
-
     public IList<Program> ToList(bool strict = false)
     {
         throw new NotImplementedException();
@@ -82,6 +239,13 @@ public class Program
     public BigInteger ToBigInt()
     {
         throw new NotImplementedException();
+    }
+    public string ToText()
+    {
+        if (IsCons)
+            throw new Exception($"Cannot convert {ToString()} to text.");
+
+        return Encoding.UTF8.GetString(Atom);
     }
 
     public string ToHex()
@@ -100,16 +264,24 @@ public class Program
 
     public byte[] Serialize()
     {
-        if (this.IsAtom)
+        if (IsAtom)
         {
-            if (this.IsNull) return new byte[] { 0x80 };
-            else if (this.Atom.Length == 1 && this.Atom[0] <= 0x7f)
-                return this.Atom;
+            if (IsNull)
+            {
+                return new byte[] { 0x80 };
+            }
+            else if (Atom.Length == 1 && Atom[0] <= 0x7f)
+            {
+                return Atom;
+            }
             else
             {
-                var size = this.Atom.Length;
+                var size = Atom.Length;
                 var result = new List<byte>();
-                if (size < 0x40) result.Add((byte)(0x80 | size));
+                if (size < 0x40)
+                {
+                    result.Add((byte)(0x80 | size));
+                }
                 else if (size < 0x2000)
                 {
                     result.Add((byte)(0xc0 | (size >> 8)));
@@ -137,22 +309,23 @@ public class Program
                     result.Add((byte)((size >> 0) & 0xff));
                 }
                 else
+                {
                     throw new ArgumentOutOfRangeException(
-                        $"Cannot serialize {this.ToString()} as it is 17,179,869,184 or more bytes in size{this.PositionSuffix}."
+                        $"Cannot serialize {ToString()} as it is 17,179,869,184 or more bytes in size{PositionSuffix}."
                     );
-                result.AddRange(this.Atom);
+                }
+                result.AddRange(Atom);
                 return result.ToArray();
             }
         }
         else
         {
             var result = new List<byte> { 0xff };
-            result.AddRange(this.First.Serialize());
-            result.AddRange(this.Rest.Serialize());
+            result.AddRange(First.Serialize());
+            result.AddRange(Rest.Serialize());
             return result.ToArray();
         }
     }
-    
 
     public string SerializeHex() => Serialize().ToHex();
 }

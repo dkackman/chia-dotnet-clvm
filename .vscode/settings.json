@@ -1,3 +1,14 @@
 {
-  "cSpell.words": ["clvm", "Divmod", "Hmac", "pubkey", "Softfork"]
+  "cSpell.words": [
+    "clvm",
+    "defconstant",
+    "defmacro",
+    "defun",
+    "Divmod",
+    "Hmac",
+    "pubkey",
+    "sexp",
+    "Softfork",
+    "uncompiled"
+  ]
 }

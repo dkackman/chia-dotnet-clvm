@@ -8,14 +8,14 @@ public delegate ProgramOutput Operator(Program args);
 public record OperatorsType
 {
     public IDictionary<string, Operator> Operators { get; init; } = new Dictionary<string, Operator>();
-    public Func<Program, Program, ProgramOutput> Unknown { get; init; } = (a, b) => new ProgramOutput() { Value = a, Cost = 0 };
+    public Func<Program, Program, ProgramOutput> Unknown { get; set; } = (a, b) => new ProgramOutput() { Value = a, Cost = 0 };
     public string Quote { get; init; } = string.Empty;
     public string Apply { get; init; } = string.Empty;
 }
 
 public static class Operators
 {
-    public static readonly IReadOnlyDictionary<string, Operator> operators = new Dictionary<string, Operator>
+    public static readonly IDictionary<string, Operator> operators = new Dictionary<string, Operator>
     {
         { "i", new Operator(I) },
         { "c", new Operator(C) },
