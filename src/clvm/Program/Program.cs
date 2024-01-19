@@ -57,13 +57,25 @@ public class Program
 
     public static Program FromList(Program[] programs)
     {
-        Program result = Program.Nil;
+        Program result = Nil;
         foreach (Program program in programs.Reverse())
-            result = Program.FromCons(program, result);
+        {
+            result = FromCons(program, result);
+        }
         return result;
     }
 
     public static Program FromList(IList<Program> value) => FromList(value.Cast<Program>().ToArray());
+
+    public static Program Deserialize(byte[] bytes)
+    {
+        if (!bytes.Any())
+            throw new ParseError("Unexpected end of source.");
+
+        return Serialization.Deserialize(bytes.ToList());
+    }
+
+    public static Program DeserializeHex(string hex) => Deserialize(hex.FromHex());
 
     public string PositionSuffix => Position is not null ? $" at {Position}" : "";
     public Position? Position { get; private set; }
@@ -76,19 +88,22 @@ public class Program
 
     public Program Curry(IList<Program> args)
     {
-        return Program.FromSource(
+        return FromSource(
             "(a (q #a 4 (c 2 (c 5 (c 7 0)))) (c (q (c (q . 2) (c (c (q . 1) 5) (c (a 6 (c 2 (c 11 (q 1)))) 0))) #a (i 5 (q 4 (q . 4) (c (c (q . 1) 9) (c (a 6 (c 2 (c 13 (c 11 0)))) 0))) (q . 11)) 1) 1))"
-        ).Run(Program.FromCons(this, Program.FromList(args.ToArray()
+        ).Run(FromCons(this, FromList(args.ToArray()
         ))).Value;
     }
 
-    public Tuple<Program, List<Program>> Uncurry()
+    public Tuple<Program, List<Program>>? Uncurry()
     {
-        var uncurryPatternFunction = Program.FromSource("(a (q . (: . function)) (: . core))");
-        var uncurryPatternCore = Program.FromSource("(c (q . (: . parm)) (: . core))");
+        var uncurryPatternFunction = FromSource("(a (q . (: . function)) (: . core))");
+        var uncurryPatternCore = FromSource("(c (q . (: . parm)) (: . core))");
 
         var result = Bindings.Match(uncurryPatternFunction, this);
-        if (result == null) return null;
+        if (result == null)
+        {
+            return null;
+        }
 
         var fn = result["function"];
         var core = result["core"];
@@ -111,6 +126,7 @@ public class Program
         {
             return new Tuple<Program, List<Program>>(fn, args);
         }
+
         return null;
     }
 
@@ -184,7 +200,7 @@ public class Program
         ProgramOutput DoRead(Program args)
         {
             var fileName = args.First.ToText();
-            string source = null;
+            string? source = null;
             foreach (var entry in fullOptions.IncludeFilePaths)
             {
                 foreach (var file in entry.Value)
@@ -274,6 +290,7 @@ public class Program
     {
         if (IsCons)
             throw new Exception($"Cannot convert {ToString()} to hex{PositionSuffix}.");
+
         return Atom;
     }
 
@@ -281,6 +298,7 @@ public class Program
     {
         if (IsCons || (Atom.Length != 48 && Atom.Length != 96))
             throw new Exception($"Cannot convert {ToString()} to JacobianPoint{PositionSuffix}.");
+
         return Atom.Length == 48
             ? JacobianPoint.FromBytesG1(Atom)
             : JacobianPoint.FromBytesG2(Atom);
@@ -290,6 +308,7 @@ public class Program
     {
         if (IsCons)
             throw new Exception($"Cannot convert {ToString()} to private key{PositionSuffix}.");
+
         return PrivateKey.FromBytes(Atom);
     }
 
@@ -297,6 +316,7 @@ public class Program
     {
         if (IsCons)
             throw new Exception($"Cannot convert {ToString()} to hex{PositionSuffix}.");
+
         return Atom.ToHex();
     }
 
@@ -304,6 +324,7 @@ public class Program
     {
         if (IsCons)
             throw new Exception($"Cannot convert {ToString()} to bool{PositionSuffix}.");
+
         return !IsNull;
     }
 
@@ -311,6 +332,7 @@ public class Program
     {
         if (IsCons)
             throw new Exception($"Cannot convert {ToString()} to int{PositionSuffix}.");
+
         return Atom.BytesToInt(Endian.Big, true);
     }
 
@@ -318,6 +340,7 @@ public class Program
     {
         if (IsCons)
             throw new Exception($"Cannot convert {ToString()} to bigint{PositionSuffix}.");
+
         return Atom.BytesToBigInt(Endian.Big, true);
     }
 
@@ -412,70 +435,7 @@ public class Program
         return result;
     }
 
-    public byte[] Serialize()
-    {
-        if (IsAtom)
-        {
-            if (IsNull)
-            {
-                return new byte[] { 0x80 };
-            }
-            else if (Atom.Length == 1 && Atom[0] <= 0x7f)
-            {
-                return Atom;
-            }
-            else
-            {
-                var size = Atom.Length;
-                var result = new List<byte>();
-                if (size < 0x40)
-                {
-                    result.Add((byte)(0x80 | size));
-                }
-                else if (size < 0x2000)
-                {
-                    result.Add((byte)(0xc0 | (size >> 8)));
-                    result.Add((byte)((size >> 0) & 0xff));
-                }
-                else if (size < 0x100000)
-                {
-                    result.Add((byte)(0xe0 | (size >> 16)));
-                    result.Add((byte)((size >> 8) & 0xff));
-                    result.Add((byte)((size >> 0) & 0xff));
-                }
-                else if (size < 0x8000000)
-                {
-                    result.Add((byte)(0xf0 | (size >> 24)));
-                    result.Add((byte)((size >> 16) & 0xff));
-                    result.Add((byte)((size >> 8) & 0xff));
-                    result.Add((byte)((size >> 0) & 0xff));
-                }
-                else if (size < 0x400000000)
-                {
-                    result.Add((byte)(0xf8 | (size >> 32)));
-                    result.Add((byte)((size >> 24) & 0xff));
-                    result.Add((byte)((size >> 16) & 0xff));
-                    result.Add((byte)((size >> 8) & 0xff));
-                    result.Add((byte)((size >> 0) & 0xff));
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(
-                        $"Cannot serialize {ToString()} as it is 17,179,869,184 or more bytes in size{PositionSuffix}."
-                    );
-                }
-                result.AddRange(Atom);
-                return [.. result];
-            }
-        }
-        else
-        {
-            var result = new List<byte> { 0xff };
-            result.AddRange(First.Serialize());
-            result.AddRange(Rest.Serialize());
-            return result.ToArray();
-        }
-    }
+    public byte[] Serialize() => Serialization.Serialize(this);
 
     public string SerializeHex() => Serialize().ToHex();
 

@@ -16,7 +16,7 @@ public class CompileTests
             new object[] { "(mod () (defun factorial (number) (if (> number 2) (* number (factorial (- number 1))) number)) (factorial 5))", "(q . 120)" },
             new object[] { "(mod () (defconstant something \"Hello\") something)", "(q . \"Hello\")" },
             new object[] { "(mod () (defun-inline mul (left right) (* left right)) (mul 5 10))", "(q . 50)" },
-            new object[] { "(mod () (defmacro mul (left right) (* left right)) (mul 5 10))", "(q . 50)", 29 }
+            new object[] { "(mod () (defmacro mul (left right) (* left right)) (mul 5 10))", "(q . 50)", new BigInteger(29) }
         };
 
     [Theory]

@@ -36,20 +36,26 @@ public static class Bindings
     {
         if (bindings.ContainsKey(key))
         {
-            if (!bindings[key].Equals(valueProgram)) return null;
+            if (!bindings[key].Equals(valueProgram))
+            {
+                return null;
+            }
             return bindings;
         }
         bindings[key] = valueProgram;
         return bindings;
     }
 
-    public static Group Match(Program pattern, Program sexp, Group knownBindings = null)
+    public static Group? Match(Program pattern, Program sexp, Group knownBindings = null)
     {
         knownBindings = knownBindings ?? new Group();
 
         if (!pattern.IsCons)
         {
-            if (sexp.IsCons) return null;
+            if (sexp.IsCons)
+            {
+                return null;
+            }
             return pattern.Atom.SequenceEqual(sexp.Atom) ? knownBindings : null;
         }
 
@@ -58,10 +64,16 @@ public static class Bindings
 
         if (left.IsAtom && left.Atom.SequenceEqual(AtomMatch))
         {
-            if (sexp.IsCons) return null;
+            if (sexp.IsCons)
+            {
+                return null;
+            }
             if (right.IsAtom && right.Atom.SequenceEqual(AtomMatch))
             {
-                if (sexp.Atom.SequenceEqual(AtomMatch)) return new Group();
+                if (sexp.Atom.SequenceEqual(AtomMatch))
+                {
+                    return new Group();
+                }
                 return null;
             }
             return UnifyBindings(knownBindings, right.ToText(), sexp);
@@ -71,15 +83,24 @@ public static class Bindings
         {
             if (right.IsAtom && right.Atom.SequenceEqual(SexpMatch))
             {
-                if (sexp.Atom.SequenceEqual(SexpMatch)) return new Group();
+                if (sexp.Atom.SequenceEqual(SexpMatch))
+                {
+                    return new Group();
+                }
                 return null;
             }
             return UnifyBindings(knownBindings, right.ToText(), sexp);
         }
 
-        if (!sexp.IsCons) return null;
+        if (!sexp.IsCons)
+        {
+            return null;
+        }
         var newBindings = Match(left, sexp.First, knownBindings);
-        if (newBindings == null) return null;
+        if (newBindings == null)
+        {
+            return null;
+        }
         return Match(right, sexp.Rest, newBindings);
     }
 }
