@@ -315,8 +315,8 @@ public static class Operators
         if (list[1].Atom.Length > 4 || (list.Count == 3 && list[2].Atom.Length > 4))
             throw new Exception($"Expected 4 byte indices in \"substr\" operator{args.PositionSuffix}.");
 
-        var from = list[1].ToInt(); // Assuming ToInt method is defined in Program
-        var to = list.Count == 3 ? list[2].ToInt() : value.Length;
+        var from = (int)list[1].ToInt(); // Assuming ToInt method is defined in Program
+        var to = (int)(list.Count == 3 ? list[2].ToInt() : value.Length);
         if (to > value.Length || to < from || to < 0 || from < 0)
             throw new Exception($"Invalid indices in \"substr\" operator{args.PositionSuffix}.");
 
@@ -484,5 +484,18 @@ public static class Operators
             Value = Program.False, // Assuming Program.False is defined
             Cost = (ulong)cost
         };
+    }
+
+    public static ProgramOutput RunOperator(Program op, Program args, RunOptions options)
+    {
+        BigInteger symbol = op.ToBigInt();
+        string keyword = KeywordConstants.Keywords.FirstOrDefault(entry => entry.Value == symbol).Key ?? op.ToText();
+        if (options.Operators.Operators.ContainsKey(keyword))
+        {
+            ProgramOutput result = options.Operators.Operators[keyword](args);
+            return result;
+        }
+
+        return options.Operators.Unknown(op, args);
     }
 }

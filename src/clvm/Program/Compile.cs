@@ -77,7 +77,7 @@ public static class Compile
         return QuoteAsProgram(symbolTable);
     }
 
-    public static Dictionary<string, Func<Program, Program, Program, Eval, Program>> CompileBindings = 
+    public static IDictionary<string, Func<Program, Program, Program, Eval, Program>> CompileBindings =
         new Dictionary<string, Func<Program, Program, Program, Eval, Program>>
     {
         { "qq", CompileQq },
@@ -93,16 +93,15 @@ public static class Compile
         {
             return program;
         }
-        else if (program.First.IsAtom && program.First.ToText() == "quote")
+
+        if (program.First.IsAtom && program.First.ToText() == "quote")
         {
             if (!program.Rest.Rest.IsNull)
                 throw new Exception($"Compilation error while compiling {program}. Quote takes exactly one argument{program.PositionSuffix}.");
             return QuoteAsProgram(LowerQuote(program.Rest.First));
         }
-        else
-        {
-            return Program.FromCons(LowerQuote(program.First), LowerQuote(program.Rest));
-        }
+
+        return Program.FromCons(LowerQuote(program.First), LowerQuote(program.Rest));
     }
 
     public static Operator MakeDoCom(Eval runProgram)

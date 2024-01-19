@@ -1,14 +1,20 @@
 {
   "cSpell.words": [
+    "Binop",
     "clvm",
     "defconstant",
     "defmacro",
     "defun",
     "Divmod",
     "Hmac",
+    "logand",
+    "logior",
+    "lognot",
+    "logxor",
     "pubkey",
     "sexp",
     "Softfork",
+    "substr",
     "uncompiled"
   ]
 }

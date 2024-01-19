@@ -55,10 +55,14 @@ public class Program
         throw new ParseError("Unexpected end of source.");
     }
 
-    public static Program FromList(Program[] value)
+    public static Program FromList(Program[] programs)
     {
-        throw new NotImplementedException();
+        Program result = Program.Nil;
+        foreach (Program program in programs.Reverse())
+            result = Program.FromCons(program, result);
+        return result;
     }
+
     public static Program FromList(IList<Program> value) => FromList(value.Cast<Program>().ToArray());
 
     public string PositionSuffix => Position is not null ? $" at {Position}" : "";
@@ -141,14 +145,15 @@ public class Program
         return result;
     }
 
-    public ProgramOutput Compile(CompileOptions options = null)
+    public ProgramOutput Compile(CompileOptions? options = null)
     {
-        var fullOptions = options ?? new CompileOptions
+        var fullOptions = Bindings.Merge(new CompileOptions
         {
             Strict = false,
             Operators = DefaultOperators.MakeDefaultOperators(),
             IncludeFilePaths = new Dictionary<string, IDictionary<string, string>>()
-        };
+        },
+            options);
 
         if (fullOptions.Strict)
         {
@@ -227,19 +232,95 @@ public class Program
         );
     }
 
-    public ProgramOutput Run(Program environment, RunOptions options = null)
+    public ProgramOutput Run(Program environment, RunOptions? options = null)
     {
-        throw new NotImplementedException();
+        var fullOptions = Bindings.Merge(new CompileOptions
+        {
+            Strict = false,
+            Operators = DefaultOperators.MakeDefaultOperators(),
+            IncludeFilePaths = new Dictionary<string, IDictionary<string, string>>()
+        },
+            options);
+
+        if (fullOptions.Strict)
+        {
+            fullOptions.Operators.Unknown = (_operator, args) =>
+            {
+                throw new Exception($"Unimplemented operator{args.PositionSuffix}.");
+            };
+        }
+        var instructionStack = new Stack<Instruction>();
+        instructionStack.Push(InstructionsClass.Instructions["eval"]);
+        var stack = new Stack<Program>();
+        stack.Push(FromCons(this, environment));
+        BigInteger cost = 0;
+        while (instructionStack.Count > 0)
+        {
+            var instruction = instructionStack.Pop();
+            cost += instruction(instructionStack, stack, fullOptions);
+            if (fullOptions.MaxCost.HasValue && cost > fullOptions.MaxCost.Value)
+            {
+                throw new Exception($"Exceeded cost of {fullOptions.MaxCost.Value}{stack.Peek().PositionSuffix}.");
+            }
+        }
+        return new ProgramOutput
+        {
+            Value = stack.Peek(),
+            Cost = cost
+        };
     }
-    public IList<Program> ToList(bool strict = false)
+
+    public byte[] ToBytes()
     {
-        throw new NotImplementedException();
+        if (IsCons)
+            throw new Exception($"Cannot convert {ToString()} to hex{PositionSuffix}.");
+        return Atom;
+    }
+
+    public JacobianPoint ToJacobianPoint()
+    {
+        if (IsCons || (Atom.Length != 48 && Atom.Length != 96))
+            throw new Exception($"Cannot convert {ToString()} to JacobianPoint{PositionSuffix}.");
+        return Atom.Length == 48
+            ? JacobianPoint.FromBytesG1(Atom)
+            : JacobianPoint.FromBytesG2(Atom);
+    }
+
+    public PrivateKey ToPrivateKey()
+    {
+        if (IsCons)
+            throw new Exception($"Cannot convert {ToString()} to private key{PositionSuffix}.");
+        return PrivateKey.FromBytes(Atom);
+    }
+
+    public string ToHex()
+    {
+        if (IsCons)
+            throw new Exception($"Cannot convert {ToString()} to hex{PositionSuffix}.");
+        return Atom.ToHex();
+    }
+
+    public bool ToBool()
+    {
+        if (IsCons)
+            throw new Exception($"Cannot convert {ToString()} to bool{PositionSuffix}.");
+        return !IsNull;
+    }
+
+    public long ToInt()
+    {
+        if (IsCons)
+            throw new Exception($"Cannot convert {ToString()} to int{PositionSuffix}.");
+        return Atom.BytesToInt(Endian.Big, true);
     }
 
     public BigInteger ToBigInt()
     {
-        throw new NotImplementedException();
+        if (IsCons)
+            throw new Exception($"Cannot convert {ToString()} to bigint{PositionSuffix}.");
+        return Atom.BytesToBigInt(Endian.Big, true);
     }
+
     public string ToText()
     {
         if (IsCons)
@@ -248,18 +329,87 @@ public class Program
         return Encoding.UTF8.GetString(Atom);
     }
 
-    public string ToHex()
-    {
-        throw new NotImplementedException();
-    }
-
-    public int ToInt()
-    {
-        throw new NotImplementedException();
-    }
     public string ToSource(bool showKeywords = true)
     {
-        throw new NotImplementedException();
+        if (IsAtom)
+        {
+            if (IsNull)
+            {
+                return "()";
+            }
+
+            if (Atom.Length > 2)
+            {
+                try
+                {
+                    string str = ToText();
+                    for (int i = 0; i < str.Length; i++)
+                    {
+                        if (!Constants.Printable.Contains(str[i]))
+                        {
+                            return $"0x{ToHex()}";
+                        }
+                    }
+
+                    if (str.Contains('"') && str.Contains("'"))
+                    {
+                        return $"0x{ToHex()}";
+                    }
+
+                    string quote = str.Contains('"') ? "'" : "\"";
+                    return quote + str + quote;
+                }
+                catch
+                {
+                    return $"0x{ToHex()}";
+                }
+            }
+            else if (ByteUtils.BytesEqual(ByteUtils.EncodeInt(Atom.BytesToInt(Endian.Big, true)), Atom))
+            {
+                return Atom.BytesToInt(Endian.Big, true).ToString();
+            }
+            else
+            {
+                return $"0x{ToHex()}";
+            }
+        }
+        else
+        {
+            string result = "(";
+            if (showKeywords && First.IsAtom)
+            {
+                BigInteger value = First.ToBigInt();
+                string keyword = KeywordConstants.Keywords.FirstOrDefault(kvp => kvp.Value == value).Key;
+                result += keyword ?? First.ToSource(showKeywords);
+            }
+            else
+            {
+                result += First.ToSource(showKeywords);
+            }
+            Program current = Cons.Item2;
+            while (current.IsCons)
+            {
+                result += $" {current.First.ToSource(showKeywords)}";
+                current = current.Cons.Item2;
+            }
+            result += (current.IsNull ? "" : $" . {current.ToSource(showKeywords)}") + ")";
+            return result;
+        }
+    }
+
+    public IList<Program> ToList(bool strict = false)
+    {
+        List<Program> result = new List<Program>();
+        Program current = this;
+        while (current.IsCons)
+        {
+            Program item = current.First;
+            result.Add(item);
+            current = current.Rest;
+        }
+        if (!current.IsNull && strict)
+            throw new Exception($"Expected strict list{PositionSuffix}.");
+        return result;
     }
 
     public byte[] Serialize()
@@ -315,7 +465,7 @@ public class Program
                     );
                 }
                 result.AddRange(Atom);
-                return result.ToArray();
+                return [.. result];
             }
         }
         else
@@ -328,5 +478,11 @@ public class Program
     }
 
     public string SerializeHex() => Serialize().ToHex();
-}
 
+    public bool Equals(Program value)
+    {
+        return IsAtom == value.IsAtom && (IsAtom ? ByteUtils.BytesEqual(Atom, value.Atom) : First.Equals(value.First) && Rest.Equals(value.Rest));
+    }
+
+    public override string ToString() => ToSource();
+}
