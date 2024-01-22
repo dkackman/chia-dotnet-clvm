@@ -87,7 +87,7 @@ public static class Compile
         { "mod", Mod.CompileMod },
     };
 
-    public static Program LowerQuote(Program program, Program macroLookup = null, Program symbolTable = null, Eval runProgram = null)
+    public static Program LowerQuote(Program program, Program? macroLookup = null, Program? symbolTable = null, Eval? runProgram = null)
     {
         if (program.IsAtom)
         {

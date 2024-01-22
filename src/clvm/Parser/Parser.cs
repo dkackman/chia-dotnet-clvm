@@ -58,7 +58,7 @@ public static partial class Parser
         Token token = tokens[0];
         if (token.Text == ")")
         {
-            return Program.FromBytes(new byte[0]).At(new Position(source, token.Index));
+            return Program.FromBytes([]).At(new Position(source, token.Index));
         }
 
         int consStart = token.Index;
@@ -86,19 +86,17 @@ public static partial class Parser
         return Program.FromCons(first, rest).At(new Position(source, consStart));
     }
 
-    public static Program TokenizeInt(string source, Token token)
+    public static Program? TokenizeInt(string source, Token token)
     {
         if (MyRegex().IsMatch(token.Text))
         {
             return Program.FromBigInt(BigInteger.Parse(token.Text.Replace("_", ""))).At(new Position(source, token.Index));
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     }
 
-    public static Program TokenizeHex(string source, Token token)
+    public static Program? TokenizeHex(string source, Token token)
     {
         if (token.Text.Length >= 2 && token.Text.Substring(0, 2).ToLower() == "0x")
         {
@@ -113,20 +111,24 @@ public static partial class Parser
                 throw new ParseError($"Invalid hex {token.Text} at {new Position(source, token.Index)}.");
             }
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     }
 
     [GeneratedRegex(@"^[+\-]?[0-9]+(?:_[0-9]+)*$")]
     private static partial Regex MyRegex();
 
-    public static Program TokenizeQuotes(string source, Token token)
+    public static Program? TokenizeQuotes(string source, Token token)
     {
-        if (token.Text.Length < 2) return null;
+        if (token.Text.Length < 2)
+        {
+            return null;
+        }
         char quote = token.Text[0];
-        if (!"\"'".Contains(quote)) return null;
+        if (!"\"'".Contains(quote))
+        {
+            return null;
+        }
         if (token.Text[token.Text.Length - 1] != quote)
             throw new ParseError($"Unterminated string {token.Text} at {new Position(source, token.Index)}.");
         return Program.FromText(token.Text.Substring(1, token.Text.Length - 2)).At(new Position(source, token.Index));
@@ -190,7 +192,7 @@ public static partial class Parser
                     throw new ParseError($"Unterminated string at {new Position(source, index)}.");
             }
             Token token = ConsumeUntilWhitespace(source, index);
-            yield return new Token { Text = token.Text, Index = token.Index };
+            yield return new Token { Text = token.Text, Index = index };
             index = token.Index;
         }
     }

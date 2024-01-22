@@ -32,7 +32,7 @@ public static class Bindings
     private static readonly byte[] AtomMatch = Encoding.UTF8.GetBytes("$");
     private static readonly byte[] SexpMatch = Encoding.UTF8.GetBytes(":");
 
-    public static Group UnifyBindings(Group bindings, string key, Program valueProgram)
+    public static Group? UnifyBindings(Group bindings, string key, Program valueProgram)
     {
         if (bindings.ContainsKey(key))
         {
@@ -46,9 +46,9 @@ public static class Bindings
         return bindings;
     }
 
-    public static Group? Match(Program pattern, Program sexp, Group knownBindings = null)
+    public static Group? Match(Program pattern, Program sexp, Group? knownBindings = null)
     {
-        knownBindings = knownBindings ?? new Group();
+        knownBindings ??= [];
 
         if (!pattern.IsCons)
         {

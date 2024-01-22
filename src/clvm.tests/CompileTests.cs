@@ -1,5 +1,5 @@
 using System.Numerics;
-using chia.dotnet.clvm; 
+using chia.dotnet.clvm;
 
 namespace clvm.tests;
 
@@ -24,6 +24,7 @@ public class CompileTests
     public void TestCompile(string puzzle, string expectedOutput, BigInteger? expectedCost = null)
     {
         var puzzleProgram = Program.FromSource(puzzle);
+        var hex = puzzleProgram.ToHex();
         var result = puzzleProgram.Compile(new CompileOptions { MaxCost = expectedCost });
 
         if (expectedOutput == null)

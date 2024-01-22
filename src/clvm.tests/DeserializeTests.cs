@@ -1,4 +1,3 @@
-
 using chia.dotnet.clvm;
 
 namespace clvm.tests;

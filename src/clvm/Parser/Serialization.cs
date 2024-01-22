@@ -43,14 +43,14 @@ public static class Serialization
                     result.Add((byte)((size >> 8) & 0xff));
                     result.Add((byte)((size >> 0) & 0xff));
                 }
-                else if (size < 0x400000000)
-                {
-                    result.Add((byte)(0xf8 | (size >> 32)));
-                    result.Add((byte)((size >> 24) & 0xff));
-                    result.Add((byte)((size >> 16) & 0xff));
-                    result.Add((byte)((size >> 8) & 0xff));
-                    result.Add((byte)((size >> 0) & 0xff));
-                }
+                // else if (size < 0x400000000)
+                // {
+                //     result.Add((byte)(0xf8 | (size >> 32)));
+                //     result.Add((byte)((size >> 24) & 0xff));
+                //     result.Add((byte)((size >> 16) & 0xff));
+                //     result.Add((byte)((size >> 8) & 0xff));
+                //     result.Add((byte)((size >> 0) & 0xff));
+                // }
                 else
                 {
                     throw new ArgumentOutOfRangeException(

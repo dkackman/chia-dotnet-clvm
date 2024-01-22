@@ -82,10 +82,11 @@ public static class ClvmHelper
     public static IList<Program> ToList(
         this Program program,
         string name,
-        int[] lengthRange,
+        int[]? lengthRange,
         ArgumentType? type = null)
     {
         var list = program.ToList();
+        lengthRange ??= [];
         if (lengthRange.Length != 2 || list.Count < lengthRange[0] || list.Count > lengthRange[1])
         {
             var rangeDescription = lengthRange[1] == int.MaxValue ? $"at least {lengthRange[0]}" : $"between {lengthRange[0]} and {lengthRange[1]}";

@@ -72,7 +72,7 @@ public class Program
         if (!bytes.Any())
             throw new ParseError("Unexpected end of source.");
 
-        return Serialization.Deserialize(bytes.ToList());
+        return Serialization.Deserialize([.. bytes]);
     }
 
     public static Program DeserializeHex(string hex) => Deserialize(hex.FromHex());
@@ -133,8 +133,8 @@ public class Program
     public byte[] Hash()
     {
         return IsAtom
-            ? Hmac.Hash256(new byte[] { 1 }.Concat(Atom).ToArray())
-            : Hmac.Hash256(new byte[] { 2 }.Concat(First.Hash()).Concat(Rest.Hash()).ToArray());
+            ? Hmac.Hash256([1, .. Atom])
+            : Hmac.Hash256([2, .. First.Hash(), .. Rest.Hash()]);
     }
 
     public string HashHex() => Hash().ToHex();
@@ -144,11 +144,11 @@ public class Program
         var result = this;
         if (IsAtom || First.IsCons || First.ToText() != "mod")
         {
-            result = FromList(new List<Program> { FromText("mod"), Nil, this }.ToArray());
+            result = FromList([FromText("mod"), Nil, this]);
         }
         var items = result.ToList();
         items.Insert(2, program);
-        return FromList(items.ToArray());
+        return FromList([.. items]);
     }
 
     public Program DefineAll(IList<Program> programs)
@@ -169,7 +169,7 @@ public class Program
             Operators = DefaultOperators.MakeDefaultOperators(),
             IncludeFilePaths = new Dictionary<string, IDictionary<string, string>>()
         },
-            options);
+        options);
 
         if (fullOptions.Strict)
         {
@@ -225,6 +225,7 @@ public class Program
 
         ProgramOutput RunProgram(Program program, Program args)
         {
+            var s = program.ToSource();
             return program.Run(args, fullOptions);
         }
 
@@ -244,7 +245,7 @@ public class Program
 
         return RunProgram(
             FromSource("(a (opt (com 2)) 3)"),
-            FromList(new List<Program> { this }.ToArray())
+            FromList([this])
         );
     }
 

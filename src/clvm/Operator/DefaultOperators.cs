@@ -1,7 +1,7 @@
 using System.Numerics;
 using chia.dotnet.bls;
 
-namespace chia.dotnet.clvm; 
+namespace chia.dotnet.clvm;
 
 public static class DefaultOperators
 {
@@ -18,7 +18,7 @@ public static class DefaultOperators
 
     public static ProgramOutput DefaultUnknownOperator(Program op, Program args)
     {
-        if (!op.Atom.Any() || op.Atom.Take(2).SequenceEqual(new byte[] { 0xff, 0xff }))
+        if (op.Atom.Length == 0 || op.Atom.Take(2).SequenceEqual(new byte[] { 0xff, 0xff }))
             throw new Exception($"Reserved operator {op.PositionSuffix}.");
 
         if (op.Atom.Length > 5)
