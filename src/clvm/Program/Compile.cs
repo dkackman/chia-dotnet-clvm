@@ -7,7 +7,7 @@ public delegate ProgramOutput Eval(Program program, Program args);
 
 public static class Compile
 {
-    public static BetterSet<string> PassThroughOperators = new BetterSet<string>(
+    public static BetterSet<string> PassThroughOperators = new(
         KeywordConstants.Keywords.Values.Select(value => ByteUtils.ToHex(ByteUtils.EncodeBigInt(value)))
         .Concat(new[] { ByteUtils.ToHex(Encoding.UTF8.GetBytes("com")), ByteUtils.ToHex(Encoding.UTF8.GetBytes("opt")) })
     );
@@ -24,23 +24,24 @@ public static class Compile
         {
             return QuoteAsProgram(program);
         }
+
         if (!program.First.IsCons)
         {
             var op = program.First.ToText();
             if (op == "qq")
             {
                 var expression = CompileQq(program.Rest, macroLookup, symbolTable, runProgram, level + 1);
-                return Com(Program.FromList(new List<Program>
-                {
+                return Com(Program.FromList(
+                [
                     Program.FromBytes(Atoms.ConsAtom),
                     Program.FromText(op),
-                    Program.FromList(new List<Program>
-                        {
+                    Program.FromList(
+                        [
                             Program.FromBytes(Atoms.ConsAtom),
                             expression,
                             QuoteAsProgram(Program.Nil)
-                        }.ToArray())
-                }.ToArray()));
+                        ])
+                ]));
             }
             else if (op == "unquote")
             {
@@ -49,33 +50,27 @@ public static class Compile
                     return Com(program.Rest.First);
                 }
                 var expression = CompileQq(program.Rest, macroLookup, symbolTable, runProgram, level - 1);
-                return Com(Program.FromList(new List<Program>
-                {
+                return Com(Program.FromList(
+                [
                     Program.FromBytes(Atoms.ConsAtom),
                     Program.FromText(op),
-                    Program.FromList(new List<Program>
-                    {
+                    Program.FromList(
+                    [
                         Program.FromBytes(Atoms.ConsAtom),
                         expression,
                         QuoteAsProgram(Program.Nil)
-                    }.ToArray())
-                }.ToArray()));
+                    ])
+                ]));
             }
         }
-        var first = Com(Program.FromList(new List<Program> { Program.FromText("qq"), program.First }.ToArray()));
-        var rest = Com(Program.FromList(new List<Program> { Program.FromText("qq"), program.Rest }.ToArray()));
-        return Program.FromList(new List<Program> { Program.FromBytes(Atoms.ConsAtom), first, rest }.ToArray());
+        var first = Com(Program.FromList([Program.FromText("qq"), program.First]));
+        var rest = Com(Program.FromList([Program.FromText("qq"), program.Rest]));
+        return Program.FromList([Program.FromBytes(Atoms.ConsAtom), first, rest]);
     }
 
-    public static Program CompileMacros(Program args, Program macroLookup, Program symbolTable, Eval runProgram)
-    {
-        return QuoteAsProgram(macroLookup);
-    }
+    public static Program CompileMacros(Program args, Program macroLookup, Program symbolTable, Eval runProgram) => QuoteAsProgram(macroLookup);
 
-    public static Program CompileSymbols(Program args, Program macroLookup, Program symbolTable, Eval runProgram)
-    {
-        return QuoteAsProgram(symbolTable);
-    }
+    public static Program CompileSymbols(Program args, Program macroLookup, Program symbolTable, Eval runProgram) => QuoteAsProgram(symbolTable);
 
     public static IDictionary<string, Func<Program, Program, Program, Eval, Program>> CompileBindings =
         new Dictionary<string, Func<Program, Program, Program, Eval, Program>>
@@ -98,6 +93,7 @@ public static class Compile
         {
             if (!program.Rest.Rest.IsNull)
                 throw new Exception($"Compilation error while compiling {program}. Quote takes exactly one argument{program.PositionSuffix}.");
+                
             return QuoteAsProgram(LowerQuote(program.Rest.First));
         }
 
@@ -114,7 +110,10 @@ public static class Compile
             if (!sexp.Rest.IsNull)
             {
                 macroLookup = sexp.Rest.First;
-                if (!sexp.Rest.Rest.IsNull) symbolTable = sexp.Rest.Rest.First;
+                if (!sexp.Rest.Rest.IsNull)
+                {
+                    symbolTable = sexp.Rest.Rest.First;
+                }
             }
             else
             {
@@ -151,6 +150,7 @@ public static class Compile
                     return value;
                 }
             }
+
             return QuoteAsProgram(program);
         }
 
@@ -158,15 +158,16 @@ public static class Compile
         if (op.IsCons)
         {
             var inner = EvalAsProgram(
-                Program.FromList(new List<Program> {
-                Program.FromText("com"),
-                QuoteAsProgram(op),
-                QuoteAsProgram(macroLookup),
-                QuoteAsProgram(symbolTable),
-                }.ToArray()),
+                Program.FromList([
+                    Program.FromText("com"),
+                    QuoteAsProgram(op),
+                    QuoteAsProgram(macroLookup),
+                    QuoteAsProgram(symbolTable),
+                ]),
                 Program.FromBytes(NodePath.Top.AsPath())
             );
-            return Program.FromList(new List<Program> { inner }.ToArray());
+
+            return Program.FromList([inner]);
         }
 
         var atom1 = op.ToText();
@@ -177,14 +178,15 @@ public static class Compile
                 var macroCode = macroPair.Rest.First;
                 var postProgram = BrunAsProgram(macroCode, program.Rest);
                 var result1 = EvalAsProgram(
-                    Program.FromList(new List<Program> {
-                    Program.FromText("com"),
-                    postProgram,
-                    QuoteAsProgram(macroLookup),
-                    QuoteAsProgram(symbolTable),
-                    }.ToArray()),
+                    Program.FromList([
+                        Program.FromText("com"),
+                        postProgram,
+                        QuoteAsProgram(macroLookup),
+                        QuoteAsProgram(symbolTable),
+                    ]),
                     Program.FromBytes(NodePath.Top.AsPath())
                 );
+
                 return result1;
             }
         }
@@ -207,7 +209,7 @@ public static class Compile
         var compiledArgs = program.Rest.ToList().Select(item =>
             DoComProgram(item, macroLookup, symbolTable, runProgram)).ToList();
 
-        var result = Program.FromList(new List<Program> { op }.Concat(compiledArgs).ToArray());
+        var result = Program.FromList([op, .. compiledArgs]);
         if (PassThroughOperators.Contains(ByteUtils.ToHex(atom1.ToBytes())) || atom1.StartsWith("_"))
         {
             return result;
@@ -218,7 +220,10 @@ public static class Compile
             var itemList = item.ToList();
             var symbol = itemList[0];
             var value = itemList[1];
-            if (!symbol.IsAtom) continue;
+            if (!symbol.IsAtom)
+            {
+                continue;
+            }
             var symbolText = symbol.ToText();
             if (symbolText == "*")
             {
@@ -227,32 +232,33 @@ public static class Compile
             else if (symbolText == atom1)
             {
                 var newArgs = EvalAsProgram(
-                    Program.FromList(new List<Program> {
-                    Program.FromText("opt"),
-                    Program.FromList(new List<Program> {
-                        Program.FromText("com"),
-                        QuoteAsProgram(
-                            Program.FromList(new List<Program> {
-                                Program.FromText("list"),
-                            }.Concat(program.Rest.ToList()).ToArray())
-                        ),
-                        QuoteAsProgram(macroLookup),
-                        QuoteAsProgram(symbolTable),
-                    }.ToArray()),
-                    }.ToArray()),
+                    Program.FromList([
+                        Program.FromText("opt"),
+                        Program.FromList([
+                            Program.FromText("com"),
+                            QuoteAsProgram(
+                                Program.FromList([
+                                    Program.FromText("list"), .. program.Rest.ToList(),
+                                ])
+                            ),
+                            QuoteAsProgram(macroLookup),
+                            QuoteAsProgram(symbolTable),
+                        ]),
+                    ]),
                     Program.FromBytes(NodePath.Top.AsPath())
                 );
-                return Program.FromList(new List<Program> {
+                return Program.FromList([
                     Program.FromBytes(Atoms.ApplyAtom),
                     value,
-                    Program.FromList(new List<Program> {
+                    Program.FromList([
                         Program.FromBytes(Atoms.ConsAtom),
                         Program.FromBytes(NodePath.Left.AsPath()),
                         newArgs,
-                    }.ToArray()),
-                }.ToArray());
+                    ]),
+                ]);
             }
         }
+
         throw new Exception($"Can't compile unknown operator {program}{program.PositionSuffix}.");
     }
 
@@ -263,18 +269,18 @@ public static class Compile
 
     public static Program EvalAsProgram(Program program, Program args)
     {
-        return Program.FromList(new List<Program> { Program.FromBigInt(KeywordConstants.Keywords["a"]), program, args }.ToArray());
+        return Program.FromList([Program.FromBigInt(KeywordConstants.Keywords["a"]), program, args]);
     }
 
     public static Program RunAsProgram(Program program, Program macroLookup)
     {
         return EvalAsProgram(
-            Program.FromList(new List<Program>
-            {
+            Program.FromList(
+            [
             Program.FromText("com"),
             program,
             QuoteAsProgram(macroLookup),
-            }.ToArray()),
+            ]),
             Program.FromBytes(NodePath.Top.AsPath())
         );
     }

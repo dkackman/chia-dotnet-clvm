@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "Ashift",
     "Binop",
     "clvm",
     "defconstant",
@@ -7,10 +8,12 @@
     "defun",
     "Divmod",
     "Hmac",
+    "Listp",
     "logand",
     "logior",
     "lognot",
     "logxor",
+    "Lshift",
     "pubkey",
     "sexp",
     "Softfork",

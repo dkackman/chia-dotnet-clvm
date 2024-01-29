@@ -7,7 +7,11 @@ public delegate ProgramOutput Operator(Program args);
 
 public record OperatorsType
 {
-    public IDictionary<string, Operator> Operators { get; init; } = new Dictionary<string, Operator>();
+    public OperatorsType()
+    {
+        Operators = new Dictionary<string, Operator>(clvm.Operators.DefaultOperators);
+    }
+    public IDictionary<string, Operator> Operators { get; init; } 
     public Func<Program, Program, ProgramOutput> Unknown { get; set; } = (a, b) => new ProgramOutput() { Value = a, Cost = 0 };
     public string Quote { get; init; } = string.Empty;
     public string Apply { get; init; } = string.Empty;
@@ -15,7 +19,7 @@ public record OperatorsType
 
 public static class Operators
 {
-    public static readonly IDictionary<string, Operator> operators = new Dictionary<string, Operator>
+    public static readonly IDictionary<string, Operator> DefaultOperators = new Dictionary<string, Operator>
     {
         { "i", new Operator(I) },
         { "c", new Operator(C) },
@@ -52,6 +56,7 @@ public static class Operators
     private static ProgramOutput I(Program args)
     {
         var list = args.ToList("i", 3);
+
         return new ProgramOutput
         {
             Value = list[0].IsNull ? list[2] : list[1],
@@ -62,6 +67,7 @@ public static class Operators
     private static ProgramOutput C(Program args)
     {
         var list = args.ToList("c", 2);
+
         return new ProgramOutput
         {
             Value = Program.FromCons(list[0], list[1]),
@@ -72,6 +78,7 @@ public static class Operators
     private static ProgramOutput F(Program args)
     {
         var list = args.ToList("f", 1, ArgumentType.Cons);
+
         return new ProgramOutput
         {
             Value = list[0].First,
@@ -82,6 +89,7 @@ public static class Operators
     private static ProgramOutput R(Program args)
     {
         var list = args.ToList("r", 1, ArgumentType.Cons);
+
         return new ProgramOutput
         {
             Value = list[0].Rest,
@@ -92,6 +100,7 @@ public static class Operators
     private static ProgramOutput L(Program args)
     {
         var list = args.ToList("l", 1);
+
         return new ProgramOutput
         {
             Value = Program.FromBool(list[0].IsCons),
@@ -99,18 +108,17 @@ public static class Operators
         };
     }
 
-    private static ProgramOutput X(Program args)
-    {
-        throw new Exception($"The error {args} was raised{args.PositionSuffix}.");
-    }
+    private static ProgramOutput X(Program args) => throw new Exception($"The error {args} was raised{args.PositionSuffix}.");
+
 
     private static ProgramOutput Equal(Program args)
     {
         var list = args.ToList("=", 2, ArgumentType.Atom);
+
         return new ProgramOutput
         {
             Value = Program.FromBool(ByteUtils.BytesEqual(list[0].Atom, list[1].Atom)),
-            Cost = Costs.EqBase + ((long)list[0].Atom.Length + (long)list[1].Atom.Length) * Costs.EqPerByte
+            Cost = Costs.EqBase + (list[0].Atom.Length + (long)list[1].Atom.Length) * Costs.EqPerByte
         };
     }
 
@@ -118,8 +126,9 @@ public static class Operators
     {
         var list = args.ToList("sha256", null, ArgumentType.Atom);
         var cost = Costs.Sha256Base;
-        int argLength = 0;
+        var argLength = 0;
         var bytes = new List<byte>();
+
         foreach (var item in list)
         {
             bytes.AddRange(item.Atom);
@@ -141,6 +150,7 @@ public static class Operators
         var total = BigInteger.Zero;
         var cost = Costs.ArithBase;
         var argSize = 0;
+
         foreach (var item in list)
         {
             total += item.ToBigInt();
@@ -160,7 +170,9 @@ public static class Operators
     {
         var cost = Costs.ArithBase;
         if (args.IsNull)
+        {
             return new ProgramOutput { Value = Program.Nil, Cost = cost };
+        }
 
         var list = args.ToList("-", null, ArgumentType.Atom);
         var total = BigInteger.Zero;
@@ -187,18 +199,21 @@ public static class Operators
         var list = args.ToList("*", null, ArgumentType.Atom);
         var cost = Costs.MulBase;
         if (!list.Any())
+        {
             return ClvmHelper.MallocCost(new ProgramOutput { Value = Program.True, Cost = cost });
+        }
 
         BigInteger value = list[0].ToBigInt();
-        int size = list[0].Atom.Length;
+        var size = list[0].Atom.Length;
         foreach (var item in list.Skip(1))
         {
             cost += Costs.MulPerOp +
                     ((ulong)item.Atom.Length + (ulong)size) * Costs.MulLinearPerByte +
-                    ((ulong)item.Atom.Length * (ulong)size) / Costs.MulSquarePerByteDivider;
+                    (item.Atom.Length * size) / Costs.MulSquarePerByteDivider;
             value *= item.ToBigInt();
             size = ClvmHelper.LimbsForBigInt(value);
         }
+
         return ClvmHelper.MallocCost(new ProgramOutput { Value = Program.FromBigInt(value), Cost = cost });
     }
 
@@ -215,7 +230,9 @@ public static class Operators
         var quotientValue = numerator / denominator;
         var remainderValue = ClvmHelper.Mod(numerator, denominator);
         if ((numerator < BigInteger.Zero) != (denominator < BigInteger.Zero) && remainderValue != BigInteger.Zero)
+        {
             quotientValue -= BigInteger.One;
+        }
 
         var quotient = Program.FromBigInt(quotientValue);
         var remainder = Program.FromBigInt(remainderValue);
@@ -237,7 +254,9 @@ public static class Operators
         var quotientValue = numerator / denominator;
         //var remainderValue = ClvmHelper.Mod(numerator, denominator);
         if ((numerator < BigInteger.Zero) != (denominator < BigInteger.Zero) && quotientValue < BigInteger.Zero)
+        {
             quotientValue -= BigInteger.One;
+        }
 
         var quotient = Program.FromBigInt(quotientValue);
         return ClvmHelper.MallocCost(new ProgramOutput { Value = quotient, Cost = cost });
@@ -246,6 +265,7 @@ public static class Operators
     {
         var list = args.ToList(">", 2, ArgumentType.Atom);
         var cost = Costs.GrBase + ((ulong)list[0].Atom.Length + (ulong)list[1].Atom.Length) * Costs.GrPerByte;
+
         return new ProgramOutput
         {
             Value = Program.FromBool(list[0].ToBigInt() > list[1].ToBigInt()),
@@ -257,6 +277,7 @@ public static class Operators
     {
         var list = args.ToList(">s", 2, ArgumentType.Atom);
         var cost = Costs.GrsBase + ((ulong)list[0].Atom.Length + (ulong)list[1].Atom.Length) * Costs.GrsPerByte;
+
         return new ProgramOutput
         {
             Value = Program.FromBool(String.Compare(list[0].ToHex(), list[1].ToHex(), StringComparison.Ordinal) == 1),
@@ -310,7 +331,7 @@ public static class Operators
 
     private static ProgramOutput Substr(Program args)
     {
-        var list = args.ToList("substr", new[] { 2, 3 }, ArgumentType.Atom);
+        var list = args.ToList("substr", [2, 3], ArgumentType.Atom);
         var value = list[0].Atom;
         if (list[1].Atom.Length > 4 || (list.Count == 3 && list[2].Atom.Length > 4))
             throw new Exception($"Expected 4 byte indices in \"substr\" operator{args.PositionSuffix}.");
@@ -332,6 +353,7 @@ public static class Operators
         var list = args.ToList("concat", null, ArgumentType.Atom);
         var cost = Costs.ConcatBase;
         var bytes = new List<byte>();
+
         foreach (var item in list)
         {
             bytes.AddRange(item.Atom);
@@ -352,11 +374,11 @@ public static class Operators
         if (list[1].Atom.Length > 4)
             throw new Exception($"Shift must be 32 bits in \"ash\" operator{args.PositionSuffix}.");
 
-        BigInteger shift = list[1].ToBigInt();
+        var shift = list[1].ToBigInt();
         if (BigInteger.Abs(shift) > 65535)
             throw new Exception($"Shift too large in \"ash\" operator{args.PositionSuffix}.");
 
-        BigInteger value = list[0].ToBigInt();
+        var value = list[0].ToBigInt();
         value = shift >= 0 ? value << (int)shift : value >> (int)-shift;
         var cost = Costs.AshiftBase + (list[0].Atom.Length + ClvmHelper.LimbsForBigInt(value)) * Costs.AshiftPerByte;
 
@@ -373,12 +395,15 @@ public static class Operators
         if (list[1].Atom.Length > 4)
             throw new Exception($"Shift must be 32 bits in \"lsh\" operator{args.PositionSuffix}.");
 
-        BigInteger shift = list[1].ToBigInt();
+        var shift = list[1].ToBigInt();
         if (BigInteger.Abs(shift) > 65535)
             throw new Exception($"Shift too large in \"lsh\" operator{args.PositionSuffix}.");
 
-        BigInteger value = list[0].Atom.BytesToBigInt();
-        if (value < BigInteger.Zero) value = -value;
+        var value = list[0].Atom.BytesToBigInt();
+        if (value < BigInteger.Zero)
+        {
+            value = -value;
+        }
         value = shift >= 0 ? value << (int)shift : value >> (int)-shift;
         var cost = Costs.LshiftBase + (list[0].Atom.Length + ClvmHelper.LimbsForBigInt(value)) * Costs.LshiftPerByte;
 
@@ -389,20 +414,11 @@ public static class Operators
         });
     }
 
-    private static ProgramOutput Logand(Program args)
-    {
-        return ClvmHelper.BinopReduction("logand", BigInteger.MinusOne, args, (a, b) => a & b);
-    }
+    private static ProgramOutput Logand(Program args) => ClvmHelper.BinopReduction("logand", BigInteger.MinusOne, args, (a, b) => a & b);
 
-    private static ProgramOutput Logior(Program args)
-    {
-        return ClvmHelper.BinopReduction("logior", BigInteger.Zero, args, (a, b) => a | b);
-    }
+    private static ProgramOutput Logior(Program args) => ClvmHelper.BinopReduction("logior", BigInteger.Zero, args, (a, b) => a | b);
+    private static ProgramOutput Logxor(Program args) => ClvmHelper.BinopReduction("logxor", BigInteger.Zero, args, (a, b) => a ^ b);
 
-    private static ProgramOutput Logxor(Program args)
-    {
-        return ClvmHelper.BinopReduction("logxor", BigInteger.Zero, args, (a, b) => a ^ b);
-    }
     private static ProgramOutput Lognot(Program args)
     {
         var items = args.ToList("lognot", 1, ArgumentType.Atom);
@@ -431,7 +447,8 @@ public static class Operators
     {
         var list = args.ToList("any");
         var cost = Costs.BoolBase + (ulong)list.Count * Costs.BoolPerArg;
-        bool result = false;
+        var result = false;
+
         foreach (var item in list)
         {
             if (!item.IsNull)
@@ -452,7 +469,8 @@ public static class Operators
     {
         var list = args.ToList("all");
         var cost = Costs.BoolBase + (ulong)list.Count * Costs.BoolPerArg;
-        bool result = true;
+        var result = true;
+
         foreach (var item in list)
         {
             if (item.IsNull)
@@ -471,18 +489,18 @@ public static class Operators
 
     private static ProgramOutput Softfork(Program args)
     {
-        var list = args.ToList("softfork", new[] { 1, int.MaxValue });
+        var list = args.ToList("softfork", [1, int.MaxValue]);
         if (!list[0].IsAtom)
             throw new Exception($"Expected atom argument in \"softfork\" operator at {list[0].PositionSuffix}.");
 
-        BigInteger cost = list[0].ToBigInt();
+        var cost = list[0].ToBigInt();
         if (cost < BigInteger.One)
             throw new Exception($"Cost must be greater than zero in \"softfork\" operator{args.PositionSuffix}.");
 
         return new ProgramOutput
         {
             Value = Program.False, // Assuming Program.False is defined
-            Cost = (ulong)cost
+            Cost = cost
         };
     }
 
@@ -490,9 +508,9 @@ public static class Operators
     {
         BigInteger symbol = op.ToBigInt();
         string keyword = KeywordConstants.Keywords.FirstOrDefault(entry => entry.Value == symbol).Key ?? op.ToText();
-        if (options.Operators.Operators.ContainsKey(keyword))
+        if (options.Operators.Operators.TryGetValue(keyword, out Operator? value))
         {
-            ProgramOutput result = options.Operators.Operators[keyword](args);
+            ProgramOutput result = value(args);
             return result;
         }
 

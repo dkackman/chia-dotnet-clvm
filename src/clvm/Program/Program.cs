@@ -11,28 +11,6 @@ public class Program
     public static readonly Program False = FromBytes([]);
     public static readonly Program Nil = False;
 
-    public Program(Cons value)
-    {
-        Value = value;
-    }
-    public Program(byte[] value)
-    {
-        Value = value;
-    }
-
-    public object Value { get; }
-
-    public bool IsAtom => Value is byte[];
-    public bool IsCons => Value is Cons;
-
-    public bool IsNull => IsAtom && Atom.Length == 0;
-
-    public byte[] Atom => Value as byte[] ?? throw new InvalidOperationException("Program is not an atom");
-    public Cons Cons => Value as Cons ?? throw new InvalidOperationException("Program is not a cons");
-
-    public Program First => Cons.Item1;
-    public Program Rest => Cons.Item2;
-
     public static Program FromCons(Program program1, Program program2) => new(new Cons(program1, program2));
     public static Program FromBytes(byte[] value) => new(value);
     public static Program FromJacobianPoint(JacobianPoint value) => new(value.ToBytes());
@@ -62,6 +40,7 @@ public class Program
         {
             result = FromCons(program, result);
         }
+
         return result;
     }
 
@@ -69,13 +48,28 @@ public class Program
 
     public static Program Deserialize(byte[] bytes)
     {
-        if (!bytes.Any())
+        if (bytes.Length == 0)
             throw new ParseError("Unexpected end of source.");
 
         return Serialization.Deserialize([.. bytes]);
     }
 
     public static Program DeserializeHex(string hex) => Deserialize(hex.FromHex());
+
+    public Program(Cons value) => Value = value;
+    public Program(byte[] value) => Value = value;
+
+    public object Value { get; }
+
+    public bool IsAtom => Value is byte[];
+    public bool IsCons => Value is Cons;
+    public bool IsNull => IsAtom && Atom.Length == 0;
+
+    public byte[] Atom => Value as byte[] ?? throw new InvalidOperationException("Program is not an atom");
+    public Cons Cons => Value as Cons ?? throw new InvalidOperationException("Program is not a cons");
+
+    public Program First => Cons.Item1;
+    public Program Rest => Cons.Item2;
 
     public string PositionSuffix => Position is not null ? $" at {Position}" : "";
     public Position? Position { get; private set; }
@@ -90,7 +84,7 @@ public class Program
     {
         return FromSource(
             "(a (q #a 4 (c 2 (c 5 (c 7 0)))) (c (q (c (q . 2) (c (c (q . 1) 5) (c (a 6 (c 2 (c 11 (q 1)))) 0))) #a (i 5 (q 4 (q . 4) (c (c (q . 1) 9) (c (a 6 (c 2 (c 13 (c 11 0)))) 0))) (q . 11)) 1) 1))"
-        ).Run(FromCons(this, FromList(args.ToArray()
+        ).Run(FromCons(this, FromList([.. args]
         ))).Value;
     }
 
@@ -130,12 +124,9 @@ public class Program
         return null;
     }
 
-    public byte[] Hash()
-    {
-        return IsAtom
+    public byte[] Hash() => IsAtom
             ? Hmac.Hash256([1, .. Atom])
             : Hmac.Hash256([2, .. First.Hash(), .. Rest.Hash()]);
-    }
 
     public string HashHex() => Hash().ToHex();
 
@@ -146,8 +137,10 @@ public class Program
         {
             result = FromList([FromText("mod"), Nil, this]);
         }
+
         var items = result.ToList();
         items.Insert(2, program);
+
         return FromList([.. items]);
     }
 
@@ -158,6 +151,7 @@ public class Program
         {
             result = result.Define(program);
         }
+
         return result;
     }
 
@@ -215,17 +209,17 @@ public class Program
             {
                 throw new Exception($"Can't open {fileName}{args.PositionSuffix}.");
             }
+
             return new ProgramOutput { Value = FromSource(source), Cost = 1 };
         }
 
-        ProgramOutput DoWrite(Program _args)
+        ProgramOutput DoWrite(Program _)
         {
             return new ProgramOutput { Value = Nil, Cost = 1 };
         }
 
         ProgramOutput RunProgram(Program program, Program args)
         {
-            var s = program.ToSource();
             return program.Run(args, fullOptions);
         }
 
@@ -266,10 +260,9 @@ public class Program
                 throw new Exception($"Unimplemented operator{args.PositionSuffix}.");
             };
         }
-        var instructionStack = new Stack<Instruction>();
-        instructionStack.Push(InstructionsClass.Instructions["eval"]);
-        var stack = new Stack<Program>();
-        stack.Push(FromCons(this, environment));
+
+        var instructionStack = new Stack<Instruction>([InstructionsClass.Instructions["eval"]]);
+        var stack = new Stack<Program>([FromCons(this, environment)]);
         BigInteger cost = 0;
         while (instructionStack.Count > 0)
         {
@@ -280,6 +273,7 @@ public class Program
                 throw new Exception($"Exceeded cost of {fullOptions.MaxCost.Value}{stack.Peek().PositionSuffix}.");
             }
         }
+
         return new ProgramOutput
         {
             Value = stack.Peek(),
@@ -366,7 +360,7 @@ public class Program
             {
                 try
                 {
-                    string str = ToText();
+                    var str = ToText();
                     for (int i = 0; i < str.Length; i++)
                     {
                         if (!Constants.Printable.Contains(str[i]))
@@ -375,7 +369,7 @@ public class Program
                         }
                     }
 
-                    if (str.Contains('"') && str.Contains("'"))
+                    if (str.Contains('"') && str.Contains('\''))
                     {
                         return $"0x{ToHex()}";
                     }
@@ -399,17 +393,18 @@ public class Program
         }
         else
         {
-            string result = "(";
+            var result = "(";
             if (showKeywords && First.IsAtom)
             {
                 BigInteger value = First.ToBigInt();
-                string keyword = KeywordConstants.Keywords.FirstOrDefault(kvp => kvp.Value == value).Key;
+                var keyword = KeywordConstants.Keywords.FirstOrDefault(kvp => kvp.Value == value).Key;
                 result += keyword ?? First.ToSource(showKeywords);
             }
             else
             {
                 result += First.ToSource(showKeywords);
             }
+
             Program current = Cons.Item2;
             while (current.IsCons)
             {
@@ -417,13 +412,14 @@ public class Program
                 current = current.Cons.Item2;
             }
             result += (current.IsNull ? "" : $" . {current.ToSource(showKeywords)}") + ")";
+
             return result;
         }
     }
 
     public IList<Program> ToList(bool strict = false)
     {
-        List<Program> result = new List<Program>();
+        List<Program> result = [];
         Program current = this;
         while (current.IsCons)
         {
@@ -431,8 +427,10 @@ public class Program
             result.Add(item);
             current = current.Rest;
         }
+
         if (!current.IsNull && strict)
             throw new Exception($"Expected strict list{PositionSuffix}.");
+
         return result;
     }
 
@@ -441,9 +439,7 @@ public class Program
     public string SerializeHex() => Serialize().ToHex();
 
     public bool Equals(Program value)
-    {
-        return IsAtom == value.IsAtom && (IsAtom ? ByteUtils.BytesEqual(Atom, value.Atom) : First.Equals(value.First) && Rest.Equals(value.Rest));
-    }
+        => IsAtom == value.IsAtom && (IsAtom ? ByteUtils.BytesEqual(Atom, value.Atom) : First.Equals(value.First) && Rest.Equals(value.Rest));
 
     public override string ToString() => ToSource();
 }

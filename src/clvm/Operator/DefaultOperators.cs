@@ -7,9 +7,8 @@ public static class DefaultOperators
 {
     public static OperatorsType MakeDefaultOperators()
     {
-        return new OperatorsType
+        return  new OperatorsType
         {
-            Operators = Operators.operators,
             Unknown = DefaultUnknownOperator,
             Quote = "q",
             Apply = "a"

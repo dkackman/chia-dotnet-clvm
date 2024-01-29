@@ -12,7 +12,7 @@ public class Position
         int column = 1;
         for (int i = 0; i < index; i++)
         {
-            if (source[i] == '\n')
+            if (CheckForChar(source, index, '\n'))
             {
                 line++;
                 column = 1;
@@ -27,4 +27,13 @@ public class Position
     }
 
     public override string ToString() => $"{Line}:{Column}";
+
+    private static bool CheckForChar(string source, int index, char expected)
+    {
+        if (source.Length <= index)
+        {
+            return false;
+        }
+        return source[index] == expected;
+    }
 }

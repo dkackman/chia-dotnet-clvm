@@ -31,10 +31,12 @@ public static partial class Parser
             {
                 index++;
             }
+
             if (index >= text.Length || text[index] != ';')
             {
                 break;
             }
+
             while (index < text.Length && !"\n\r".Contains(text[index]))
             {
                 index++;
@@ -50,6 +52,7 @@ public static partial class Parser
         {
             index++;
         }
+
         return new Token { Text = text.Substring(start, index - start), Index = index };
     }
 
@@ -98,10 +101,14 @@ public static partial class Parser
 
     public static Program? TokenizeHex(string source, Token token)
     {
-        if (token.Text.Length >= 2 && token.Text.Substring(0, 2).ToLower() == "0x")
+        if (token.Text.Length >= 2 && token.Text[..2].ToLower() == "0x")
         {
-            string hex = token.Text.Substring(2);
-            if (hex.Length % 2 == 1) hex = $"0{hex}";
+            string hex = token.Text[2..];
+            if (hex.Length % 2 == 1)
+            {
+                hex = $"0{hex}";
+            }
+
             try
             {
                 return Program.FromHex(hex).At(new Position(source, token.Index));
@@ -124,22 +131,34 @@ public static partial class Parser
         {
             return null;
         }
+
         char quote = token.Text[0];
         if (!"\"'".Contains(quote))
         {
             return null;
         }
-        if (token.Text[token.Text.Length - 1] != quote)
+
+        if (token.Text[^1] != quote)
             throw new ParseError($"Unterminated string {token.Text} at {new Position(source, token.Index)}.");
-        return Program.FromText(token.Text.Substring(1, token.Text.Length - 2)).At(new Position(source, token.Index));
+
+        return Program.FromText(token.Text[1..^1]).At(new Position(source, token.Index));
     }
 
     public static Program TokenizeSymbol(string source, Token token)
     {
         string text = token.Text;
-        if (text.StartsWith('#')) text = text.Substring(1);
-        BigInteger? keyword = KeywordConstants.Keywords.GetValueOrDefault(text);
-        return (keyword == null ? Program.FromText(text) : Program.FromBigInt(keyword.Value)).At(new Position(source, token.Index));
+        if (text.StartsWith('#'))
+        {
+            text = text[1..];
+        }
+        // BigInteger? keyword = KeywordConstants.Keywords.GetValueOrDefault(text);
+        // return (keyword == null ? Program.FromText(text) : Program.FromBigInt(keyword.Value)).At(new Position(source, token.Index));
+        if (KeywordConstants.Keywords.TryGetValue(text, out BigInteger value))
+        {
+            return Program.FromBigInt(value).At(new Position(source, token.Index));
+        }
+
+        return Program.FromText(text);
     }
 
     public static Program TokenizeExpr(string source, List<Token> tokens)
@@ -168,7 +187,11 @@ public static partial class Parser
         while (index < source.Length)
         {
             index = ConsumeWhitespace(source, index);
-            if (index >= source.Length) break;
+            if (index >= source.Length)
+            {
+                break;
+            }
+
             char charAtIndex = source[index];
             if ("(.)".Contains(charAtIndex))
             {
@@ -176,6 +199,7 @@ public static partial class Parser
                 index++;
                 continue;
             }
+
             if ("\"'".Contains(charAtIndex))
             {
                 int start = index;

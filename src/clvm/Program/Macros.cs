@@ -16,7 +16,8 @@ public static class Macros
                     (c (f (r 1))
                         (c (f (r (r 1)))
                             (q . ()))))
-                    (q . ()))))))",
+                    (q . ()))))))
+        ",
         @"
         ;(defmacro list ARGS
         ;    ((c (mod args
@@ -41,17 +42,22 @@ public static class Macros
                                 (q 1))
                             1)
                         1))
-                1))",
-        @"(defmacro function (BODY)
+                1))
+        ",
+        @"
+        (defmacro function (BODY)
             (qq (opt (com (q . (unquote BODY))
-                    (qq (unquote (macros)))
-                    (qq (unquote (symbols))))))",
-        @"(defmacro if (A B C)
+                     (qq (unquote (macros)))
+                     (qq (unquote (symbols)))))))
+        ",
+        @"
+        (defmacro if (A B C)
             (qq (a
                 (i (unquote A)
                 (function (unquote B))
                 (function (unquote C)))
-                @))",
+                @)))
+        ",
         @"(defmacro / (A B) (qq (f (divmod (unquote A) (unquote B)))))",
     };
 
@@ -62,7 +68,7 @@ public static class Macros
         var run = Program.FromSource("(a (com 2 3) 1)");
         foreach (var macroSource in DefaultMacroSources)
         {
-            var macroProgram = Program.FromSource(macroSource);
+            var macroProgram = Program.FromSource(macroSource.Replace("\r\n", "\n"));
             var env = Program.FromCons(macroProgram, DefaultMacroLookupProgram);
             var newMacro = evalAsProgram(run, env).Value;
             DefaultMacroLookupProgram = Program.FromCons(newMacro, DefaultMacroLookupProgram);
@@ -74,7 +80,7 @@ public static class Macros
     {
         if (DefaultMacroLookupProgram == null || DefaultMacroLookupProgram.IsNull)
         {
-            DefaultMacroLookupProgram = Program.FromList(new List<Program>().ToArray());
+            DefaultMacroLookupProgram = Program.FromList([]);
             BuildDefaultMacroLookup(evalAsProgram);
         }
         return DefaultMacroLookupProgram;
