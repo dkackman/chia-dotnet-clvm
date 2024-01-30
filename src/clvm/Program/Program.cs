@@ -223,19 +223,11 @@ public class Program
             return program.Run(args, fullOptions);
         }
 
-        var bindings = new Dictionary<string, Operator>
-        {
-            { "com", clvm.Compile.MakeDoCom(RunProgram) },
-            { "opt", Optimize.MakeDoOpt(RunProgram) },
-            { "_full_path_for_name", DoFullPathForName },
-            { "_read", DoRead },
-            { "_write", DoWrite }
-        };
-
-        foreach (var binding in bindings)
-        {
-            fullOptions.Operators.Operators[binding.Key] = binding.Value;
-        }
+        fullOptions.Operators.Operators["com"] = clvm.Compile.MakeDoCom(RunProgram);
+        fullOptions.Operators.Operators["opt"] = Optimize.MakeDoOpt(RunProgram);
+        fullOptions.Operators.Operators["_full_path_for_name"] = DoFullPathForName;
+        fullOptions.Operators.Operators["_read"] = DoRead;
+        fullOptions.Operators.Operators["_write"] = DoWrite;
 
         return RunProgram(
             FromSource("(a (opt (com 2)) 3)"),
@@ -269,9 +261,7 @@ public class Program
             var instruction = instructionStack.Pop();
             cost += instruction(instructionStack, stack, fullOptions);
             if (fullOptions.MaxCost.HasValue && cost > fullOptions.MaxCost.Value)
-            {
                 throw new Exception($"Exceeded cost of {fullOptions.MaxCost.Value}{stack.Peek().PositionSuffix}.");
-            }
         }
 
         return new ProgramOutput
@@ -355,7 +345,12 @@ public class Program
             {
                 return "()";
             }
-
+            if (Atom.Length == 2 && Atom[0] == 0 && Atom[1] == 200)
+            {
+                var i = Atom.BytesToInt(Endian.Big, true);
+                var b = ByteUtils.EncodeInt(i);
+                var e = ByteUtils.BytesEqual(b, Atom);
+            }
             if (Atom.Length > 2)
             {
                 try
@@ -396,7 +391,7 @@ public class Program
             var result = "(";
             if (showKeywords && First.IsAtom)
             {
-                BigInteger value = First.ToBigInt();
+                var value = First.ToBigInt();
                 var keyword = KeywordConstants.Keywords.FirstOrDefault(kvp => kvp.Value == value).Key;
                 result += keyword ?? First.ToSource(showKeywords);
             }
@@ -405,7 +400,7 @@ public class Program
                 result += First.ToSource(showKeywords);
             }
 
-            Program current = Cons.Item2;
+            var current = Cons.Item2;
             while (current.IsCons)
             {
                 result += $" {current.First.ToSource(showKeywords)}";
@@ -420,7 +415,7 @@ public class Program
     public IList<Program> ToList(bool strict = false)
     {
         List<Program> result = [];
-        Program current = this;
+        var current = this;
         while (current.IsCons)
         {
             Program item = current.First;

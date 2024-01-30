@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="chia-dotnet-bls" Version="1.2.3" />
+    <PackageReference Include="chia-dotnet-bls" Version="1.3.0" />
   </ItemGroup>
 
 </Project>

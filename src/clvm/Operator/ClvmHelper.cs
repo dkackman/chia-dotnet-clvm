@@ -42,6 +42,7 @@ public static class ClvmHelper
             Cost = cost
         });
     }
+
     public static ProgramOutput MallocCost(ProgramOutput output)
     {
         return new ProgramOutput
@@ -87,7 +88,7 @@ public static class ClvmHelper
     {
         var list = program.ToList();
         lengthRange ??= [];
-        if (lengthRange.Length != 2 || list.Count < lengthRange[0] || list.Count > lengthRange[1])
+        if (lengthRange.Length >= 2 && (list.Count < lengthRange[0] || list.Count > lengthRange[1]))
         {
             var rangeDescription = lengthRange[1] == int.MaxValue ? $"at least {lengthRange[0]}" : $"between {lengthRange[0]} and {lengthRange[1]}";
             throw new Exception($"Expected {rangeDescription} arguments in {name} operator{program.PositionSuffix}.");

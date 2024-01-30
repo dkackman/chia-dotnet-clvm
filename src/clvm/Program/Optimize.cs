@@ -133,11 +133,13 @@ public static class Optimize
         {
             return program;
         }
+
         var @operator = program.First;
         if (@operator.IsAtom && ByteUtils.BytesEqual(@operator.Atom, Atoms.QuoteAtom))
         {
             return program;
         }
+        
         return Program.FromList(program.ToList().Select(item => OptimizeProgram(item, evalAsProgram)).ToList());
     }
 

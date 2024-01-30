@@ -24,9 +24,8 @@ public class CompileTests
     public void TestCompile(string puzzle, string expectedOutput, BigInteger? expectedCost = null)
     {
         var puzzleProgram = Program.FromSource(puzzle);
-        var hex = puzzleProgram.ToHex();
+        var t = puzzleProgram.ToSource();
         var result = puzzleProgram.Compile(new CompileOptions { MaxCost = expectedCost });
-
         if (expectedOutput == null)
         {
             Assert.Throws<Exception>(() => result.Value);

@@ -56,7 +56,7 @@ public static partial class Parser
         return new Token { Text = text.Substring(start, index - start), Index = index };
     }
 
-    public static Program TokenizeCons(string source, List<Token> tokens)
+    public static Program TokenizeCons(string source, IList<Token> tokens)
     {
         Token token = tokens[0];
         if (token.Text == ")")
@@ -161,7 +161,7 @@ public static partial class Parser
         return Program.FromText(text);
     }
 
-    public static Program TokenizeExpr(string source, List<Token> tokens)
+    public static Program TokenizeExpr(string source, IList<Token> tokens)
     {
         Token token = tokens[0];
         if (token.Text == "(")
