@@ -345,12 +345,7 @@ public class Program
             {
                 return "()";
             }
-            if (Atom.Length == 2 && Atom[0] == 0 && Atom[1] == 200)
-            {
-                var i = Atom.BytesToInt(Endian.Big, true);
-                var b = ByteUtils.EncodeInt(i);
-                var e = ByteUtils.BytesEqual(b, Atom);
-            }
+
             if (Atom.Length > 2)
             {
                 try

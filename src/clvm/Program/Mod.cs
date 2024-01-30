@@ -113,6 +113,7 @@ public static class Mod
         var args = Flatten(third.First).Where(item => !string.IsNullOrEmpty(item)).ToList();
         var unquotedCode = UnquoteArgs(code, args);
         items.Add(Program.FromList(new List<Program> { Program.FromText("qq"), unquotedCode }));
+
         return Program.FromList(items);
     }
 
@@ -125,11 +126,13 @@ public static class Mod
             ParseInclude(nameProgram, @namespace, functions, constants, macros, runProgram);
             return;
         }
+
         var name = nameProgram.ToText();
         if (@namespace.Contains(name))
         {
             throw new Exception($"Symbol {name} redefined.");
         }
+        
         @namespace.Add(name);
         if (op == "defmacro")
         {

@@ -24,18 +24,19 @@ public class CompileTests
     public void TestCompile(string puzzle, string expectedOutput, BigInteger? expectedCost = null)
     {
         var puzzleProgram = Program.FromSource(puzzle);
-        var t = puzzleProgram.ToSource();
-        var result = puzzleProgram.Compile(new CompileOptions { MaxCost = expectedCost });
-        if (expectedOutput == null)
-        {
-            Assert.Throws<Exception>(() => result.Value);
-        }
-        else
-        {
-            var text = result.Value.ToSource();
-            Assert.Equal(expectedOutput, text);
-            if (expectedCost != null)
-                Assert.Equal(expectedCost + 182, result.Cost);
-        }
+        var result = puzzleProgram.Compile(new CompileOptions { MaxCost = null });
+
+        var text = result.Value.ToSource();
+        Assert.Equal(expectedOutput, text);
+        if (expectedCost != null)
+            Assert.Equal(expectedCost + 182, result.Cost);
+    }
+
+    [Fact]
+    public void EnforceMaxCost()
+    {
+        var puzzleProgram = Program.FromSource("(mod () (defmacro mul (left right) (* left right)) (mul 5 10))");
+
+        Assert.Throws<Exception>(() => puzzleProgram.Compile(new CompileOptions { MaxCost = 2 }));
     }
 }
