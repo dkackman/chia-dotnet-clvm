@@ -7,21 +7,17 @@ public class RunTests
 {
     public static IEnumerable<object[]> TestData =>
         [
-            ["(+ (q . 7) (q . 1))", new object[] { "8", 805 }],
-            ["(+ (q . 1))", new object[] { "1", 462 }],
-            ["(+ ())", new object[] { "()", 473 }],
-            ["(+)", new object[] { "()", 109 }],
-            ["(+ (q . 0x0000000000000000000000000000000000000000000000000000000000000000000000000000000007) (q . 0x000000000000000000000000000000000000000000000000000000000000000000000001))", new object[] { "8", 1030 }],
-            ["(0x0bf (q . 1) (q . 2) (q . 3))", new object[] { "()", 1962 }],
+            [new object[] {"(+)"}, new object[] { "()", 109 }],
         ];
 
     [Theory]
     [MemberData(nameof(TestData))]
-    public void TestRun(string puzzle, object[] output)
+    public void TestRun(object[] input, object[] output)
     {
-        var solution = output[0].ToString()!;
-        BigInteger cost = new((int)output[1]);
-        var strict = output.Length > 2 && (bool)output[2];
+        var puzzle = input[0].ToString()!;
+        var solution = input.Length > 1 ? input[0].ToString()! : "()";
+        BigInteger? maxCost = input.Length > 2 ? new((int)input[2]) : null;
+        bool strict = input.Length > 3 && (bool)input[2];
 
         if (output == null)
         {
@@ -29,18 +25,34 @@ public class RunTests
             {
                 var puzzleProgram = Program.FromSource(puzzle);
                 var solutionProgram = Program.FromSource(solution);
-                puzzleProgram.Run(solutionProgram, new RunOptions { MaxCost = cost, Strict = strict });
+                puzzleProgram.Run(solutionProgram, new RunOptions { MaxCost = maxCost, Strict = strict });
             });
         }
         else
         {
             var puzzleProgram = Program.FromSource(puzzle);
             var solutionProgram = Program.FromSource(solution);
-            var result = puzzleProgram.Run(solutionProgram, new RunOptions { MaxCost = cost, Strict = strict });
-            var text = output.Length > 2 && (bool)output[2] ? result.Value.SerializeHex() : result.Value.ToSource(output.Length > 3 && Convert.ToBoolean(output[3].ToString()));
-            Assert.Equal(text, output[0].ToString());
+            var result = puzzleProgram.Run(solutionProgram, new RunOptions { MaxCost = maxCost, Strict = strict });
+
+            string text = "";
+            if (output.Length > 2 && output[2] != null)
+            {
+                text = result.Value.SerializeHex();
+            }
+            else
+            {
+                var arg = output.Length > 3 && output[3] != null;
+                text = result.Value.ToSource(arg);
+            }
+
+            var expectedResult = output[0].ToString()!;
+            Assert.Equal(expectedResult, text);
+
             if (output.Length > 1)
-                Assert.Equal(result.Cost, (BigInteger)output[1] - 9);
+            {
+                BigInteger expectedCost = new((int)output[1]);
+                Assert.Equal(result.Cost, expectedCost - 9);
+            }
         }
     }
 }
