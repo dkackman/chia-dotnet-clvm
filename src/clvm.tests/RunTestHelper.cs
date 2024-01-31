@@ -8,11 +8,12 @@ static class RunTestHelper
         var puzzle = input[0] is not null ? input[0].ToString()! : throw new Exception("Invalid input");
         var solution = input.Length > 1 && input[1] is not null ? input[1].ToString()! : "()";
         BigInteger? maxCost = input.Length > 2 && input[2] is not null ? new((long)input[2]) : null;
-        bool strict = input.Length > 3 && input[3] is not null && (bool)input[3];
+        var strict = input.Length > 3 && input[3] is not null && (bool)input[3];
 
         if (output == null || output[0] == null)
         {
-            Assert.Throws<Exception>(() =>
+            
+            Assert.ThrowsAny<Exception>(() =>
             {
                 var puzzleProgram = Program.FromSource(puzzle);
                 var solutionProgram = Program.FromSource(solution);

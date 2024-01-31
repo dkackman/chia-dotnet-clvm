@@ -67,6 +67,116 @@ public class RunFirstGreaterHexIfTests
         [new object[] { "(i (f (r (r 1))) (f 1) (f (r 1)))", "(200 300 400)" }, new object[] { "200", 361L }],
         // if_5
         [new object[] { "(i (f (r (r 1))) (f 1) (f (r 1)))", "(200 300 1)" }, new object[] { "200", 361L }],
+        // first-01
+        [new object[] { "(f)" }, new object[] { null }],
+
+        // first-02
+        [new object[] { "(f (q . 1))" }, new object[] { null }],
+
+        // first-03
+        [new object[] { "(f (q . 1) (q . 1))" }, new object[] { null }],
+
+        // first-04
+        [new object[] { "(f ())" }, new object[] { null }],
+
+        // first-05
+        [new object[] { "(f (q . (1 2)))" }, new object[] { "1" }],
+
+        // first-06
+        [new object[] { "(f (q . 0xffff))" }, new object[] { null }],
+
+        // first-07
+        [new object[] { "(f (q . 128))" }, new object[] { null }],
+
+        // first-08
+        [new object[] { "(f (q . -1))" }, new object[] { null }],
+
+        // gr-01
+        [new object[] { "(>)" }, new object[] { null }],
+
+        // gr-02
+        [new object[] { "(> (q . 1))" }, new object[] { null }],
+
+        // gr-03
+        [new object[] { "(> (q . 1) (q . 1))" }, new object[] { "()" }],
+
+        // gr-04
+        [new object[] { "(> (q . 1) (q . 1) (q . 1))" }, new object[] { null }],
+
+        // gr-05
+        [new object[] { "(> () ())" }, new object[] { "()" }],
+
+        // gr-06
+        [new object[] { "(> (q . (1 2)) (q . (1 2)))" }, new object[] { null }],
+
+        // gr-07
+        [new object[] { "(> (q . 0xffff) (q . 0xffff))" }, new object[] { "()" }],
+
+        // gr-08
+        [new object[] { "(> (q . 128) (q . 128))" }, new object[] { "()" }],
+
+        // gr-09
+        [new object[] { "(> (q . -1) (q . -1))" }, new object[] { "()" }],
+
+        // grss-01
+        [new object[] { "(>s)" }, new object[] { null }],
+
+        // grss-02
+        [new object[] { "(>s (q . 1))" }, new object[] { null }],
+
+        // grss-03
+        [new object[] { "(>s (q . 1) (q . 1))" }, new object[] { "()" }],
+
+        // grss-04
+        [new object[] { "(>s (q . 1) (q . 1) (q . 1))" }, new object[] { null }],
+
+        // grss-05
+        [new object[] { "(>s () ())" }, new object[] { "()" }],
+
+        // grss-06
+        [new object[] { "(>s (q . (1 2)) (q . (1 2)))" }, new object[] { null }],
+
+        // grss-07
+        [new object[] { "(>s (q . 0xffff) (q . 0xffff))" }, new object[] { "()" }],
+
+        // grss-08
+        [new object[] { "(>s (q . 128) (q . 128))" }, new object[] { "()" }],
+
+        // grss-09
+        [new object[] { "(>s (q . -1) (q . -1))" }, new object[] { "()" }],
+
+        // if-01
+        [new object[] { "(i)" }, new object[] { null }],
+
+        // if-02
+        [new object[] { "(i (q . 1))" }, new object[] { null }],
+
+        // if-03
+        [new object[] { "(i (q . 1) (q . 1))" }, new object[] { null }],
+
+        // if-04
+        [new object[] { "(i (q . 1) (q . 1) (q . 1))" }, new object[] { "1" }],
+
+        // if-05
+        [new object[] { "(i (q . 1) (q . 1) (q . 1) (q . 1))" }, null],
+
+        // if-06
+        [new object[] { "(i () () ())" }, new object[] { "()" }],
+
+        // if-07
+        [
+            new object[] { "(i (q . (1 2)) (q . (1 3)) (q . (1 4)))" },
+            new object[] { "(1 3)", null, null, false }
+        ],
+
+        // if-08
+        [new object[] { "(i (q . 0xffff) (q . 0xffff) (q . 0xffff))" }, new object[] { "0xffff" }],
+
+        // if-09
+        [new object[] { "(i (q . 128) (q . 128) (q . 128))" }, new object[] { "128" }],
+
+        // if-10
+        [new object[] { "(i (q . -1) (q . -1) (q . -1))" }, new object[] { "-1" }]
     ];
 
     [Theory]

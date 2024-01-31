@@ -43,8 +43,79 @@ public class RunAddAllAnyTests
         [new object[] { "(a (q . (+ 2 5)) (q . (20 30)))" }, new object[] { "50", 996L }],
         // apply-07
         [new object[] { "(a (q . q) (q . (2 3 4)))", null, null, true }, new object[] { "(2 3 4)", 184L, null, false }],
+        // add-01
+        [new object[] { "(+)" }, new object[] { "()" }],
+
+        // add-02
+        [new object[] { "(+ (q . 1))" }, new object[] { "1" }],
+
+        // add-03
+        [new object[] { "(+ (q . 1) (q . 1))" }, new object[] { "2" }],
+
+        // add-04
+        [new object[] { "(+ () ())" }, new object[] { "()" }],
+
+        // add-05
+        [new object[] { "(+ (q . (1 2)) (q . (1 2)))" }, new object[] { null }],
+
+        // add-06
+        [new object[] { "(+ (q . 0xffff) (q . 0xffff))" }, new object[] { "-2" }],
+
+        // add-07
+        [new object[] { "(+ (q . 128) (q . 128))" }, new object[] { "256" }],
+
+        // add-08
+        [new object[] { "(+ (q . -1) (q . -1))" }, new object[] { "-2" }],
+
+        // all-01
+        [new object[] { "(all)" }, new object[] { "1" }],
+
+        // all-02
+        [new object[] { "(all (q . 1))" }, new object[] { "1" }],
+
+        // all-03
+        [new object[] { "(all (q . 1) (q . 1))" }, new object[] { "1" }],
+
+        // all-04
+        [new object[] { "(all () ())" }, new object[] { "()" }],
+
+        // all-05
+        [new object[] { "(all (q . (1 2)) (q . (1 2)))" }, new object[] { "1" }],
+
+        // all-06
+        [new object[] { "(all (q . 0xffff) (q . 0xffff))" }, new object[] { "1" }],
+
+        // all-07
+        [new object[] { "(all (q . 128) (q . 128))" }, new object[] { "1" }],
+
+        // all-08
+        [new object[] { "(all (q . -1) (q . -1))" }, new object[] { "1" }],
+
+        // any-01
+        [new object[] { "(any)" }, new object[] { "()" }],
+
+        // any-02
+        [new object[] { "(any (q . 1))" }, new object[] { "1" }],
+
+        // any-03
+        [new object[] { "(any (q . 1) (q . 1))" }, new object[] { "1" }],
+
+        // any-04
+        [new object[] { "(any () ())" }, new object[] { "()" }],
+
+        // any-05
+        [new object[] { "(any (q . (1 2)) (q . (1 2)))" }, new object[] { "1" }],
+
+        // any-06
+        [new object[] { "(any (q . 0xffff) (q . 0xffff))" }, new object[] { "1" }],
+
+        // any-07
+        [new object[] { "(any (q . 128) (q . 128))" }, new object[] { "1" }],
+
+        // any-08
+        [new object[] { "(any (q . -1) (q . -1))" }, new object[] { "1" }],
+
     ];
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
     [Theory]
     [MemberData(nameof(TestData))]

@@ -82,6 +82,61 @@ public class RunApplyArgAshTests
         [new object[] { "(ash (q . 500) (q . -65536))" }, new object[] { null }],
         // ash-c
         [new object[] { "(ash (q . 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007) (q . 0x0000000000000000000000000000000000000000000000000000000000000001))" }, new object[] { null }],
+
+        // apply-01
+        [new object[] { "(a)" }, new object[] { null }],
+
+        // apply-02
+        [new object[] { "(a (q . 1))" }, new object[] { null }],
+
+        // apply-03
+        [new object[] { "(a (q . 1) (q . 1))", null, null, true }, new object[] { "1" }],
+
+        // apply-04
+        [new object[] { "(a (q . 1) (q . 1) (q . 1))" }, new object[] { null }],
+
+        // apply-05
+        [new object[] { "(a (q . 1) (q . 1) (q . 1) (q . 1))" }, new object[] { null }],
+
+        // apply-06
+        [new object[] { "(a () () ())" }, new object[] { null }],
+
+        // apply-07
+        [new object[] { "(a (q . (1 2)) (q . (1 2)) (q . (1 2)))" }, new object[] { null }],
+
+        // apply-08
+        [new object[] { "(a (q . 0xffff) (q . 0xffff) (q . 0xffff))" }, new object[] { null }],
+
+        // apply-09
+        [new object[] { "(a (q . 128) (q . 128) (q . 128))" }, new object[] { null }],
+
+        // apply-10
+        [new object[] { "(a (q . -1) (q . -1) (q . -1))" }, new object[] { null }],
+
+        // ash-01
+        [new object[] { "(ash)" }, new object[] { null }],
+
+        // ash-02
+        [new object[] { "(ash (q . 1))" }, new object[] { null }],
+
+        // ash-03
+        [new object[] { "(ash (q . 1) (q . 1))" }, new object[] { "2" }],
+
+        // ash-04
+        [new object[] { "(ash () ())" }, new object[] { "()" }],
+
+        // ash-05
+        [new object[] { "(ash (q . (1 2)) (q . (1 2)))" }, new object[] { null }],
+
+        // ash-06
+        [new object[] { "(ash (q . 0xffff) (q . 0xffff))" }, new object[] { "-1" }],
+
+        // ash-07
+        [new object[] { "(ash (q . 128) (q . 128))" }, new object[] { "0x008000000000000000000000000000000000" }],
+
+        // ash-08
+        [new object[] { "(ash (q . -1) (q . -1))" }, new object[] { "-1" }],
+
     ];
 
     [Theory]

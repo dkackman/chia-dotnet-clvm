@@ -1,6 +1,6 @@
 namespace clvm.tests;
 
-public class RunDivModTests
+public class RunDivModEqTests
 {
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 
@@ -60,6 +60,60 @@ public class RunDivModTests
         [new object[] { "(divmod 2 5)", "(80000 10)" }, new object[] { "(8000)", 1270L }],
         // divmod-9
         [new object[] { "(divmod 2 5)", "(-80000 10)" }, new object[] { "(-8000)", 1270L }],
+        // divmod-01
+        [new object[] { "(divmod)" }, new object[] { null }],
+
+        // divmod-02
+        [new object[] { "(divmod (q . 1))" }, new object[] { null }],
+
+        // divmod-03
+        [new object[] { "(divmod (q . 1) (q . 1))" }, new object[] { "(1)", null, null, false }],
+
+        // divmod-04
+        [new object[] { "(divmod (q . 1) (q . 1) (q . 1))" }, new object[] { null }],
+
+        // divmod-05
+        [new object[] { "(divmod () ())" }, new object[] { null }],
+
+        // divmod-06
+        [new object[] { "(divmod (q . (1 2)) (q . (1 2)))" }, new object[] { null }],
+
+        // divmod-07
+        [new object[] { "(divmod (q . 0xffff) (q . 0xffff))" }, new object[] { "(1)", null, null, false }],
+
+        // divmod-08
+        [new object[] { "(divmod (q . 128) (q . 128))" }, new object[] { "(1)", null, null, false }],
+
+        // divmod-09
+        [new object[] { "(divmod (q . -1) (q . -1))" }, new object[] { "(1)", null, null, false }],
+
+        // eq-01
+        [new object[] { "(=)" }, new object[] { null }],
+
+        // eq-02
+        [new object[] { "(= (q . 1))" }, new object[] { null }],
+
+        // eq-03
+        [new object[] { "(= (q . 1) (q . 1))" }, new object[] { "1" }],
+
+        // eq-04
+        [new object[] { "(= (q . 1) (q . 1) (q . 1))" }, new object[] { null }],
+
+        // eq-05
+        [new object[] { "(= () ())" }, new object[] { "1" }],
+
+        // eq-06
+        [new object[] { "(= (q . (1 2)) (q . (1 2)))" }, new object[] { null }],
+
+        // eq-07
+        [new object[] { "(= (q . 0xffff) (q . 0xffff))" }, new object[] { "1" }],
+
+        // eq-08
+        [new object[] { "(= (q . 128) (q . 128))" }, new object[] { "1" }],
+
+        // eq-09
+        [new object[] { "(= (q . -1) (q . -1))" }, new object[] { "1" }],
+
     ];
 
     [Theory]
