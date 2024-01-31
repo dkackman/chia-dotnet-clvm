@@ -32,6 +32,10 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# docfx outputs
+_site/
+docfx/api/
+
 # docfx output folders
 _site/
 docfx/api/

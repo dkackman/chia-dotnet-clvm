@@ -1,7 +1,8 @@
-# chia-dotnet-clvm
+---
+_layout: landing
+---
 
-[![.NET](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/dotnet.yml/badge.svg)](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/dotnet.yml)
-[![CodeQL](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/github-code-scanning/codeql)
+# Welcome to **chia-dotnet-clvm**
 
 A (very much WIP) port of [node-clvm-lib](https://github.com/Chia-Network/node-clvm-lib).
 

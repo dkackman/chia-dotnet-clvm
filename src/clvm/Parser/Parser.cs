@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace chia.dotnet.clvm;
 
-public static partial class Parser
+internal static partial class Parser
 {
     public static Token? Next(IList<Token> tokens)
     {

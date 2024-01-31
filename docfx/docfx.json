@@ -1,0 +1,47 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../src/clvm",
+          "files": [
+            "**/*.csproj"
+          ]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "modern"
+    ],
+    "globalMetadata": {
+      "_appName": "chia-dotnet-clvm",
+      "_appTitle": "chia-dotnet-clvm",
+      "_appLogoPath": "images/favicon-32x32.png",
+      "_appFaviconPath": "images/favicon.ico",
+      "_enableSearch": true,
+      "pdf": true
+    }
+  }
+}

@@ -3,21 +3,48 @@ using System.Numerics;
 
 namespace chia.dotnet.clvm;
 
-public delegate ProgramOutput Operator(Program args);
-
+/// <summary>
+/// Represents a collection of operators used in the CLVM language.
+/// </summary>
 public record OperatorsType
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OperatorsType"/> class.
+    /// </summary>
     public OperatorsType()
     {
         Operators = new Dictionary<string, Operator>(clvm.Operators.DefaultOperators);
     }
+
+    /// <summary>
+    /// Gets or sets the dictionary of operators.
+    /// </summary>
     public IDictionary<string, Operator> Operators { get; init; }
+
+    /// <summary>
+    /// Gets or sets the unknown operator function.
+    /// </summary>
     public Func<Program, Program, ProgramOutput> Unknown { get; set; } = clvm.Operators.DefaultUnknownOperator;
+
+    /// <summary>
+    /// Gets or sets the quote operator symbol.
+    /// </summary>
     public string Quote { get; init; } = "q";
+
+    /// <summary>
+    /// Gets or sets the apply operator symbol.
+    /// </summary>
     public string Apply { get; init; } = "a";
 }
 
-public static class Operators
+/// <summary>
+/// Represents a delegate for an operator function.
+/// </summary>
+/// <param name="args">The arguments passed to the operator.</param>
+/// <returns>The output of the operator.</returns>
+public delegate ProgramOutput Operator(Program args);
+
+internal static class Operators
 {
     public static readonly IDictionary<string, Operator> DefaultOperators = new Dictionary<string, Operator>
     {

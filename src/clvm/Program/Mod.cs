@@ -1,6 +1,6 @@
 namespace chia.dotnet.clvm;
 
-public static class Mod
+internal static class Mod
 {
     public const string MainName = "";
 

@@ -3,9 +3,9 @@ using chia.dotnet.bls;
 
 namespace chia.dotnet.clvm;
 
-public delegate ProgramOutput Eval(Program program, Program args);
+internal delegate ProgramOutput Eval(Program program, Program args);
 
-public static class Compile
+internal static class Compile
 {
     public static BetterSet<string> PassThroughOperators = new(
         KeywordConstants.Keywords.Values.Select(value => ByteUtils.ToHex(ByteUtils.EncodeBigInt(value)))

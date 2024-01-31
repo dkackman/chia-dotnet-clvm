@@ -3,9 +3,9 @@ using System.Reflection;
 
 namespace chia.dotnet.clvm;
 
-public class Group : Dictionary<string, Program> { }
+internal class Group : Dictionary<string, Program> { }
 
-public static class Bindings
+internal static class Bindings
 {
     public static T Merge<T>(T item1, T? item2) where T : class, new()
     {

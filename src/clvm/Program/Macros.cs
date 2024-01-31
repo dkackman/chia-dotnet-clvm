@@ -1,6 +1,6 @@
 namespace chia.dotnet.clvm;
 
-public static class Macros
+internal static class Macros
 {
     public static readonly IList<string> DefaultMacroSources = new List<string>
     {
@@ -69,9 +69,9 @@ public static class Macros
         foreach (var macroSource in DefaultMacroSources)
         {
             var macroProgram = Program.FromSource(macroSource.Replace("\r\n", "\n"));
-            var env = Program.FromCons(macroProgram, DefaultMacroLookupProgram);
+            var env = Program.FromCons(macroProgram, DefaultMacroLookupProgram!);
             var newMacro = evalAsProgram(run, env).Value;
-            DefaultMacroLookupProgram = Program.FromCons(newMacro, DefaultMacroLookupProgram);
+            DefaultMacroLookupProgram = Program.FromCons(newMacro, DefaultMacroLookupProgram!);
         }
         return DefaultMacroLookupProgram ?? throw new Exception("DefaultMacroLookupProgram is null");
     }

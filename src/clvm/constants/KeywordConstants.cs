@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace chia.dotnet.clvm;
 
-public static class KeywordConstants
+internal static class KeywordConstants
 {
     public static readonly IReadOnlyDictionary<string, BigInteger> Keywords = new Dictionary<string, BigInteger>
     {

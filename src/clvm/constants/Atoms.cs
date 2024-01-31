@@ -2,7 +2,7 @@ using chia.dotnet.bls;
 
 namespace chia.dotnet.clvm;
 
-public static class Atoms
+internal static class Atoms
 {
     public static readonly byte[] QuoteAtom = ByteUtils.EncodeBigInt(KeywordConstants.Keywords["q"]);
     public static readonly byte[] ApplyAtom = ByteUtils.EncodeBigInt(KeywordConstants.Keywords["a"]);

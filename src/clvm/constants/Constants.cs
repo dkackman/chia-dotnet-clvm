@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace chia.dotnet.clvm; 
 
-public static class Constants
+internal static class Constants
 {
     public const string Printable = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\v\f";
 

@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace chia.dotnet.clvm;
 
-public static class Costs
+internal static class Costs
 {
     public static readonly  BigInteger If = 33;
     public static readonly  BigInteger Cons = 50;

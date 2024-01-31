@@ -3,7 +3,7 @@ using chia.dotnet.bls;
 namespace chia.dotnet.clvm;
 
 
-public static class Serialization
+internal static class Serialization
 {
     public static byte[] Serialize(Program program)
     {

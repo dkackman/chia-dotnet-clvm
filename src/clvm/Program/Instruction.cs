@@ -3,9 +3,9 @@ using chia.dotnet.bls;
 
 namespace chia.dotnet.clvm;
 
-public delegate BigInteger Instruction(Stack<Instruction> instructions, Stack<Program> stack, RunOptions options);
+internal delegate BigInteger Instruction(Stack<Instruction> instructions, Stack<Program> stack, RunOptions options);
 
-public static class InstructionsClass
+internal static class InstructionsClass
 {
     public static IDictionary<string, Instruction> Instructions = new Dictionary<string, Instruction>
     {

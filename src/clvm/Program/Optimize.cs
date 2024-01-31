@@ -2,7 +2,7 @@ using chia.dotnet.bls;
 
 namespace chia.dotnet.clvm;
 
-public static class Optimize
+internal static class Optimize
 {
     public static bool SeemsConstant(Program program)
     {

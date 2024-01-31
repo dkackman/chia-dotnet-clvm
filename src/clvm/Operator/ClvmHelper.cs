@@ -2,9 +2,9 @@ using System.Numerics;
 
 namespace chia.dotnet.clvm;
 
-public enum ArgumentType { Atom, Cons }
+internal enum ArgumentType { Atom, Cons }
 
-public static class ClvmHelper
+internal static class ClvmHelper
 {
     public static BigInteger Mod(BigInteger value, BigInteger modulus) => ((value % modulus) + modulus) % modulus;
 
