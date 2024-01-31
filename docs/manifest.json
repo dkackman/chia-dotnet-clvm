@@ -1,0 +1,478 @@
+{
+  "source_base_path": "C:/Users/don/src/github/dkackman/chia-dotnet-clvm/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.ArgumentType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.ArgumentType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Atoms.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Atoms.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.BetterSet-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.BetterSet-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Bindings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Bindings.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.ClvmHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.ClvmHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Compile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Compile.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.CompileOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.CompileOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Cons.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Cons.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Constants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Constants.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Costs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Costs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Eval.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Eval.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Group.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Group.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Instruction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Instruction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.InstructionsClass.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.InstructionsClass.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.KeywordConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.KeywordConstants.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Macros.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Macros.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Mod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Mod.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.NodePath.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.NodePath.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Operator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Operator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Operators.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Operators.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.OperatorsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.OperatorsType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Optimize.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Optimize.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.ParseError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.ParseError.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Parser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Parser.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Position.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Position.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Program.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.ProgramOutput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.ProgramOutput.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.RunOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.RunOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Serialization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Serialization.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.Token.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.Token.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.clvm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.clvm.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/android-chrome-192x192.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/android-chrome-192x192.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/android-chrome-512x512.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/android-chrome-512x512.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/apple-touch-icon.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/apple-touch-icon.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon-16x16.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon-16x16.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon-32x32.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon-32x32.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/site.webmanifest",
+      "output": {
+        "resource": {
+          "relative_path": "images/site.webmanifest"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

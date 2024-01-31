@@ -1,0 +1,1057 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class JacobianPoint
+ | chia-dotnet-bls </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class JacobianPoint
+ | chia-dotnet-bls ">
+      
+      <meta name="description" content="Represents a point in Jacobian coordinates on an elliptic curve. It can represent both a PublicKey and a Signature.">
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dkackman/chia-dotnet-bls/new/main/apiSpec/new?filename=chia_dotnet_bls_JacobianPoint.md&amp;value=---%0Auid%3A%20chia.dotnet.bls.JacobianPoint%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/favicon-32x32.png" alt="chia-dotnet-bls">
+            chia-dotnet-bls
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="chia.dotnet.bls.JacobianPoint">
+
+
+
+  <h1 id="chia_dotnet_bls_JacobianPoint" data-uid="chia.dotnet.bls.JacobianPoint" class="text-break">
+    Class JacobianPoint
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="chia.html">chia</a>.<a class="xref" href="chia.dotnet.html">dotnet</a>.<a class="xref" href="chia.dotnet.bls.html">bls</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>chia-dotnet-bls.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents a point in Jacobian coordinates on an elliptic curve.
+It can represent both a PublicKey and a Signature.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class JacobianPoint</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">JacobianPoint</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_DeriveChildPkUnhardened_chia_dotnet_bls_JacobianPoint_System_Int64_">AugSchemeMPL.DeriveChildPkUnhardened(JacobianPoint, long)</a>
+  </div>
+  <div>
+      <a class="xref" href="chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Verify_chia_dotnet_bls_JacobianPoint_System_Byte___chia_dotnet_bls_JacobianPoint_">AugSchemeMPL.Verify(JacobianPoint, byte[], JacobianPoint)</a>
+  </div>
+  <div>
+      <a class="xref" href="chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Verify_chia_dotnet_bls_JacobianPoint_System_String_chia_dotnet_bls_JacobianPoint_">AugSchemeMPL.Verify(JacobianPoint, string, JacobianPoint)</a>
+  </div>
+  <div>
+      <a class="xref" href="chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_CalculateSyntheticOffset_chia_dotnet_bls_JacobianPoint_System_Byte___">KeyDerivation.CalculateSyntheticOffset(JacobianPoint, byte[])</a>
+  </div>
+  <div>
+      <a class="xref" href="chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_CalculateSyntheticPublicKey_chia_dotnet_bls_JacobianPoint_System_Byte___">KeyDerivation.CalculateSyntheticPublicKey(JacobianPoint, byte[])</a>
+  </div>
+  <div>
+      <a class="xref" href="chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePublicKeyPath_chia_dotnet_bls_JacobianPoint_System_Int32___">KeyDerivation.DerivePublicKeyPath(JacobianPoint, int[])</a>
+  </div>
+  <div>
+      <a class="xref" href="chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePublicKeyWallet_chia_dotnet_bls_JacobianPoint_System_Int32_">KeyDerivation.DerivePublicKeyWallet(JacobianPoint, int)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_IsInfinity_" data-uid="chia.dotnet.bls.JacobianPoint.IsInfinity*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_IsInfinity" data-uid="chia.dotnet.bls.JacobianPoint.IsInfinity">
+  IsInfinity
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A flag indicating whether the point is at infinity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInfinity { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd>Represents a point in Jacobian coordinates on an elliptic curve. It can represent both a PublicKey and a Signature.</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_Add_" data-uid="chia.dotnet.bls.JacobianPoint.Add*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_Add_chia_dotnet_bls_JacobianPoint_" data-uid="chia.dotnet.bls.JacobianPoint.Add(chia.dotnet.bls.JacobianPoint)">
+  Add(JacobianPoint)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L320"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds the point to another point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JacobianPoint Add(JacobianPoint value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd><p>The other point</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd><p>The resulting point</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_Clone_" data-uid="chia.dotnet.bls.JacobianPoint.Clone*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_Clone" data-uid="chia.dotnet.bls.JacobianPoint.Clone">
+  Clone()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L392"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clones the point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JacobianPoint Clone()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd><p>The cloned point</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_Double_" data-uid="chia.dotnet.bls.JacobianPoint.Double*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_Double" data-uid="chia.dotnet.bls.JacobianPoint.Double">
+  Double()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Doubles the point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JacobianPoint Double()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd><p><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_Equals_" data-uid="chia.dotnet.bls.JacobianPoint.Equals*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_Equals_chia_dotnet_bls_JacobianPoint_" data-uid="chia.dotnet.bls.JacobianPoint.Equals(chia.dotnet.bls.JacobianPoint)">
+  Equals(JacobianPoint)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L386"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Compares the point to another point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(JacobianPoint value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd><p>The other point</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if they are equal</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_FromBytes_" data-uid="chia.dotnet.bls.JacobianPoint.FromBytes*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_FromBytes_System_Byte___System_Boolean_" data-uid="chia.dotnet.bls.JacobianPoint.FromBytes(System.Byte[],System.Boolean)">
+  FromBytes(byte[], bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint from a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint FromBytes(byte[] bytes, bool isExtension)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>isExtension</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd><p><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_FromBytesG1_" data-uid="chia.dotnet.bls.JacobianPoint.FromBytesG1*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_FromBytesG1_System_Byte___System_Boolean_" data-uid="chia.dotnet.bls.JacobianPoint.FromBytesG1(System.Byte[],System.Boolean)">
+  FromBytesG1(byte[], bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L168"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint from a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint FromBytesG1(byte[] bytes, bool isExtension = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>isExtension</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_FromBytesG2_" data-uid="chia.dotnet.bls.JacobianPoint.FromBytesG2*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_FromBytesG2_System_Byte___System_Boolean_" data-uid="chia.dotnet.bls.JacobianPoint.FromBytesG2(System.Byte[],System.Boolean)">
+  FromBytesG2(byte[], bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L176"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint from a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint FromBytesG2(byte[] bytes, bool isExtension = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>isExtension</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_FromHex_" data-uid="chia.dotnet.bls.JacobianPoint.FromHex*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_FromHex_System_String_System_Boolean_" data-uid="chia.dotnet.bls.JacobianPoint.FromHex(System.String,System.Boolean)">
+  FromHex(string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint from a hexadecimal string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint FromHex(string hex, bool isExtension)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>isExtension</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_FromHexG1_" data-uid="chia.dotnet.bls.JacobianPoint.FromHexG1*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_FromHexG1_System_String_System_Boolean_" data-uid="chia.dotnet.bls.JacobianPoint.FromHexG1(System.String,System.Boolean)">
+  FromHexG1(string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L184"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint from a hexadecimal string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint FromHexG1(string hex, bool isExtension = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>isExtension</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_FromHexG2_" data-uid="chia.dotnet.bls.JacobianPoint.FromHexG2*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_FromHexG2_System_String_System_Boolean_" data-uid="chia.dotnet.bls.JacobianPoint.FromHexG2(System.String,System.Boolean)">
+  FromHexG2(string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint from a hexadecimal string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint FromHexG2(string hex, bool isExtension = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>isExtension</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_GenerateG1_" data-uid="chia.dotnet.bls.JacobianPoint.GenerateG1*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_GenerateG1" data-uid="chia.dotnet.bls.JacobianPoint.GenerateG1">
+  GenerateG1()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint GenerateG1()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_GenerateG2_" data-uid="chia.dotnet.bls.JacobianPoint.GenerateG2*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_GenerateG2" data-uid="chia.dotnet.bls.JacobianPoint.GenerateG2">
+  GenerateG2()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint GenerateG2()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_GetFingerprint_" data-uid="chia.dotnet.bls.JacobianPoint.GetFingerprint*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_GetFingerprint" data-uid="chia.dotnet.bls.JacobianPoint.GetFingerprint">
+  GetFingerprint()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the fingerprint of the point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long GetFingerprint()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_InfinityG1_" data-uid="chia.dotnet.bls.JacobianPoint.InfinityG1*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_InfinityG1_System_Boolean_" data-uid="chia.dotnet.bls.JacobianPoint.InfinityG1(System.Boolean)">
+  InfinityG1(bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint at the G1 Infinity point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint InfinityG1(bool isExtension = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>isExtension</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_InfinityG2_" data-uid="chia.dotnet.bls.JacobianPoint.InfinityG2*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_InfinityG2_System_Boolean_" data-uid="chia.dotnet.bls.JacobianPoint.InfinityG2(System.Boolean)">
+  InfinityG2(bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JacobianPoint at the G2 Infinity point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JacobianPoint InfinityG2(bool isExtension = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>isExtension</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_IsOnCurve_" data-uid="chia.dotnet.bls.JacobianPoint.IsOnCurve*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_IsOnCurve" data-uid="chia.dotnet.bls.JacobianPoint.IsOnCurve">
+  IsOnCurve()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if the point is on the curve.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsOnCurve()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_IsValid_" data-uid="chia.dotnet.bls.JacobianPoint.IsValid*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_IsValid" data-uid="chia.dotnet.bls.JacobianPoint.IsValid">
+  IsValid()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L204"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if the point is valid.`</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsValid()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_Multiply_" data-uid="chia.dotnet.bls.JacobianPoint.Multiply*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_Multiply_System_Numerics_BigInteger_" data-uid="chia.dotnet.bls.JacobianPoint.Multiply(System.Numerics.BigInteger)">
+  Multiply(BigInteger)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L379"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Multiplies the point by a scalar.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JacobianPoint Multiply(BigInteger value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_Negate_" data-uid="chia.dotnet.bls.JacobianPoint.Negate*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_Negate" data-uid="chia.dotnet.bls.JacobianPoint.Negate">
+  Negate()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L313"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Negates the point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JacobianPoint Negate()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></dt>
+    <dd><p><a class="xref" href="chia.dotnet.bls.JacobianPoint.html">JacobianPoint</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_ToAffine_" data-uid="chia.dotnet.bls.JacobianPoint.ToAffine*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_ToAffine" data-uid="chia.dotnet.bls.JacobianPoint.ToAffine">
+  ToAffine()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L216"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the point to an AffinePoint.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AffinePoint ToAffine()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.AffinePoint.html">AffinePoint</a></dt>
+    <dd><p><a class="xref" href="chia.dotnet.bls.AffinePoint.html">AffinePoint</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_ToBytes_" data-uid="chia.dotnet.bls.JacobianPoint.ToBytes*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_ToBytes" data-uid="chia.dotnet.bls.JacobianPoint.ToBytes">
+  ToBytes()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L238"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the point to a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] ToBytes()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_ToHex_" data-uid="chia.dotnet.bls.JacobianPoint.ToHex*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_ToHex" data-uid="chia.dotnet.bls.JacobianPoint.ToHex">
+  ToHex()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the point to a hexadecimal string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ToHex()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Hex string</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_JacobianPoint_ToString_" data-uid="chia.dotnet.bls.JacobianPoint.ToString*"></a>
+
+  <h3 id="chia_dotnet_bls_JacobianPoint_ToString" data-uid="chia.dotnet.bls.JacobianPoint.ToString">
+  ToString()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the point to a string. This is an alias for <a class="xref" href="chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_ToHex">ToHex()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/JacobianPoint.cs/#L10" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

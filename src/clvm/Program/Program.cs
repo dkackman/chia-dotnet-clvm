@@ -4,15 +4,42 @@ using chia.dotnet.bls;
 
 namespace chia.dotnet.clvm;
 
+
+/// <summary>
+/// Represents a CLVM program.
+/// </summary>
 public class Program
 {
-    public static readonly BigInteger cost = 11000000000;
+    /// <summary>
+    /// Represents the True program.
+    /// </summary>
     public static readonly Program True = FromBytes([1]);
+
+    /// <summary>
+    /// Represents the False program.
+    /// </summary>
     public static readonly Program False = FromBytes([]);
+
+    /// <summary>
+    /// Represents the Nil program.
+    /// </summary>
     public static readonly Program Nil = False;
 
+    /// <summary>
+    /// Creates a program from two cons cells.
+    /// </summary>
+    /// <param name="program1">The first program.</param>
+    /// <param name="program2">The second program.</param>
+    /// <returns>The created program.</returns>
     public static Program FromCons(Program program1, Program program2) => new(new Cons(program1, program2));
+
+    /// <summary>
+    /// Creates a program from a byte array.
+    /// </summary>
+    /// <param name="value">The byte array.</param>
+    /// <returns>The created program.</returns>
     public static Program FromBytes(byte[] value) => new(value);
+    
     public static Program FromJacobianPoint(JacobianPoint value) => new(value.ToBytes());
     public static Program FromPrivateKey(PrivateKey value) => new(value.ToBytes());
     public static Program FromHex(string value) => new(value.HexStringToByteArray());

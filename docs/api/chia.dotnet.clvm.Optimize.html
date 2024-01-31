@@ -1,0 +1,781 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Optimize
+ | chia-dotnet-clvm </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Optimize
+ | chia-dotnet-clvm ">
+      
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dkackman/chia-dotnet-clvm/new/main/apiSpec/new?filename=chia_dotnet_clvm_Optimize.md&amp;value=---%0Auid%3A%20chia.dotnet.clvm.Optimize%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/favicon-32x32.png" alt="chia-dotnet-clvm">
+            chia-dotnet-clvm
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="chia.dotnet.clvm.Optimize">
+
+
+
+  <h1 id="chia_dotnet_clvm_Optimize" data-uid="chia.dotnet.clvm.Optimize" class="text-break">
+    Class Optimize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="chia.html">chia</a>.<a class="xref" href="chia.dotnet.html">dotnet</a>.<a class="xref" href="chia.dotnet.clvm.html">clvm</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>chia-dotnet-clvm.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Optimize</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Optimize</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="chia_dotnet_clvm_Optimize_ApplyNullOptimizer_" data-uid="chia.dotnet.clvm.Optimize.ApplyNullOptimizer*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_ApplyNullOptimizer_chia_dotnet_clvm_Program_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.ApplyNullOptimizer(chia.dotnet.clvm.Program,chia.dotnet.clvm.Eval)">
+  ApplyNullOptimizer(Program, Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program ApplyNullOptimizer(Program program, Eval _evalAsProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>_evalAsProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_ChildrenOptimizer_" data-uid="chia.dotnet.clvm.Optimize.ChildrenOptimizer*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_ChildrenOptimizer_chia_dotnet_clvm_Program_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.ChildrenOptimizer(chia.dotnet.clvm.Program,chia.dotnet.clvm.Eval)">
+  ChildrenOptimizer(Program, Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program ChildrenOptimizer(Program program, Eval evalAsProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>evalAsProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_ConsFirst_" data-uid="chia.dotnet.clvm.Optimize.ConsFirst*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_ConsFirst_chia_dotnet_clvm_Program_" data-uid="chia.dotnet.clvm.Optimize.ConsFirst(chia.dotnet.clvm.Program)">
+  ConsFirst(Program)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program ConsFirst(Program args)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>args</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_ConsOptimizer_" data-uid="chia.dotnet.clvm.Optimize.ConsOptimizer*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_ConsOptimizer_chia_dotnet_clvm_Program_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.ConsOptimizer(chia.dotnet.clvm.Program,chia.dotnet.clvm.Eval)">
+  ConsOptimizer(Program, Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program ConsOptimizer(Program program, Eval _evalAsProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>_evalAsProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_ConsQuoteApplyOptimizer_" data-uid="chia.dotnet.clvm.Optimize.ConsQuoteApplyOptimizer*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_ConsQuoteApplyOptimizer_chia_dotnet_clvm_Program_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.ConsQuoteApplyOptimizer(chia.dotnet.clvm.Program,chia.dotnet.clvm.Eval)">
+  ConsQuoteApplyOptimizer(Program, Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program ConsQuoteApplyOptimizer(Program program, Eval _evalAsProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>_evalAsProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_ConsRest_" data-uid="chia.dotnet.clvm.Optimize.ConsRest*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_ConsRest_chia_dotnet_clvm_Program_" data-uid="chia.dotnet.clvm.Optimize.ConsRest(chia.dotnet.clvm.Program)">
+  ConsRest(Program)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program ConsRest(Program args)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>args</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_ConstantOptimizer_" data-uid="chia.dotnet.clvm.Optimize.ConstantOptimizer*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_ConstantOptimizer_chia_dotnet_clvm_Program_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.ConstantOptimizer(chia.dotnet.clvm.Program,chia.dotnet.clvm.Eval)">
+  ConstantOptimizer(Program, Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program ConstantOptimizer(Program program, Eval evalAsProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>evalAsProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_IsArgsCall_" data-uid="chia.dotnet.clvm.Optimize.IsArgsCall*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_IsArgsCall_chia_dotnet_clvm_Program_" data-uid="chia.dotnet.clvm.Optimize.IsArgsCall(chia.dotnet.clvm.Program)">
+  IsArgsCall(Program)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsArgsCall(Program program)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_MakeDoOpt_" data-uid="chia.dotnet.clvm.Optimize.MakeDoOpt*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_MakeDoOpt_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.MakeDoOpt(chia.dotnet.clvm.Eval)">
+  MakeDoOpt(Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Operator MakeDoOpt(Eval runProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>runProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Operator.html">Operator</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_OptimizeProgram_" data-uid="chia.dotnet.clvm.Optimize.OptimizeProgram*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_OptimizeProgram_chia_dotnet_clvm_Program_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.OptimizeProgram(chia.dotnet.clvm.Program,chia.dotnet.clvm.Eval)">
+  OptimizeProgram(Program, Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program OptimizeProgram(Program program, Eval evalAsProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>evalAsProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_PathFromArgs_" data-uid="chia.dotnet.clvm.Optimize.PathFromArgs*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_PathFromArgs_chia_dotnet_clvm_Program_chia_dotnet_clvm_Program_" data-uid="chia.dotnet.clvm.Optimize.PathFromArgs(chia.dotnet.clvm.Program,chia.dotnet.clvm.Program)">
+  PathFromArgs(Program, Program)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program PathFromArgs(Program program, Program args)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>args</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_PathOptimizer_" data-uid="chia.dotnet.clvm.Optimize.PathOptimizer*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_PathOptimizer_chia_dotnet_clvm_Program_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.PathOptimizer(chia.dotnet.clvm.Program,chia.dotnet.clvm.Eval)">
+  PathOptimizer(Program, Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L161"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program PathOptimizer(Program program, Eval _evalAsProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>_evalAsProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_QuoteNullOptimizer_" data-uid="chia.dotnet.clvm.Optimize.QuoteNullOptimizer*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_QuoteNullOptimizer_chia_dotnet_clvm_Program_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.QuoteNullOptimizer(chia.dotnet.clvm.Program,chia.dotnet.clvm.Eval)">
+  QuoteNullOptimizer(Program, Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program QuoteNullOptimizer(Program program, Eval _evalAsProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>_evalAsProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_SeemsConstant_" data-uid="chia.dotnet.clvm.Optimize.SeemsConstant*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_SeemsConstant_chia_dotnet_clvm_Program_" data-uid="chia.dotnet.clvm.Optimize.SeemsConstant(chia.dotnet.clvm.Program)">
+  SeemsConstant(Program)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool SeemsConstant(Program program)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_SubArgs_" data-uid="chia.dotnet.clvm.Optimize.SubArgs*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_SubArgs_chia_dotnet_clvm_Program_chia_dotnet_clvm_Program_" data-uid="chia.dotnet.clvm.Optimize.SubArgs(chia.dotnet.clvm.Program,chia.dotnet.clvm.Program)">
+  SubArgs(Program, Program)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program SubArgs(Program program, Program args)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>args</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_Optimize_VarChangeOptimizerConsEval_" data-uid="chia.dotnet.clvm.Optimize.VarChangeOptimizerConsEval*"></a>
+
+  <h3 id="chia_dotnet_clvm_Optimize_VarChangeOptimizerConsEval_chia_dotnet_clvm_Program_chia_dotnet_clvm_Eval_" data-uid="chia.dotnet.clvm.Optimize.VarChangeOptimizerConsEval(chia.dotnet.clvm.Program,chia.dotnet.clvm.Eval)">
+  VarChangeOptimizerConsEval(Program, Eval)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Program VarChangeOptimizerConsEval(Program program, Eval evalAsProgram)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>program</code> <a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+    <dt><code>evalAsProgram</code> <a class="xref" href="chia.dotnet.clvm.Eval.html">Eval</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.Program.html">Program</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/Program/Optimize.cs/#L5" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

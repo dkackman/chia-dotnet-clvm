@@ -1,0 +1,866 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class BetterSet&lt;T&gt;
+ | chia-dotnet-clvm </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class BetterSet&lt;T&gt;
+ | chia-dotnet-clvm ">
+      
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dkackman/chia-dotnet-clvm/new/main/apiSpec/new?filename=chia_dotnet_clvm_BetterSet_1.md&amp;value=---%0Auid%3A%20chia.dotnet.clvm.BetterSet%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/favicon-32x32.png" alt="chia-dotnet-clvm">
+            chia-dotnet-clvm
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="chia.dotnet.clvm.BetterSet`1">
+
+
+
+  <h1 id="chia_dotnet_clvm_BetterSet_1" data-uid="chia.dotnet.clvm.BetterSet`1" class="text-break">
+    Class BetterSet&lt;T&gt;
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L3"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="chia.html">chia</a>.<a class="xref" href="chia.dotnet.html">dotnet</a>.<a class="xref" href="chia.dotnet.clvm.html">clvm</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>chia-dotnet-clvm.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class BetterSet&lt;T&gt; : HashSet&lt;T&gt;, ISet&lt;T&gt;, ICollection&lt;T&gt;, IReadOnlySet&lt;T&gt;, IReadOnlyCollection&lt;T&gt;, IEnumerable&lt;T&gt;, IEnumerable, IDeserializationCallback, ISerializable</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;T&gt;</div>
+      <div><span class="xref">BetterSet&lt;T&gt;</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1">ISet</a>&lt;T&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;T&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlyset-1">IReadOnlySet</a>&lt;T&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;T&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.ideserializationcallback">IDeserializationCallback</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable">ISerializable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.add">HashSet&lt;T&gt;.Add(T)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.clear">HashSet&lt;T&gt;.Clear()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.contains">HashSet&lt;T&gt;.Contains(T)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.copyto#system-collections-generic-hashset-1-copyto(-0())">HashSet&lt;T&gt;.CopyTo(T[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.copyto#system-collections-generic-hashset-1-copyto(-0()-system-int32)">HashSet&lt;T&gt;.CopyTo(T[], int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.copyto#system-collections-generic-hashset-1-copyto(-0()-system-int32-system-int32)">HashSet&lt;T&gt;.CopyTo(T[], int, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.createsetcomparer">HashSet&lt;T&gt;.CreateSetComparer()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.ensurecapacity">HashSet&lt;T&gt;.EnsureCapacity(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.exceptwith">HashSet&lt;T&gt;.ExceptWith(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.getenumerator">HashSet&lt;T&gt;.GetEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.intersectwith">HashSet&lt;T&gt;.IntersectWith(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.ispropersubsetof">HashSet&lt;T&gt;.IsProperSubsetOf(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.ispropersupersetof">HashSet&lt;T&gt;.IsProperSupersetOf(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.issubsetof">HashSet&lt;T&gt;.IsSubsetOf(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.issupersetof">HashSet&lt;T&gt;.IsSupersetOf(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.ondeserialization">HashSet&lt;T&gt;.OnDeserialization(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.overlaps">HashSet&lt;T&gt;.Overlaps(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.remove">HashSet&lt;T&gt;.Remove(T)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.removewhere">HashSet&lt;T&gt;.RemoveWhere(Predicate&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.setequals">HashSet&lt;T&gt;.SetEquals(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.symmetricexceptwith">HashSet&lt;T&gt;.SymmetricExceptWith(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.trimexcess">HashSet&lt;T&gt;.TrimExcess()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.trygetvalue">HashSet&lt;T&gt;.TryGetValue(T, out T)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.unionwith">HashSet&lt;T&gt;.UnionWith(IEnumerable&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.comparer">HashSet&lt;T&gt;.Comparer</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1.count">HashSet&lt;T&gt;.Count</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1__ctor_" data-uid="chia.dotnet.clvm.BetterSet`1.#ctor*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1__ctor" data-uid="chia.dotnet.clvm.BetterSet`1.#ctor">
+  BetterSet()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BetterSet()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1__ctor_" data-uid="chia.dotnet.clvm.BetterSet`1.#ctor*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1__ctor_System_Collections_Generic_IEnumerable__0__" data-uid="chia.dotnet.clvm.BetterSet`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+  BetterSet(IEnumerable&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BetterSet(IEnumerable&lt;T&gt; collection)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_Difference_" data-uid="chia.dotnet.clvm.BetterSet`1.Difference*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_Difference_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.Difference(chia.dotnet.clvm.BetterSet{`0})">
+  Difference(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BetterSet&lt;T&gt; Difference(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_DifferenceUpdate_" data-uid="chia.dotnet.clvm.BetterSet`1.DifferenceUpdate*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_DifferenceUpdate_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.DifferenceUpdate(chia.dotnet.clvm.BetterSet{`0})">
+  DifferenceUpdate(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DifferenceUpdate(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_EqualsSet_" data-uid="chia.dotnet.clvm.BetterSet`1.EqualsSet*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_EqualsSet_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.EqualsSet(chia.dotnet.clvm.BetterSet{`0})">
+  EqualsSet(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool EqualsSet(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_Filter_" data-uid="chia.dotnet.clvm.BetterSet`1.Filter*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_Filter_System_Func__0_System_Boolean__" data-uid="chia.dotnet.clvm.BetterSet`1.Filter(System.Func{`0,System.Boolean})">
+  Filter(Func&lt;T, bool&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BetterSet&lt;T&gt; Filter(Func&lt;T, bool&gt; predicate)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>predicate</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_Intersection_" data-uid="chia.dotnet.clvm.BetterSet`1.Intersection*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_Intersection_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.Intersection(chia.dotnet.clvm.BetterSet{`0})">
+  Intersection(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BetterSet&lt;T&gt; Intersection(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_IntersectionUpdate_" data-uid="chia.dotnet.clvm.BetterSet`1.IntersectionUpdate*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_IntersectionUpdate_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.IntersectionUpdate(chia.dotnet.clvm.BetterSet{`0})">
+  IntersectionUpdate(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void IntersectionUpdate(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_IsSubset_" data-uid="chia.dotnet.clvm.BetterSet`1.IsSubset*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_IsSubset_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.IsSubset(chia.dotnet.clvm.BetterSet{`0})">
+  IsSubset(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSubset(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_IsSubsetProper_" data-uid="chia.dotnet.clvm.BetterSet`1.IsSubsetProper*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_IsSubsetProper_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.IsSubsetProper(chia.dotnet.clvm.BetterSet{`0})">
+  IsSubsetProper(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSubsetProper(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_IsSuperset_" data-uid="chia.dotnet.clvm.BetterSet`1.IsSuperset*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_IsSuperset_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.IsSuperset(chia.dotnet.clvm.BetterSet{`0})">
+  IsSuperset(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSuperset(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_IsSupersetProper_" data-uid="chia.dotnet.clvm.BetterSet`1.IsSupersetProper*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_IsSupersetProper_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.IsSupersetProper(chia.dotnet.clvm.BetterSet{`0})">
+  IsSupersetProper(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSupersetProper(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_Map_" data-uid="chia.dotnet.clvm.BetterSet`1.Map*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_Map__1_System_Func__0___0__" data-uid="chia.dotnet.clvm.BetterSet`1.Map``1(System.Func{`0,``0})">
+  Map&lt;U&gt;(Func&lt;T, U&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BetterSet&lt;U&gt; Map&lt;U&gt;(Func&lt;T, U&gt; mapper)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mapper</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, U&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;U&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>U</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_SymmetricDifference_" data-uid="chia.dotnet.clvm.BetterSet`1.SymmetricDifference*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_SymmetricDifference_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.SymmetricDifference(chia.dotnet.clvm.BetterSet{`0})">
+  SymmetricDifference(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BetterSet&lt;T&gt; SymmetricDifference(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_SymmetricDifferenceUpdate_" data-uid="chia.dotnet.clvm.BetterSet`1.SymmetricDifferenceUpdate*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_SymmetricDifferenceUpdate_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.SymmetricDifferenceUpdate(chia.dotnet.clvm.BetterSet{`0})">
+  SymmetricDifferenceUpdate(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SymmetricDifferenceUpdate(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_Union_" data-uid="chia.dotnet.clvm.BetterSet`1.Union*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_Union_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.Union(chia.dotnet.clvm.BetterSet{`0})">
+  Union(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BetterSet&lt;T&gt; Union(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_clvm_BetterSet_1_Update_" data-uid="chia.dotnet.clvm.BetterSet`1.Update*"></a>
+
+  <h3 id="chia_dotnet_clvm_BetterSet_1_Update_chia_dotnet_clvm_BetterSet__0__" data-uid="chia.dotnet.clvm.BetterSet`1.Update(chia.dotnet.clvm.BetterSet{`0})">
+  Update(BetterSet&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Update(BetterSet&lt;T&gt; set)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>set</code> <a class="xref" href="chia.dotnet.clvm.BetterSet-1.html">BetterSet</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dkackman/chia-dotnet-clvm/blob/main/src/clvm/types/BetterSet.cs/#L3" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

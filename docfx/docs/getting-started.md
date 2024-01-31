@@ -2,32 +2,14 @@
 
 ## Installation
 
-Install the [nuget package](https://www.nuget.org/packages/chia-dotnet-bls/)
+Install the [nuget package](https://www.nuget.org/packages/chia-dotnet-clvm/)
 
 ```bash
-dotnet add package chia-dotnet-bls
+dotnet add package chia-dotnet-clvm
 ```
 
-## Sign and Verify a Message
+## Run a Simple ChiaLisp Program
 
 ```csharp
-using chia.dotnet.bls;
-using dotnetstandard_bip39; // https://www.nuget.org/packages/dotnetstandard-bip39/
 
-const string MNEMONIC = "abandon abandon abandon";
-const string MESSAGE = "hello world";
-
-// create a secret key from a mnemonic
-var bip39 = new BIP39();
-var seed = bip39.MnemonicToSeedHex(MNEMONIC, "");
-var sk = PrivateKey.FromSeed(seed);
-
-// sign the message
-var signature = sk.Sign(MESSAGE);
-
-// verify the signature
-var pk = sk.GetG1();
-var result = pk.Verify(MESSAGE, signature);
-
-Console.WriteLine($"Signature is valid: {result}");
 ```

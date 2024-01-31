@@ -1,6 +1,6 @@
 namespace chia.dotnet.clvm;
 
-public class BetterSet<T> : HashSet<T>
+internal class BetterSet<T> : HashSet<T>
 {
     public BetterSet() : base() { }
 

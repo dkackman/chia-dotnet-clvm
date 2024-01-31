@@ -3,7 +3,7 @@ using chia.dotnet.bls;
 
 namespace chia.dotnet.clvm;
 
-public class NodePath
+internal class NodePath
 {
     public static readonly NodePath Top = new(1);
     public static readonly NodePath Left = Top.First();

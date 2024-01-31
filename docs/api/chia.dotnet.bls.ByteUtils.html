@@ -1,0 +1,882 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ByteUtils
+ | chia-dotnet-bls </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ByteUtils
+ | chia-dotnet-bls ">
+      
+      <meta name="description" content="Extension methods for working with byte arrays and conversions.">
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dkackman/chia-dotnet-bls/new/main/apiSpec/new?filename=chia_dotnet_bls_ByteUtils.md&amp;value=---%0Auid%3A%20chia.dotnet.bls.ByteUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/favicon-32x32.png" alt="chia-dotnet-bls">
+            chia-dotnet-bls
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="chia.dotnet.bls.ByteUtils">
+
+
+
+  <h1 id="chia_dotnet_bls_ByteUtils" data-uid="chia.dotnet.bls.ByteUtils" class="text-break">
+    Class ByteUtils
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="chia.html">chia</a>.<a class="xref" href="chia.dotnet.html">dotnet</a>.<a class="xref" href="chia.dotnet.bls.html">bls</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>chia-dotnet-bls.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Extension methods for working with byte arrays and conversions.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ByteUtils</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ByteUtils</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="chia_dotnet_bls_ByteUtils_BigIntBitLength_" data-uid="chia.dotnet.bls.ByteUtils.BigIntBitLength*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_BigIntBitLength_System_Numerics_BigInteger_" data-uid="chia.dotnet.bls.ByteUtils.BigIntBitLength(System.Numerics.BigInteger)">
+  BigIntBitLength(BigInteger)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the number of bits required to represent a BigInteger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long BigIntBitLength(BigInteger value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a></dt>
+    <dd><p>The BigInteger value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The number of bits required to represent the BigInteger.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_BigIntToBits_" data-uid="chia.dotnet.bls.ByteUtils.BigIntToBits*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_BigIntToBits_System_Numerics_BigInteger_" data-uid="chia.dotnet.bls.ByteUtils.BigIntToBits(System.Numerics.BigInteger)">
+  BigIntToBits(BigInteger)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a BigInteger to a byte array representing its binary representation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] BigIntToBits(this BigInteger i)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>i</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a></dt>
+    <dd><p>The BigInteger to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array representing the binary representation of the BigInteger.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_BigIntToBytes_" data-uid="chia.dotnet.bls.ByteUtils.BigIntToBytes*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_BigIntToBytes_System_Numerics_BigInteger_System_Int32_chia_dotnet_bls_Endian_System_Boolean_" data-uid="chia.dotnet.bls.ByteUtils.BigIntToBytes(System.Numerics.BigInteger,System.Int32,chia.dotnet.bls.Endian,System.Boolean)">
+  BigIntToBytes(BigInteger, int, Endian, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L245"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a BigInteger to a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] BigIntToBytes(this BigInteger value, int size, Endian endian = Endian.Big, bool signed = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a></dt>
+    <dd><p>The BigInteger to convert.</p>
+</dd>
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The size of the resulting byte array.</p>
+</dd>
+    <dt><code>endian</code> <a class="xref" href="chia.dotnet.bls.Endian.html">Endian</a></dt>
+    <dd><p>The endianness of the byte array.</p>
+</dd>
+    <dt><code>signed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates whether the value is signed or unsigned.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array representation of the BigInteger.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_BytesEqual_" data-uid="chia.dotnet.bls.ByteUtils.BytesEqual*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_BytesEqual_System_Byte___System_Byte___" data-uid="chia.dotnet.bls.ByteUtils.BytesEqual(System.Byte[],System.Byte[])">
+  BytesEqual(byte[], byte[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if two byte arrays are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool BytesEqual(this byte[] a, byte[] b)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The first byte array.</p>
+</dd>
+    <dt><code>b</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The second byte array.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the byte arrays are equal, false otherwise.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_BytesToBigInt_" data-uid="chia.dotnet.bls.ByteUtils.BytesToBigInt*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_BytesToBigInt_System_Byte___chia_dotnet_bls_Endian_System_Boolean_" data-uid="chia.dotnet.bls.ByteUtils.BytesToBigInt(System.Byte[],chia.dotnet.bls.Endian,System.Boolean)">
+  BytesToBigInt(byte[], Endian, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L278"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a byte array to a BigInteger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BigInteger BytesToBigInt(this byte[] bytes, Endian endian = Endian.Big, bool signed = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array to convert.</p>
+</dd>
+    <dt><code>endian</code> <a class="xref" href="chia.dotnet.bls.Endian.html">Endian</a></dt>
+    <dd><p>The endianness of the byte array.</p>
+</dd>
+    <dt><code>signed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates whether the value is signed or unsigned.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a></dt>
+    <dd><p>The BigInteger representation of the byte array.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_BytesToInt_" data-uid="chia.dotnet.bls.ByteUtils.BytesToInt*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_BytesToInt_System_Byte___chia_dotnet_bls_Endian_System_Boolean_" data-uid="chia.dotnet.bls.ByteUtils.BytesToInt(System.Byte[],chia.dotnet.bls.Endian,System.Boolean)">
+  BytesToInt(byte[], Endian, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L204"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a byte array to a long integer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long BytesToInt(this byte[] bytes, Endian endian = Endian.Big, bool signed = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array to convert.</p>
+</dd>
+    <dt><code>endian</code> <a class="xref" href="chia.dotnet.bls.Endian.html">Endian</a></dt>
+    <dd><p>The endianness of the byte array.</p>
+</dd>
+    <dt><code>signed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates whether the value is signed or unsigned.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The long integer representation of the byte array.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_ConcatenateArrays_" data-uid="chia.dotnet.bls.ByteUtils.ConcatenateArrays*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_ConcatenateArrays_System_Byte_____" data-uid="chia.dotnet.bls.ByteUtils.ConcatenateArrays(System.Byte[][])">
+  ConcatenateArrays(params byte[][])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L344"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Concatenates multiple byte arrays into a single byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] ConcatenateArrays(params byte[][] arrays)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>arrays</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[][]</dt>
+    <dd><p>The byte arrays to concatenate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The concatenated byte array.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_DecodeBigInt_" data-uid="chia.dotnet.bls.ByteUtils.DecodeBigInt*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_DecodeBigInt_System_Byte___" data-uid="chia.dotnet.bls.ByteUtils.DecodeBigInt(System.Byte[])">
+  DecodeBigInt(byte[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L195"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a byte array to a big integer, assuming signed and big endian</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static BigInteger DecodeBigInt(this byte[] bytes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a></dt>
+    <dd><p>The big integer representation of the byte array.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_DecodeInt_" data-uid="chia.dotnet.bls.ByteUtils.DecodeInt*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_DecodeInt_System_Byte___" data-uid="chia.dotnet.bls.ByteUtils.DecodeInt(System.Byte[])">
+  DecodeInt(byte[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a byte array to a long integer, assuming signed and big endian</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long DecodeInt(this byte[] bytes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The long integer representation of the byte array.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_EncodeBigInt_" data-uid="chia.dotnet.bls.ByteUtils.EncodeBigInt*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_EncodeBigInt_System_Numerics_BigInteger_" data-uid="chia.dotnet.bls.ByteUtils.EncodeBigInt(System.Numerics.BigInteger)">
+  EncodeBigInt(BigInteger)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a> to a byte array, as signed and big endian,
+with a special case for zero returning an empty array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] EncodeBigInt(this BigInteger value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a></dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a> to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array representation of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.biginteger">BigInteger</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_EncodeInt_" data-uid="chia.dotnet.bls.ByteUtils.EncodeInt*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_EncodeInt_System_Int64_" data-uid="chia.dotnet.bls.ByteUtils.EncodeInt(System.Int64)">
+  EncodeInt(long)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a long integer to a byte array, as signed and big endian,
+with a special case for zero returning an empty array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] EncodeInt(this long value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The long integer to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array representation of the long integer.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_FromHex_" data-uid="chia.dotnet.bls.ByteUtils.FromHex*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_FromHex_System_String_" data-uid="chia.dotnet.bls.ByteUtils.FromHex(System.String)">
+  FromHex(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L324"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a hexadecimal string to a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] FromHex(this string hex)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The hexadecimal string to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array representation of the hexadecimal string.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_HexStringToByteArray_" data-uid="chia.dotnet.bls.ByteUtils.HexStringToByteArray*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_HexStringToByteArray_System_String_" data-uid="chia.dotnet.bls.ByteUtils.HexStringToByteArray(System.String)">
+  HexStringToByteArray(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a hexadecimal string to a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] HexStringToByteArray(this string hex)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The hexadecimal string to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array representation of the hexadecimal string.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_IntBitLength_" data-uid="chia.dotnet.bls.ByteUtils.IntBitLength*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_IntBitLength_System_Int64_" data-uid="chia.dotnet.bls.ByteUtils.IntBitLength(System.Int64)">
+  IntBitLength(long)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the number of bits required to represent a BigInteger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int IntBitLength(long value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The BigInteger value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bits required to represent the BigInteger.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_IntToBytes_" data-uid="chia.dotnet.bls.ByteUtils.IntToBytes*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_IntToBytes_System_Int64_System_Int32_chia_dotnet_bls_Endian_System_Boolean_" data-uid="chia.dotnet.bls.ByteUtils.IntToBytes(System.Int64,System.Int32,chia.dotnet.bls.Endian,System.Boolean)">
+  IntToBytes(long, int, Endian, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a long integer to a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] IntToBytes(this long value, int size, Endian endian = Endian.Big, bool signed = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The long integer to convert.</p>
+</dd>
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The size of the resulting byte array.</p>
+</dd>
+    <dt><code>endian</code> <a class="xref" href="chia.dotnet.bls.Endian.html">Endian</a></dt>
+    <dd><p>The endianness of the byte array.</p>
+</dd>
+    <dt><code>signed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates whether the value is signed or unsigned.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array representation of the long integer.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_ToBytes_" data-uid="chia.dotnet.bls.ByteUtils.ToBytes*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_ToBytes_System_String_" data-uid="chia.dotnet.bls.ByteUtils.ToBytes(System.String)">
+  ToBytes(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a string to a byte array using UTF-8 encoding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] ToBytes(this string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The string to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array representation of the string.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="chia_dotnet_bls_ByteUtils_ToHex_" data-uid="chia.dotnet.bls.ByteUtils.ToHex*"></a>
+
+  <h3 id="chia_dotnet_bls_ByteUtils_ToHex_System_Byte___" data-uid="chia.dotnet.bls.ByteUtils.ToHex(System.Byte[])">
+  ToHex(byte[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a byte array to a hexadecimal string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToHex(this byte[] bytes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte array to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The hexadecimal string representation of the byte array.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/utils/ByteUtils.cs/#L26" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
