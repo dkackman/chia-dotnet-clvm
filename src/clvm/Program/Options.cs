@@ -5,7 +5,7 @@ namespace chia.dotnet.clvm;
 public record RunOptions
 {
     public BigInteger? MaxCost { get; init; }
-    public OperatorsType Operators { get; init; } = new OperatorsType();
+    public OperatorsType Operators { get; init; } = new();
     public bool Strict { get; init; }
 }
 

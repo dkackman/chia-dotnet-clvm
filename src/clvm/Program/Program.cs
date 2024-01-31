@@ -157,13 +157,7 @@ public class Program
 
     public ProgramOutput Compile(CompileOptions? options = null)
     {
-        var fullOptions = Bindings.Merge(new CompileOptions
-        {
-            Strict = false,
-            Operators = DefaultOperators.MakeDefaultOperators(),
-            IncludeFilePaths = new Dictionary<string, IDictionary<string, string>>()
-        },
-        options);
+        var fullOptions = Bindings.Merge(new CompileOptions(), options);
 
         if (fullOptions.Strict)
         {
@@ -237,13 +231,7 @@ public class Program
 
     public ProgramOutput Run(Program environment, RunOptions? options = null)
     {
-        var fullOptions = Bindings.Merge(new CompileOptions
-        {
-            Strict = false,
-            Operators = DefaultOperators.MakeDefaultOperators(),
-            IncludeFilePaths = new Dictionary<string, IDictionary<string, string>>()
-        },
-            options);
+        var fullOptions = Bindings.Merge(new CompileOptions(), options);
 
         if (fullOptions.Strict)
         {
