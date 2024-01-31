@@ -47,6 +47,7 @@ internal static class InstructionsClass
                 var newOperandList = program.Rest;
                 stack.Push(newOperator);
                 stack.Push(newOperandList);
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 instructionStack.Push(Instructions["apply"]);
 
                 return Costs.Apply;
@@ -86,6 +87,7 @@ internal static class InstructionsClass
                     throw new Exception($"Expected 2 arguments in \"a\" operator{operandList.PositionSuffix}.");
                 stack.Push(Program.FromCons(args[0], args[1]));
                 instructionStack.Push(Instructions["eval"]);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
                 return Costs.Apply;
             }

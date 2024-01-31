@@ -15,6 +15,13 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Authors>dkackman</Authors>
+    <Version>0.1.0-alpha-01</Version>
+    <Copyright>2024 dkackman</Copyright>
+    <PackageProjectUrl>https://dkackman.github.io/chia-dotnet-clvm/</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/dkackman/chia-dotnet-clvm</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>88% unit test passings</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +30,10 @@
       <PackagePath>\</PackagePath>
     </None>
     <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
