@@ -1,24 +1,25 @@
 {
-  "cSpell.words": [
-    "Ashift",
-    "Binop",
-    "clvm",
-    "defconstant",
-    "defmacro",
-    "defun",
-    "Divmod",
-    "Hmac",
-    "Listp",
-    "logand",
-    "logior",
-    "lognot",
-    "logxor",
-    "Lshift",
-    "pubkey",
-    "sexp",
-    "Softfork",
-    "substr",
-    "uncompiled",
-    "uncurry"
-  ]
+    "cSpell.words": [
+        "Ashift",
+        "Binop",
+        "clvm",
+        "defconstant",
+        "defmacro",
+        "defun",
+        "Divmod",
+        "Hmac",
+        "Listp",
+        "logand",
+        "logior",
+        "lognot",
+        "logxor",
+        "Lshift",
+        "pubkey",
+        "sexp",
+        "Softfork",
+        "substr",
+        "uncompiled",
+        "uncurry"
+    ],
+    "dotnet-test-explorer.testProjectPath": "**/*tests.@(csproj|vbproj|fsproj)"
 }
