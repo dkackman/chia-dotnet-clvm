@@ -82,7 +82,7 @@ public class RunUnknownTests
         // unknown-121
         [new object[] { "(0xfffeffffc0 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-122
-        [new object[] { "(0xfffeffffff (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0xfffeffffff (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-123
         [new object[] { "(0xfffeffffff (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-124

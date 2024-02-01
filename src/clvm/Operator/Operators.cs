@@ -553,7 +553,7 @@ internal static class Operators
             throw new Exception($"Invalid operator {op.PositionSuffix}.");
 
         var costFunction = (op.Atom[^1] & 0xc0) >> 6;
-        var costMultiplier = ByteUtils.BytesToInt(op.Atom.Take(op.Atom.Length - 1).ToArray(), Endian.Big, true) + 1;
+        var costMultiplier = ByteUtils.BytesToInt(op.Atom.Take(op.Atom.Length - 1).ToArray(), Endian.Big, false) + 1;
         BigInteger cost;
 
         if (costFunction == 0)
@@ -616,6 +616,7 @@ internal static class Operators
 
         cost *= new BigInteger(costMultiplier);
 
+        // 8125954129920
         if (cost >= BigInteger.Pow(2, 32))
             throw new Exception($"Invalid operator {op.PositionSuffix}.");
 

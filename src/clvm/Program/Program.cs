@@ -39,7 +39,7 @@ public class Program
     /// <param name="value">The byte array.</param>
     /// <returns>The created program.</returns>
     public static Program FromBytes(byte[] value) => new(value);
-    
+
     public static Program FromJacobianPoint(JacobianPoint value) => new(value.ToBytes());
     public static Program FromPrivateKey(PrivateKey value) => new(value.ToBytes());
     public static Program FromHex(string value) => new(value.HexStringToByteArray());
@@ -333,7 +333,7 @@ public class Program
         if (IsCons)
             throw new Exception($"Cannot convert {ToString()} to int{PositionSuffix}.");
 
-        return Atom.BytesToInt(Endian.Big, true);
+        return Atom.DecodeInt();
     }
 
     public BigInteger ToBigInt()
@@ -341,7 +341,7 @@ public class Program
         if (IsCons)
             throw new Exception($"Cannot convert {ToString()} to bigint{PositionSuffix}.");
 
-        return Atom.BytesToBigInt(Endian.Big, true);
+        return Atom.DecodeBigInt();
     }
 
     public string ToText()
@@ -387,9 +387,9 @@ public class Program
                     return $"0x{ToHex()}";
                 }
             }
-            else if (ByteUtils.BytesEqual(ByteUtils.EncodeInt(Atom.BytesToInt(Endian.Big, true)), Atom))
+            else if (ByteUtils.BytesEqual(Atom.DecodeInt().EncodeInt(), Atom))
             {
-                return Atom.BytesToInt(Endian.Big, true).ToString();
+                return Atom.DecodeInt().ToString();
             }
             else
             {

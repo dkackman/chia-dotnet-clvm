@@ -118,7 +118,7 @@ internal static class Serialization
             for (int i = 0; i < 4; i++)
             {
                 program.RemoveAt(0);
-                if (!program.Any())
+                if (program.Count == 0)
                     throw new ParseError("Expected next byte in source.");
                 sizeBytes.Add(program[0]);
             }
@@ -126,11 +126,11 @@ internal static class Serialization
         else if (program[0] == 0xff)
         {
             program.RemoveAt(0);
-            if (!program.Any())
+            if (program.Count == 0)
                 throw new ParseError("Expected next byte in source.");
             Program first = Deserialize(program);
             program.RemoveAt(0);
-            if (!program.Any())
+            if (program.Count == 0)
                 throw new ParseError("Expected next byte in source.");
             Program rest = Deserialize(program);
             return Program.FromCons(first, rest);
@@ -140,14 +140,14 @@ internal static class Serialization
             throw new ParseError("Invalid encoding.");
         }
 
-        int size = (int)ByteUtils.BytesToInt(sizeBytes.ToArray(), Endian.Big, true);// DecodeInt(sizeInts.ToArray());
+        int size = (int)ByteUtils.DecodeInt([.. sizeBytes]);
         List<byte> bytes = new List<byte>();
         for (int i = 0; i < size; i++)
         {
             program.RemoveAt(0);
             if (!program.Any())
                 throw new ParseError("Expected next byte in atom.");
-            bytes.Add((byte)program[0]);
+            bytes.Add(program[0]);
         }
         return Program.FromBytes(bytes.ToArray());
     }
