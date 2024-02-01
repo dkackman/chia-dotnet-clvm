@@ -36,7 +36,7 @@ static class RunTestHelper
                 text = result.Value.ToSource(arg);
             }
 
-            var expectedResult = output[0] is not null ? output[0].ToString()! : null; ;
+            var expectedResult = output[0] is not null ? output[0].ToString()! : null;
             Assert.Equal(expectedResult, text);
 
             if (output.Length > 1 && output[1] != null)
