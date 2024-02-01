@@ -16,80 +16,69 @@ public class RunUnknownTests
         // unknown-01
         [ new object[] { "(0x000 )" }, new object[] { "()", 11L } ],
         // unknown-02
-        [new object[] { "(0x03f )" }, null],
+        [new object[] { "(0x03f )", null, null, true }, null],
         // unknown-03
-        [ new object[] { "(0x03f )" },
-            new object[] { "()", 11L } ],
+        [ new object[] { "(0x03f )" }, new object[] { "()", 11L } ],
         // unknown-04
-        [new object[] { "(0x100 )" }, null],
+        [new object[] { "(0x100 )", null, null, true }, null],
         // unknown-05
-        [ new object[] { "(0x100 )" },
-            new object[] { "()", 12L } ],
+        [ new object[] { "(0x100 )" }, new object[] { "()", 12L } ],
         // unknown-06
-        [new object[] { "(0x13f )" }, null],
+        [new object[] { "(0x13f )", null, null, true }, null],
         // unknown-07
-        [ new object[] { "(0x13f )" },
-            new object[] { "()", 12L } ],
+        [ new object[] { "(0x13f )" }, new object[] { "()", 12L } ],
         // unknown-08
-        [new object[] { "(0xfffeffff00 )" }, null],
+        [new object[] { "(0xfffeffff00 )", null, null, true }, null],
         // unknown-09
-        [ new object[] { "(0xfffeffff00 )" },
-            new object[] { "()", 4294901770L } ],
+        [ new object[] { "(0xfffeffff00 )" }, new object[] { "()", 4294901770L } ],
         // unknown-10
-        [new object[] { "(0xfffeffff3f )" }, null],
+        [new object[] { "(0xfffeffff3f )", null, null, true }, null],
         // unknown-100
-        [new object[] { "(0x180 (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x180 (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-101
-        [ new object[] { "(0x180 (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 3854L } ],
+        [ new object[] { "(0x180 (q . 1) (q . 2) (q . 3))" }, new object[] { "()", 3854L } ],
         // unknown-102
-        [new object[] { "(0x1bf (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x1bf (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-103
-        [ new object[] { "(0x1bf (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 3854L } ],
+        [ new object[] { "(0x1bf (q . 1) (q . 2) (q . 3))" }, new object[] { "()", 3854L } ],
         // unknown-104
-        [new object[] { "(0xfffeffff80 (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0xfffeffff80 (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-105
         [new object[] { "(0xfffeffff80 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-106
-        [new object[] { "(0xfffeffffbf (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0xfffeffffbf (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-107
         [new object[] { "(0xfffeffffbf (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-108
-        [new object[] { "(0x7ffffffff80 (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x7ffffffff80 (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-109
         [new object[] { "(0x7ffffffff80 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-11
-        [ new object[] { "(0xfffeffff3f )" },
-            new object[] { "()", 4294901770L } ],
+        [ new object[] { "(0xfffeffff3f )" }, new object[] { "()", 4294901770L } ],
         // unknown-110
-        [new object[] { "(0x7ffffffffbf (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x7ffffffffbf (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-111
         [new object[] { "(0x7ffffffffbf (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-112
-        [new object[] { "(0x0c0 (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x0c0 (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-113
-        [ new object[] { "(0x0c0 (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 626L } ],
+        [ new object[] { "(0x0c0 (q . 1) (q . 2) (q . 3))" }, new object[] { "()", 626L } ],
         // unknown-114
-        [new object[] { "(0x0ff (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x0ff (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-115
-        [ new object[] { "(0x0ff (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 626L } ],
+        [ new object[] { "(0x0ff (q . 1) (q . 2) (q . 3))" }, new object[] { "()", 626L } ],
         // unknown-116
-        [new object[] { "(0x1c0 (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x1c0 (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-117
-        [ new object[] { "(0x1c0 (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 1182L } ],
+        [ new object[] { "(0x1c0 (q . 1) (q . 2) (q . 3))" },  new object[] { "()", 1182L } ],
         // unknown-118
-        [new object[] { "(0x1ff (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x1ff (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-119
-        [ new object[] { "(0x1ff (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 1182L } ],
+        [ new object[] { "(0x1ff (q . 1) (q . 2) (q . 3))" }, new object[] { "()", 1182L } ],
         // unknown-12
-        [new object[] { "(0x7ffffffff00 )" }, null],
+        [new object[] { "(0x7ffffffff00 )", null, null, true }, null],
         // unknown-120
-        [new object[] { "(0xfffeffffc0 (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0xfffeffffc0 (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-121
         [new object[] { "(0xfffeffffc0 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-122
@@ -97,42 +86,53 @@ public class RunUnknownTests
         // unknown-123
         [new object[] { "(0xfffeffffff (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-124
-        [new object[] { "(0x7ffffffffc0 (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x7ffffffffc0 (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-125
         [new object[] { "(0x7ffffffffc0 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-126
-        [new object[] { "(0x7ffffffffff (q . 1) (q . 2) (q . 3))" }, null],
+        [new object[] { "(0x7ffffffffff (q . 1) (q . 2) (q . 3))", null, null, true }, null],
         // unknown-127
         [new object[] { "(0x7ffffffffff (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-128
-        [new object[] { "(0x000 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" }, null],
+        [new object[] {
+            "(0x000 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))",
+                null, null, true }, null],
         // unknown-129
         [ new object[] { "(0x000 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" },
             new object[] { "()", 51 } ],
         // unknown-13
         [new object[] { "(0x7ffffffff00 )" }, null],
         // unknown-130
-        [new object[] { "(0x03f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" }, null],
+        [
+            new object[] { "(0x03f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))",
+            null, null, true }, null
+        ],
         // unknown-131
-        [ new object[] { "(0x03f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" },
-            new object[] { "()", 51 } ],
+        [
+            new object[] { "(0x03f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" },
+            new object[] { "()", 51 }
+        ],
         // unknown-132
-        [new object[] { "(0x100 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" }, null],
+        [new object[] { "(0x100 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))",
+            null, null, true }, null],
         // unknown-133
         [ new object[] { "(0x100 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" },
             new object[] { "()", 52 } ],
-        // unknown-134 (continued)
-        [new object[] { "(0x13f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" }, null],
+        // unknown-134
+        [new object[] { "(0x13f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))",
+        null, null, true }, null],
         // unknown-135
         [ new object[] { "(0x13f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" },
             new object[] { "()", 52 } ],
         // unknown-136
-        [new object[] { "(0xfffeffff00 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" }, null],
-        // unknown-137 (continued)
+        [new object[] { "(0xfffeffff00 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))",
+            null, null, true  }, null],
+        // unknown-137
         [ new object[] { "(0xfffeffff00 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" },
             new object[] { "()", 4294901810L } ],
         // unknown-138
-        [new object[] { "(0xfffeffff3f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" }, null],
+        [new object[] { "(0xfffeffff3f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))",
+            null, null, true }, null],
         // unknown-139
         [ new object[] { "(0xfffeffff3f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" },
             new object[] { "()", 4294901810L } ],
