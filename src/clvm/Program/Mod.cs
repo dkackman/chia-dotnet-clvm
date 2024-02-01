@@ -6,9 +6,18 @@ internal static class Mod
 
     public static Program BuildTree(List<Program> items)
     {
-        if (items.Count == 0) return Program.Nil;
-        else if (items.Count == 1) return items[0];
+        if (items.Count == 0)
+        {
+            return Program.Nil;
+        }
+
+        if (items.Count == 1)
+        {
+            return items[0];
+        }
+
         var halfSize = items.Count >> 1;
+
         return Program.FromCons(
             BuildTree(items.GetRange(0, halfSize)),
             BuildTree(items.GetRange(halfSize, items.Count - halfSize))
@@ -19,40 +28,42 @@ internal static class Mod
     {
         if (items.Count == 0)
         {
-            return Program.FromList(new List<Program> { Compile.QuoteAsProgram(Program.Nil) }.ToArray());
+            return Program.FromList([Compile.QuoteAsProgram(Program.Nil)]);
         }
-        else if (items.Count == 1)
+
+        if (items.Count == 1)
         {
             return items[0];
         }
+
         var halfSize = items.Count >> 1;
-        return Program.FromList(new List<Program>
-        {
+
+        return Program.FromList(
+        [
             Program.FromBytes(Atoms.ConsAtom),
             BuildTreeProgram(items.GetRange(0, halfSize)),
             BuildTreeProgram(items.GetRange(halfSize, items.Count - halfSize)),
-        }.ToArray());
+        ]);
     }
 
-    public static List<string> Flatten(Program program)
+    public static IList<string> Flatten(Program program)
     {
         if (program.IsCons)
         {
-            return Flatten(program.First).Concat(Flatten(program.Rest)).ToList();
+            return [.. Flatten(program.First), .. Flatten(program.Rest)];
         }
-        else
-        {
-            return new List<string> { program.ToText() };
-        }
+
+        return [program.ToText()];
     }
 
-    public static SortedSet<string> BuildUsedConstantNames(Dictionary<string, Program> functions, Dictionary<string, Program> constants, List<Program> macros)
+    public static SortedSet<string> BuildUsedConstantNames(IDictionary<string, Program> functions, IDictionary<string, Program> constants, IList<Program> macros)
     {
         var macrosAsDict = new Dictionary<string, Program>();
         foreach (var item in macros)
         {
             macrosAsDict[item.Rest.First.ToText()] = item;
         }
+
         var possibleSymbols = new HashSet<string>(functions.Keys);
         possibleSymbols.UnionWith(constants.Keys);
         var newNames = new HashSet<string> { MainName };
@@ -60,10 +71,10 @@ internal static class Mod
         while (newNames.Count > 0)
         {
             var priorNewNames = new HashSet<string>(newNames);
-            newNames = new HashSet<string>();
+            newNames = [];
             foreach (var item in priorNewNames)
             {
-                foreach (var group in new List<Dictionary<string, Program>> { functions, macrosAsDict })
+                foreach (var group in new List<IDictionary<string, Program>> { functions, macrosAsDict })
                 {
                     if (group.ContainsKey(item))
                     {
@@ -74,12 +85,14 @@ internal static class Mod
             newNames.ExceptWith(usedNames);
             usedNames.UnionWith(newNames);
         }
+
         usedNames.IntersectWith(possibleSymbols);
         usedNames.Remove(MainName);
-        var sortedUsedNames = new SortedSet<string>(usedNames);
-        return sortedUsedNames;
+
+        return new SortedSet<string>(usedNames);
     }
-    public static void ParseInclude(Program name, HashSet<string> @namespace, Dictionary<string, Program> functions, Dictionary<string, Program> constants, List<Program> macros, Eval runProgram)
+
+    public static void ParseInclude(Program name, HashSet<string> @namespace, IDictionary<string, Program> functions, IDictionary<string, Program> constants, IList<Program> macros, Eval runProgram)
     {
         var program = Program.FromSource("(_read (_full_path_for_name 1))");
         var output = runProgram(program, name).Value;
@@ -89,7 +102,7 @@ internal static class Mod
         }
     }
 
-    public static Program UnquoteArgs(Program program, List<string> args)
+    public static Program UnquoteArgs(Program program, IList<string> args)
     {
         if (program.IsCons)
         {
@@ -98,12 +111,15 @@ internal static class Mod
                 UnquoteArgs(program.Rest, args)
             );
         }
-        else if (args.Contains(program.ToText()))
+
+        if (args.Contains(program.ToText()))
         {
             return Program.FromList(new List<Program> { Program.FromText("unquote"), program });
         }
+
         return program;
     }
+
     public static Program DefunInlineToMacro(Program program)
     {
         var second = program.Rest;
@@ -117,7 +133,7 @@ internal static class Mod
         return Program.FromList(items);
     }
 
-    public static void ParseModProgram(Program declarationProgram, HashSet<string> @namespace, Dictionary<string, Program> functions, Dictionary<string, Program> constants, List<Program> macros, Eval runProgram)
+    public static void ParseModProgram(Program declarationProgram, HashSet<string> @namespace, IDictionary<string, Program> functions, IDictionary<string, Program> constants, IList<Program> macros, Eval runProgram)
     {
         var op = declarationProgram.First.ToText();
         var nameProgram = declarationProgram.Rest.First;
@@ -132,7 +148,7 @@ internal static class Mod
         {
             throw new Exception($"Symbol {name} redefined.");
         }
-        
+
         @namespace.Add(name);
         if (op == "defmacro")
         {
@@ -156,7 +172,7 @@ internal static class Mod
         }
     }
 
-    public static (Dictionary<string, Program> functions, Dictionary<string, Program> constants, List<Program> macros) CompileModStage1(Program args, Eval runProgram)
+    public static (IDictionary<string, Program> functions, IDictionary<string, Program> constants, IList<Program> macros) CompileModStage1(Program args, Eval runProgram)
     {
         var functions = new Dictionary<string, Program>();
         var constants = new Dictionary<string, Program>();
@@ -166,11 +182,17 @@ internal static class Mod
         while (true)
         {
             args = args.Rest;
-            if (args.Rest.IsNull) break;
+            if (args.Rest.IsNull)
+            {
+                break;
+            }
+
             ParseModProgram(args.First, @namespace, functions, constants, macros, runProgram);
         }
+
         var uncompiledMain = args.First;
         functions[MainName] = Program.FromList(new List<Program> { mainLocalArguments, uncompiledMain });
+
         return (functions, constants, macros);
     }
 
@@ -180,16 +202,19 @@ internal static class Mod
         {
             return Program.Nil;
         }
-        else if (!tree.IsCons)
+
+        if (!tree.IsCons)
         {
             return Program.FromList(new List<Program> { Program.FromList(new List<Program> { tree, Program.FromBytes(rootNode.AsPath()) }) });
         }
+
         var left = SymbolTableForTree(tree.First, rootNode.Add(NodePath.Left));
         var right = SymbolTableForTree(tree.Rest, rootNode.Add(NodePath.Right));
+
         return Program.FromList(left.ToList().Concat(right.ToList()).ToList());
     }
 
-    public static Program BuildMacroLookupProgram(Program macroLookup, List<Program> macros, Eval runProgram)
+    public static Program BuildMacroLookupProgram(Program macroLookup, IList<Program> macros, Eval runProgram)
     {
         var macroLookupProgram = Compile.QuoteAsProgram(macroLookup);
         foreach (var macro in macros)
@@ -205,18 +230,19 @@ internal static class Mod
                             macro,
                             macroLookupProgram
                         })
-                    ),
-                    macroLookupProgram
-                })
+                        ),
+                        macroLookupProgram
+                    })
                 }),
                 Program.FromBytes(NodePath.Top.AsPath())
             );
             macroLookupProgram = Optimize.OptimizeProgram(macroLookupProgram, runProgram);
         }
+
         return macroLookupProgram;
     }
 
-    public static Dictionary<string, Program> CompileFunctions(Dictionary<string, Program> functions, Program macroLookupProgram, Program constantSymbolTable, NodePath argsRootNode)
+    public static IDictionary<string, Program> CompileFunctions(IDictionary<string, Program> functions, Program macroLookupProgram, Program constantSymbolTable, NodePath argsRootNode)
     {
         var compiledFunctions = new Dictionary<string, Program>();
         foreach (var function in functions)
@@ -232,18 +258,20 @@ internal static class Mod
                 Compile.QuoteAsProgram(lambdaExpression.Rest.First),
                 macroLookupProgram,
                 Compile.QuoteAsProgram(allSymbols)
-            })
-        });
+                })
+            });
         }
+
         return compiledFunctions;
     }
+
     public static Program CompileMod(Program args, Program macroLookup, Program _symbolTable, Eval runProgram)
     {
         var (functions, constants, macros) = CompileModStage1(args, runProgram);
         var macroLookupProgram = BuildMacroLookupProgram(macroLookup, macros, runProgram);
         var allConstantNames = BuildUsedConstantNames(functions, constants, macros);
         var hasConstantTree = allConstantNames.Count > 0;
-        var constantTree = BuildTree(allConstantNames.Select(item => Program.FromText(item)).ToList());
+        var constantTree = BuildTree(allConstantNames.Select(Program.FromText).ToList());
         var constantRootNode = NodePath.Left;
         var argsRootNode = hasConstantTree ? NodePath.Right : NodePath.Top;
         var constantSymbolTable = SymbolTableForTree(constantTree, constantRootNode);
@@ -254,9 +282,18 @@ internal static class Mod
         {
             var allConstantsLookup = new Dictionary<string, Program>();
             foreach (var function in compiledFunctions)
-                if (allConstantNames.Contains(function.Key)) allConstantsLookup[function.Key] = function.Value;
+            {
+                if (allConstantNames.Contains(function.Key))
+                {
+                    allConstantsLookup[function.Key] = function.Value;
+                }
+            }
+
             foreach (var constant in constants)
+            {
                 allConstantsLookup[constant.Key] = constant.Value;
+            }
+
             var allConstantsList = allConstantNames.Select(item => allConstantsLookup[item]).ToList();
             var allConstantsTreeProgram = BuildTreeProgram(allConstantsList);
             var allConstantsTreeSource = allConstantsTreeProgram.ToString();
@@ -266,6 +303,7 @@ internal static class Mod
         {
             argTreeSource = "1";
         }
+
         return Program.FromSource($"(opt (q . (a {mainPathSource} {argTreeSource})))");
     }
 }

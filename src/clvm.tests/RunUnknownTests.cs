@@ -12,42 +12,41 @@ public class RunUnknownTests
         // unknown-2
         [new object[] { "(a (q 0xff) (q 1))", null, null, true }, new object[] { null }],
         // unknown-00
-        [new object[] { "(0x000 )" }, null],
+        [new object[] { "(0x000 )", null, null, true }, null],
         // unknown-01
-        [ new object[] { "(0x000 )" },
-            new object[] { "()", 11 } ],
+        [ new object[] { "(0x000 )" }, new object[] { "()", 11L } ],
         // unknown-02
         [new object[] { "(0x03f )" }, null],
         // unknown-03
         [ new object[] { "(0x03f )" },
-            new object[] { "()", 11 } ],
+            new object[] { "()", 11L } ],
         // unknown-04
         [new object[] { "(0x100 )" }, null],
         // unknown-05
         [ new object[] { "(0x100 )" },
-            new object[] { "()", 12 } ],
+            new object[] { "()", 12L } ],
         // unknown-06
         [new object[] { "(0x13f )" }, null],
         // unknown-07
         [ new object[] { "(0x13f )" },
-            new object[] { "()", 12 } ],
+            new object[] { "()", 12L } ],
         // unknown-08
         [new object[] { "(0xfffeffff00 )" }, null],
         // unknown-09
         [ new object[] { "(0xfffeffff00 )" },
-            new object[] { "()", 4294901770 } ],
+            new object[] { "()", 4294901770L } ],
         // unknown-10
         [new object[] { "(0xfffeffff3f )" }, null],
         // unknown-100
         [new object[] { "(0x180 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-101
         [ new object[] { "(0x180 (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 3854 } ],
+            new object[] { "()", 3854L } ],
         // unknown-102
         [new object[] { "(0x1bf (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-103
         [ new object[] { "(0x1bf (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 3854 } ],
+            new object[] { "()", 3854L } ],
         // unknown-104
         [new object[] { "(0xfffeffff80 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-105
@@ -62,7 +61,7 @@ public class RunUnknownTests
         [new object[] { "(0x7ffffffff80 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-11
         [ new object[] { "(0xfffeffff3f )" },
-            new object[] { "()", 4294901770 } ],
+            new object[] { "()", 4294901770L } ],
         // unknown-110
         [new object[] { "(0x7ffffffffbf (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-111
@@ -71,22 +70,22 @@ public class RunUnknownTests
         [new object[] { "(0x0c0 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-113
         [ new object[] { "(0x0c0 (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 626 } ],
+            new object[] { "()", 626L } ],
         // unknown-114
         [new object[] { "(0x0ff (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-115
         [ new object[] { "(0x0ff (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 626 } ],
+            new object[] { "()", 626L } ],
         // unknown-116
         [new object[] { "(0x1c0 (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-117
         [ new object[] { "(0x1c0 (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 1182 } ],
+            new object[] { "()", 1182L } ],
         // unknown-118
         [new object[] { "(0x1ff (q . 1) (q . 2) (q . 3))" }, null],
         // unknown-119
         [ new object[] { "(0x1ff (q . 1) (q . 2) (q . 3))" },
-            new object[] { "()", 1182 } ],
+            new object[] { "()", 1182L } ],
         // unknown-12
         [new object[] { "(0x7ffffffff00 )" }, null],
         // unknown-120
@@ -131,12 +130,12 @@ public class RunUnknownTests
         [new object[] { "(0xfffeffff00 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" }, null],
         // unknown-137 (continued)
         [ new object[] { "(0xfffeffff00 (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" },
-            new object[] { "()", 4294901810 } ],
+            new object[] { "()", 4294901810L } ],
         // unknown-138
         [new object[] { "(0xfffeffff3f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" }, null],
         // unknown-139
         [ new object[] { "(0xfffeffff3f (q . 0x101010101010101010101010101010101010101010101010101010101010101010101010101010101010101101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101) (q . 0x101010101))" },
-            new object[] { "()", 4294901810 } ],
+            new object[] { "()", 4294901810L } ],
         // unknown-14
         [new object[] { "(0x7ffffffff3f )", null, null, true }, null],
         // unknown-140

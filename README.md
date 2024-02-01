@@ -8,7 +8,7 @@ A (very much WIP) port of [node-clvm-lib](https://github.com/Chia-Network/node-c
 ## Status
 
 - All of the code is ported including units tests.
-- 752/848 unit tests are passing (88%)
+- 774/847 unit tests are passing.
 
 ## See Also
 

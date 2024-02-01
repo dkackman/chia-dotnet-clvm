@@ -7,12 +7,11 @@ static class RunTestHelper
     {
         var puzzle = input[0] is not null ? input[0].ToString()! : throw new Exception("Invalid input");
         var solution = input.Length > 1 && input[1] is not null ? input[1].ToString()! : "()";
-        BigInteger? maxCost = input.Length > 2 && input[2] is not null ? new((long)input[2]) : null;
-        var strict = input.Length > 3 && input[3] is not null && (bool)input[3];
+        BigInteger? maxCost = input.Length > 2 && input[2] is not null ? new(Convert.ToInt16(input[2])) : null;
+        var strict = input.Length > 3 && input[3] is not null && Convert.ToBoolean(input[3]);
 
         if (output == null || output[0] == null)
         {
-            
             Assert.ThrowsAny<Exception>(() =>
             {
                 var puzzleProgram = Program.FromSource(puzzle);
@@ -42,7 +41,7 @@ static class RunTestHelper
 
             if (output.Length > 1 && output[1] != null)
             {
-                BigInteger expectedCost = new((long)output[1]);
+                BigInteger expectedCost = new(Convert.ToInt64(output[1]));
                 Assert.Equal(expectedCost - 9, result.Cost);
             }
         }
