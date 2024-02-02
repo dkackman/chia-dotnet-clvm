@@ -21,6 +21,7 @@ static class RunTestHelper
         }
         else
         {
+            //(>s (q . 0x00) (q))
             var puzzleProgram = Program.FromSource(puzzle);
             var solutionProgram = Program.FromSource(solution);
             var result = puzzleProgram.Run(solutionProgram, new RunOptions { MaxCost = maxCost, Strict = strict });

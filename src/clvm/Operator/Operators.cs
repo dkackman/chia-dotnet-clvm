@@ -307,7 +307,7 @@ internal static class Operators
 
         return new ProgramOutput
         {
-            Value = Program.FromBool(String.Compare(list[0].ToHex(), list[1].ToHex(), StringComparison.Ordinal) == 1),
+            Value = Program.FromBool(String.Compare(list[0].ToHex(), list[1].ToHex(), StringComparison.InvariantCultureIgnoreCase) == 1),
             Cost = cost
         };
     }
