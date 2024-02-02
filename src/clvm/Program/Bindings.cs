@@ -34,15 +34,16 @@ internal static class Bindings
 
     public static Group? UnifyBindings(Group bindings, string key, Program valueProgram)
     {
-        if (bindings.ContainsKey(key))
+        if (bindings.TryGetValue(key, out Program? value))
         {
-            if (!bindings[key].Equals(valueProgram))
+            if (!value.Equals(valueProgram))
             {
                 return null;
             }
             return bindings;
         }
         bindings[key] = valueProgram;
+
         return bindings;
     }
 
@@ -56,6 +57,7 @@ internal static class Bindings
             {
                 return null;
             }
+
             return pattern.Atom.SequenceEqual(sexp.Atom) ? knownBindings : null;
         }
 
@@ -68,14 +70,17 @@ internal static class Bindings
             {
                 return null;
             }
+
             if (right.IsAtom && right.Atom.SequenceEqual(AtomMatch))
             {
                 if (sexp.Atom.SequenceEqual(AtomMatch))
                 {
                     return new Group();
                 }
+
                 return null;
             }
+
             return UnifyBindings(knownBindings, right.ToText(), sexp);
         }
 
@@ -87,6 +92,7 @@ internal static class Bindings
                 {
                     return new Group();
                 }
+
                 return null;
             }
             return UnifyBindings(knownBindings, right.ToText(), sexp);
@@ -96,11 +102,13 @@ internal static class Bindings
         {
             return null;
         }
+
         var newBindings = Match(left, sexp.First, knownBindings);
         if (newBindings == null)
         {
             return null;
         }
+
         return Match(right, sexp.Rest, newBindings);
     }
 }

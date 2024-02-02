@@ -221,18 +221,18 @@ internal static class Mod
         {
             macroLookupProgram = Compile.EvalAsProgram(
                 Program.FromList(new List<Program> {
-                Program.FromText("opt"),
-                Program.FromList(new List<Program> {
-                    Program.FromText("com"),
-                    Compile.QuoteAsProgram(
-                        Program.FromList(new List<Program> {
-                            Program.FromBytes(Atoms.ConsAtom),
-                            macro,
+                    Program.FromText("opt"),
+                    Program.FromList(new List<Program> {
+                        Program.FromText("com"),
+                        Compile.QuoteAsProgram(
+                            Program.FromList(new List<Program> {
+                                Program.FromBytes(Atoms.ConsAtom),
+                                macro,
+                                macroLookupProgram
+                            })
+                            ),
                             macroLookupProgram
                         })
-                        ),
-                        macroLookupProgram
-                    })
                 }),
                 Program.FromBytes(NodePath.Top.AsPath())
             );

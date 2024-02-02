@@ -38,6 +38,7 @@ internal static class InstructionsClass
 
                 return output.Cost;
             }
+
             var op = program.First;
             if (op.IsCons)
             {
@@ -52,6 +53,7 @@ internal static class InstructionsClass
 
                 return Costs.Apply;
             }
+
             var operandList = program.Rest;
             if (ByteUtils.BytesEqual(op.Atom, Atoms.QuoteAtom))
             {
@@ -59,6 +61,7 @@ internal static class InstructionsClass
 
                 return Costs.Quote;
             }
+
             instructionStack.Push(Instructions["apply"]);
             stack.Push(op);
             while (!operandList.IsNull)
@@ -91,6 +94,7 @@ internal static class InstructionsClass
 
                 return Costs.Apply;
             }
+
             var output = Operators.RunOperator(op, operandList, options);
             stack.Push(output.Value);
 
@@ -105,17 +109,20 @@ internal static class InstructionsClass
         {
             return new ProgramOutput { Value = Program.Nil, Cost = cost };
         }
+
         int endByteCursor = 0;
         byte[] atom = value.Atom;
         while (endByteCursor < atom.Length && atom[endByteCursor] == 0)
         {
             endByteCursor++;
         }
+
         cost += BigInteger.Multiply(endByteCursor, Costs.PathLookupPerZeroByte);
         if (endByteCursor == atom.Length)
         {
             return new ProgramOutput { Value = Program.Nil, Cost = cost };
         }
+
         byte endBitMask = MsbMask(atom[endByteCursor]);
         int byteCursor = atom.Length - 1;
         int bitMask = 0x01;
@@ -123,6 +130,7 @@ internal static class InstructionsClass
         {
             if (environment.IsAtom)
                 throw new Exception($"Cannot traverse into {environment}{environment.PositionSuffix}.");
+
             if ((atom[byteCursor] & bitMask) != 0)
             {
                 environment = environment.Rest;

@@ -2208,15 +2208,15 @@ references:
   isSpec: "True"
   fullName: chia.dotnet.clvm.Program.Cons
   nameWithType: Program.Cons
-- uid: chia.dotnet.clvm.Program.Curry(System.Collections.Generic.IList{chia.dotnet.clvm.Program})
-  name: Curry(IList<Program>)
-  href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_Curry_System_Collections_Generic_IList_chia_dotnet_clvm_Program__
-  commentId: M:chia.dotnet.clvm.Program.Curry(System.Collections.Generic.IList{chia.dotnet.clvm.Program})
-  name.vb: Curry(IList(Of Program))
-  fullName: chia.dotnet.clvm.Program.Curry(System.Collections.Generic.IList<chia.dotnet.clvm.Program>)
-  fullName.vb: chia.dotnet.clvm.Program.Curry(System.Collections.Generic.IList(Of chia.dotnet.clvm.Program))
-  nameWithType: Program.Curry(IList<Program>)
-  nameWithType.vb: Program.Curry(IList(Of Program))
+- uid: chia.dotnet.clvm.Program.Curry(System.Collections.Generic.IEnumerable{chia.dotnet.clvm.Program})
+  name: Curry(IEnumerable<Program>)
+  href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_Curry_System_Collections_Generic_IEnumerable_chia_dotnet_clvm_Program__
+  commentId: M:chia.dotnet.clvm.Program.Curry(System.Collections.Generic.IEnumerable{chia.dotnet.clvm.Program})
+  name.vb: Curry(IEnumerable(Of Program))
+  fullName: chia.dotnet.clvm.Program.Curry(System.Collections.Generic.IEnumerable<chia.dotnet.clvm.Program>)
+  fullName.vb: chia.dotnet.clvm.Program.Curry(System.Collections.Generic.IEnumerable(Of chia.dotnet.clvm.Program))
+  nameWithType: Program.Curry(IEnumerable<Program>)
+  nameWithType.vb: Program.Curry(IEnumerable(Of Program))
 - uid: chia.dotnet.clvm.Program.Curry*
   name: Curry
   href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_Curry_
@@ -2237,15 +2237,15 @@ references:
   isSpec: "True"
   fullName: chia.dotnet.clvm.Program.Define
   nameWithType: Program.Define
-- uid: chia.dotnet.clvm.Program.DefineAll(System.Collections.Generic.IList{chia.dotnet.clvm.Program})
-  name: DefineAll(IList<Program>)
-  href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_DefineAll_System_Collections_Generic_IList_chia_dotnet_clvm_Program__
-  commentId: M:chia.dotnet.clvm.Program.DefineAll(System.Collections.Generic.IList{chia.dotnet.clvm.Program})
-  name.vb: DefineAll(IList(Of Program))
-  fullName: chia.dotnet.clvm.Program.DefineAll(System.Collections.Generic.IList<chia.dotnet.clvm.Program>)
-  fullName.vb: chia.dotnet.clvm.Program.DefineAll(System.Collections.Generic.IList(Of chia.dotnet.clvm.Program))
-  nameWithType: Program.DefineAll(IList<Program>)
-  nameWithType.vb: Program.DefineAll(IList(Of Program))
+- uid: chia.dotnet.clvm.Program.DefineAll(System.Collections.Generic.IEnumerable{chia.dotnet.clvm.Program})
+  name: DefineAll(IEnumerable<Program>)
+  href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_DefineAll_System_Collections_Generic_IEnumerable_chia_dotnet_clvm_Program__
+  commentId: M:chia.dotnet.clvm.Program.DefineAll(System.Collections.Generic.IEnumerable{chia.dotnet.clvm.Program})
+  name.vb: DefineAll(IEnumerable(Of Program))
+  fullName: chia.dotnet.clvm.Program.DefineAll(System.Collections.Generic.IEnumerable<chia.dotnet.clvm.Program>)
+  fullName.vb: chia.dotnet.clvm.Program.DefineAll(System.Collections.Generic.IEnumerable(Of chia.dotnet.clvm.Program))
+  nameWithType: Program.DefineAll(IEnumerable<Program>)
+  nameWithType.vb: Program.DefineAll(IEnumerable(Of Program))
 - uid: chia.dotnet.clvm.Program.DefineAll*
   name: DefineAll
   href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_DefineAll_
@@ -2420,24 +2420,15 @@ references:
   isSpec: "True"
   fullName: chia.dotnet.clvm.Program.FromJacobianPoint
   nameWithType: Program.FromJacobianPoint
-- uid: chia.dotnet.clvm.Program.FromList(System.Collections.Generic.IList{chia.dotnet.clvm.Program})
-  name: FromList(IList<Program>)
-  href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_FromList_System_Collections_Generic_IList_chia_dotnet_clvm_Program__
-  commentId: M:chia.dotnet.clvm.Program.FromList(System.Collections.Generic.IList{chia.dotnet.clvm.Program})
-  name.vb: FromList(IList(Of Program))
-  fullName: chia.dotnet.clvm.Program.FromList(System.Collections.Generic.IList<chia.dotnet.clvm.Program>)
-  fullName.vb: chia.dotnet.clvm.Program.FromList(System.Collections.Generic.IList(Of chia.dotnet.clvm.Program))
-  nameWithType: Program.FromList(IList<Program>)
-  nameWithType.vb: Program.FromList(IList(Of Program))
-- uid: chia.dotnet.clvm.Program.FromList(chia.dotnet.clvm.Program[])
-  name: FromList(Program[])
-  href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_FromList_chia_dotnet_clvm_Program___
-  commentId: M:chia.dotnet.clvm.Program.FromList(chia.dotnet.clvm.Program[])
-  name.vb: FromList(Program())
-  fullName: chia.dotnet.clvm.Program.FromList(chia.dotnet.clvm.Program[])
-  fullName.vb: chia.dotnet.clvm.Program.FromList(chia.dotnet.clvm.Program())
-  nameWithType: Program.FromList(Program[])
-  nameWithType.vb: Program.FromList(Program())
+- uid: chia.dotnet.clvm.Program.FromList(System.Collections.Generic.IEnumerable{chia.dotnet.clvm.Program})
+  name: FromList(IEnumerable<Program>)
+  href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_FromList_System_Collections_Generic_IEnumerable_chia_dotnet_clvm_Program__
+  commentId: M:chia.dotnet.clvm.Program.FromList(System.Collections.Generic.IEnumerable{chia.dotnet.clvm.Program})
+  name.vb: FromList(IEnumerable(Of Program))
+  fullName: chia.dotnet.clvm.Program.FromList(System.Collections.Generic.IEnumerable<chia.dotnet.clvm.Program>)
+  fullName.vb: chia.dotnet.clvm.Program.FromList(System.Collections.Generic.IEnumerable(Of chia.dotnet.clvm.Program))
+  nameWithType: Program.FromList(IEnumerable<Program>)
+  nameWithType.vb: Program.FromList(IEnumerable(Of Program))
 - uid: chia.dotnet.clvm.Program.FromList*
   name: FromList
   href: api/chia.dotnet.clvm.Program.html#chia_dotnet_clvm_Program_FromList_

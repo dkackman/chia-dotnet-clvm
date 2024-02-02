@@ -31,6 +31,7 @@ internal static class Compile
             if (op == "qq")
             {
                 var expression = CompileQq(program.Rest, macroLookup, symbolTable, runProgram, level + 1);
+
                 return Com(Program.FromList(
                 [
                     Program.FromBytes(Atoms.ConsAtom),
@@ -49,6 +50,7 @@ internal static class Compile
                 {
                     return Com(program.Rest.First);
                 }
+
                 var expression = CompileQq(program.Rest, macroLookup, symbolTable, runProgram, level - 1);
                 return Com(Program.FromList(
                 [
@@ -63,6 +65,7 @@ internal static class Compile
                 ]));
             }
         }
+
         var first = Com(Program.FromList([Program.FromText("qq"), program.First]));
         var rest = Com(Program.FromList([Program.FromText("qq"), program.Rest]));
         return Program.FromList([Program.FromBytes(Atoms.ConsAtom), first, rest]);
@@ -74,13 +77,13 @@ internal static class Compile
 
     public static IDictionary<string, Func<Program, Program, Program, Eval, Program>> CompileBindings =
         new Dictionary<string, Func<Program, Program, Program, Eval, Program>>
-    {
-        { "qq", CompileQq },
-        { "macros", CompileMacros },
-        { "symbols", CompileSymbols },
-        { "lambda", Mod.CompileMod },
-        { "mod", Mod.CompileMod },
-    };
+        {
+            { "qq", CompileQq },
+            { "macros", CompileMacros },
+            { "symbols", CompileSymbols },
+            { "lambda", Mod.CompileMod },
+            { "mod", Mod.CompileMod },
+        };
 
     public static Program LowerQuote(Program program, Program? macroLookup = null, Program? symbolTable = null, Eval? runProgram = null)
     {
@@ -93,7 +96,7 @@ internal static class Compile
         {
             if (!program.Rest.Rest.IsNull)
                 throw new Exception($"Compilation error while compiling {program}. Quote takes exactly one argument{program.PositionSuffix}.");
-                
+
             return QuoteAsProgram(LowerQuote(program.Rest.First));
         }
 
@@ -119,6 +122,7 @@ internal static class Compile
             {
                 macroLookup = Macros.DefaultMacroLookup(runProgram);
             }
+
             return new ProgramOutput
             {
                 Value = DoComProgram(prog, macroLookup, symbolTable, runProgram),
@@ -127,11 +131,7 @@ internal static class Compile
         };
     }
 
-    public static Program DoComProgram(
-        Program program,
-        Program macroLookup,
-        Program symbolTable,
-        Eval runProgram)
+    public static Program DoComProgram(Program program, Program macroLookup, Program symbolTable, Eval runProgram)
     {
         program = LowerQuote(program, macroLookup, symbolTable, runProgram);
         if (!program.IsCons)
@@ -141,6 +141,7 @@ internal static class Compile
             {
                 return Program.FromBytes(NodePath.Top.AsPath());
             }
+
             foreach (var pair in symbolTable.ToList())
             {
                 var symbol = pair.First;
@@ -206,8 +207,7 @@ internal static class Compile
             return program;
         }
 
-        var compiledArgs = program.Rest.ToList().Select(item =>
-            DoComProgram(item, macroLookup, symbolTable, runProgram)).ToList();
+        var compiledArgs = program.Rest.ToList().Select(item => DoComProgram(item, macroLookup, symbolTable, runProgram)).ToList();
 
         var result = Program.FromList([op, .. compiledArgs]);
         if (PassThroughOperators.Contains(ByteUtils.ToHex(atom1.ToBytes())) || atom1.StartsWith("_"))
@@ -224,12 +224,14 @@ internal static class Compile
             {
                 continue;
             }
+
             var symbolText = symbol.ToText();
             if (symbolText == "*")
             {
                 return result;
             }
-            else if (symbolText == atom1)
+
+            if (symbolText == atom1)
             {
                 var newArgs = EvalAsProgram(
                     Program.FromList([
@@ -262,31 +264,21 @@ internal static class Compile
         throw new Exception($"Can't compile unknown operator {program}{program.PositionSuffix}.");
     }
 
-    public static Program QuoteAsProgram(Program program)
-    {
-        return Program.FromCons(Program.FromBigInt(KeywordConstants.Keywords["q"]), program);
-    }
+    public static Program QuoteAsProgram(Program program) => Program.FromCons(Program.FromBigInt(KeywordConstants.Keywords["q"]), program);
 
-    public static Program EvalAsProgram(Program program, Program args)
-    {
-        return Program.FromList([Program.FromBigInt(KeywordConstants.Keywords["a"]), program, args]);
-    }
+    public static Program EvalAsProgram(Program program, Program args) => Program.FromList([Program.FromBigInt(KeywordConstants.Keywords["a"]), program, args]);
 
     public static Program RunAsProgram(Program program, Program macroLookup)
     {
         return EvalAsProgram(
-            Program.FromList(
-            [
-            Program.FromText("com"),
-            program,
-            QuoteAsProgram(macroLookup),
+            Program.FromList([
+                Program.FromText("com"),
+                program,
+                QuoteAsProgram(macroLookup),
             ]),
             Program.FromBytes(NodePath.Top.AsPath())
         );
     }
 
-    public static Program BrunAsProgram(Program program, Program args)
-    {
-        return EvalAsProgram(QuoteAsProgram(program), QuoteAsProgram(args));
-    }
+    public static Program BrunAsProgram(Program program, Program args) => EvalAsProgram(QuoteAsProgram(program), QuoteAsProgram(args));
 }
