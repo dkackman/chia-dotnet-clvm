@@ -167,6 +167,6 @@
   "index.html": {
     "href": "index.html",
     "title": "Welcome to chia-dotnet-clvm | chia-dotnet-clvm",
-    "keywords": "Welcome to chia-dotnet-clvm A (very much WIP) port of node-clvm-lib. Status All of the code is ported including units tests. 752/848 unit tests are passing (88%) See Also Documentation chia-dotnet chia-dotnet-bls chia-blockchain chia and its logo are the registered trademark or trademark of Chia Network, Inc. in the United States and worldwide."
+    "keywords": "Welcome to chia-dotnet-clvm A direct port of Rigidity's node-clvm-lib. See Also Documentation chia-dotnet chia-dotnet-bls chia-blockchain Hello World var puzzleProgram = Program.FromSource(\"(q . \\\"hello world\\\")\"); var result = puzzleProgram.Compile(); Console.WriteLine(result.Value); Console.WriteLine(result.Cost); chia and its logo are the registered trademark or trademark of Chia Network, Inc. in the United States and worldwide."
   }
 }

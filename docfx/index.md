@@ -4,12 +4,7 @@ _layout: landing
 
 # Welcome to **chia-dotnet-clvm**
 
-A (very much WIP) port of [node-clvm-lib](https://github.com/Chia-Network/node-clvm-lib).
-
-## Status
-
-- All of the code is ported including units tests.
-- 752/848 unit tests are passing (88%)
+A direct port of [Rigidity](https://github.com/Rigidity)'s [node-clvm-lib](https://github.com/Chia-Network/node-clvm-lib).
 
 ## See Also
 
@@ -17,6 +12,16 @@ A (very much WIP) port of [node-clvm-lib](https://github.com/Chia-Network/node-c
 - [chia-dotnet](https://www.nuget.org/packages/chia-dotnet/)
 - [chia-dotnet-bls](https://www.nuget.org/packages/chia-dotnet-bls/)
 - [chia-blockchain](https://chia.net)
+
+## Hello World
+
+```csharp
+var puzzleProgram = Program.FromSource("(q . \"hello world\")");
+var result = puzzleProgram.Compile();
+
+Console.WriteLine(result.Value);
+Console.WriteLine(result.Cost);
+```
 
 ___
 
