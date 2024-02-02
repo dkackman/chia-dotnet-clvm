@@ -11,6 +11,7 @@ A direct port of [Rigidity](https://github.com/Rigidity)'s [node-clvm-lib](https
 - [Documentation](https://dkackman.github.io/chia-dotnet-clvm/)
 - [chia-dotnet](https://www.nuget.org/packages/chia-dotnet/)
 - [chia-dotnet-bls](https://www.nuget.org/packages/chia-dotnet-bls/)
+- [Chialisp](https://chialisp.com/)
 - [chia-blockchain](https://chia.net)
 
 ## Examples
