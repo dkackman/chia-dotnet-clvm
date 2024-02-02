@@ -33,8 +33,14 @@ static class RunTestHelper
             }
             else
             {
-                var arg = output.Length > 3 && output[3] != null && Convert.ToBoolean(output[3]);
-                text = result.Value.ToSource(arg);
+                if (output.Length > 3 && output[3] != null)
+                {
+                    text = result.Value.ToSource(Convert.ToBoolean(output[3]));
+                }
+                else
+                {
+                    text = result.Value.ToSource();
+                }
             }
 
             var expectedResult = output[0] is not null ? output[0].ToString()! : null;
