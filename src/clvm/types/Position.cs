@@ -23,9 +23,9 @@ public class Position
     public Position(string source, int index)
     {
         source = source.Replace("\r\n", "\n");
-        int line = 1;
-        int column = 1;
-        for (int i = 0; i < index; i++)
+        var line = 1;
+        var column = 1;
+        for (var i = 0; i < index; i++)
         {
             if (CheckForChar(source, index, '\n'))
             {
@@ -47,12 +47,5 @@ public class Position
     /// <returns>A string representation of the position.</returns>
     public override string ToString() => $"{Line}:{Column}";
 
-    private static bool CheckForChar(string source, int index, char expected)
-    {
-        if (source.Length <= index)
-        {
-            return false;
-        }
-        return source[index] == expected;
-    }
+    private static bool CheckForChar(string source, int index, char expected) => source.Length > index && source[index] == expected;
 }

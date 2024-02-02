@@ -15,9 +15,8 @@ internal class NodePath
     {
         if (index < 0)
         {
-            // You need to implement bigIntBitLength, bigIntToBytes, and bytesToBigInt methods
-            var byteCount = (ByteUtils.BigIntBitLength(index) + 7) >> 3;
-            var blob = ByteUtils.BigIntToBytes(index, (int)byteCount, Endian.Big, true);
+            var byteCount = (index.GetBitLength() + 7) >> 3;
+            var blob = index.BigIntToBytes((int)byteCount, Endian.Big, true);
             index = ByteUtils.BytesToBigInt([0, .. blob]);
         }
         this.index = index;
@@ -25,32 +24,22 @@ internal class NodePath
 
     public byte[] AsPath()
     {
-        // You need to implement bigIntBitLength and bigIntToBytes methods
-        var byteCount = (ByteUtils.BigIntBitLength(index) + 7) >> 3;
-        return ByteUtils.BigIntToBytes(index, (int)byteCount);
+        var byteCount = (index.GetBitLength() + 7) >> 3;
+        return index.BigIntToBytes((int)byteCount);
     }
 
     public NodePath Add(NodePath other) => new(ComposePaths(index, other.index));
 
-    public NodePath First()
-    {
-        return new NodePath(index * 2);
-    }
+    public NodePath First() => new(index * 2);
 
-    public NodePath Rest()
-    {
-        return new NodePath(index * 2 + 1);
-    }
+    public NodePath Rest() => new(index * 2 + 1);
 
-    public override string ToString()
-    {
-        return $"NodePath: {index}";
-    }
+    public override string ToString() => $"NodePath: {index}";
 
     public static BigInteger ComposePaths(BigInteger left, BigInteger right)
     {
-        BigInteger mask = new(1);
-        BigInteger tempPath = left;
+        BigInteger mask = 1;
+        var tempPath = left;
         while (tempPath > 1)
         {
             right <<= 1;
@@ -58,6 +47,7 @@ internal class NodePath
             tempPath >>= 1;
         }
         mask -= 1;
+
         return right | (left & mask);
     }
 }

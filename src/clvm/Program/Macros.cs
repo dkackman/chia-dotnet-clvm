@@ -73,6 +73,7 @@ internal static class Macros
             var newMacro = evalAsProgram(run, env).Value;
             DefaultMacroLookupProgram = Program.FromCons(newMacro, DefaultMacroLookupProgram!);
         }
+
         return DefaultMacroLookupProgram ?? throw new Exception("DefaultMacroLookupProgram is null");
     }
 
@@ -83,6 +84,7 @@ internal static class Macros
             DefaultMacroLookupProgram = Program.FromList([]);
             BuildDefaultMacroLookup(evalAsProgram);
         }
+
         return DefaultMacroLookupProgram;
     }
 }

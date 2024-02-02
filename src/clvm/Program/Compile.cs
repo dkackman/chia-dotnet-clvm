@@ -7,9 +7,9 @@ internal delegate ProgramOutput Eval(Program program, Program args);
 
 internal static class Compile
 {
-    public static BetterSet<string> PassThroughOperators = new(
-        KeywordConstants.Keywords.Values.Select(value => ByteUtils.ToHex(ByteUtils.EncodeBigInt(value)))
-        .Concat(new[] { ByteUtils.ToHex(Encoding.UTF8.GetBytes("com")), ByteUtils.ToHex(Encoding.UTF8.GetBytes("opt")) })
+    public static HashSet<string> PassThroughOperators = new(
+        KeywordConstants.Keywords.Values.Select(value => ByteUtils.ToHex(value.EncodeBigInt()))
+        .Concat(new[] { Encoding.UTF8.GetBytes("com").ToHex(), Encoding.UTF8.GetBytes("opt").ToHex() })
     );
 
     public static Program CompileQq(Program args, Program macroLookup, Program symbolTable, Eval runProgram) =>
@@ -68,6 +68,7 @@ internal static class Compile
 
         var first = Com(Program.FromList([Program.FromText("qq"), program.First]));
         var rest = Com(Program.FromList([Program.FromText("qq"), program.Rest]));
+
         return Program.FromList([Program.FromBytes(Atoms.ConsAtom), first, rest]);
     }
 
@@ -192,10 +193,11 @@ internal static class Compile
             }
         }
 
-        if (CompileBindings.ContainsKey(atom1))
+        if (CompileBindings.TryGetValue(atom1, out Func<Program, Program, Program, Eval, Program>? binding))
         {
-            var compiler = CompileBindings[atom1];
+            var compiler = binding;
             var postProgram = compiler(program.Rest, macroLookup, symbolTable, runProgram);
+
             return EvalAsProgram(
                 QuoteAsProgram(postProgram),
                 Program.FromBytes(NodePath.Top.AsPath())

@@ -30,7 +30,7 @@ internal static class Optimize
             return false;
         }
 
-        return program.Rest.ToList().All(item => SeemsConstant(item));
+        return program.Rest.ToList().All(SeemsConstant);
     }
 
     public static Program ConstantOptimizer(Program program, Eval evalAsProgram)
@@ -38,6 +38,7 @@ internal static class Optimize
         if (SeemsConstant(program) && !program.IsNull)
         {
             var newProgram = evalAsProgram(program, Program.Nil).Value;
+
             return Compile.QuoteAsProgram(newProgram);
         }
 
@@ -182,6 +183,7 @@ internal static class Optimize
         if (matched != null && !matched["atom"].IsNull)
         {
             var node = new NodePath(matched["atom"].ToBigInt()).Add(NodePath.Left);
+
             return Program.FromBytes(node.AsPath());
         }
 
@@ -189,6 +191,7 @@ internal static class Optimize
         if (matched != null && !matched["atom"].IsNull)
         {
             var node = new NodePath(matched["atom"].ToBigInt()).Add(NodePath.Right);
+
             return Program.FromBytes(node.AsPath());
         }
 
