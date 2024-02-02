@@ -4,12 +4,7 @@
 [![CodeQL](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/github-code-scanning/codeql)
 [![Nuget](https://img.shields.io/nuget/dt/chia-dotnet-clvm)](https://www.nuget.org/packages/chia-dotnet-clvm/)
 
-A (very much WIP) port of [node-clvm-lib](https://github.com/Chia-Network/node-clvm-lib).
-
-## Status
-
-- All of the code is ported including units tests.
-- 845/856 unit tests are passing.
+A direct port of [Rigidity](https://github.com/Rigidity)'s [node-clvm-lib](https://github.com/Chia-Network/node-clvm-lib).
 
 ## See Also
 
@@ -17,6 +12,18 @@ A (very much WIP) port of [node-clvm-lib](https://github.com/Chia-Network/node-c
 - [chia-dotnet](https://www.nuget.org/packages/chia-dotnet/)
 - [chia-dotnet-bls](https://www.nuget.org/packages/chia-dotnet-bls/)
 - [chia-blockchain](https://chia.net)
+
+## Examples
+
+### Hello World
+
+```csharp
+var puzzleProgram = Program.FromSource("(q . \"hello world\")");
+var result = puzzleProgram.Compile();
+
+Console.WriteLine(result.Value);
+Console.WriteLine(result.Cost);
+```
 
 ___
 
