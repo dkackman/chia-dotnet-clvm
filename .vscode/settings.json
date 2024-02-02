@@ -19,6 +19,8 @@
         "Softfork",
         "substr",
         "uncompiled",
+        "uncurried",
+        "Uncurries",
         "uncurry"
     ],
     "dotnet-test-explorer.testProjectPath": "**/*tests.@(csproj|vbproj|fsproj)"

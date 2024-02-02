@@ -6,7 +6,11 @@ internal static class Optimize
 {
     public static bool SeemsConstant(Program program)
     {
-        if (!program.IsCons) return program.IsNull;
+        if (!program.IsCons)
+        {
+            return program.IsNull;
+        }
+
         var op = program.First;
         if (!op.IsCons)
         {
@@ -15,7 +19,8 @@ internal static class Optimize
             {
                 return true;
             }
-            else if (ByteUtils.BytesEqual(value, Atoms.RaiseAtom))
+
+            if (ByteUtils.BytesEqual(value, Atoms.RaiseAtom))
             {
                 return false;
             }
@@ -24,6 +29,7 @@ internal static class Optimize
         {
             return false;
         }
+
         return program.Rest.ToList().All(item => SeemsConstant(item));
     }
 
@@ -32,15 +38,14 @@ internal static class Optimize
         if (SeemsConstant(program) && !program.IsNull)
         {
             var newProgram = evalAsProgram(program, Program.Nil).Value;
-            program = Compile.QuoteAsProgram(newProgram);
+            return Compile.QuoteAsProgram(newProgram);
         }
+
         return program;
     }
 
-    public static bool IsArgsCall(Program program)
-    {
-        return program.IsAtom && program.ToBigInt() == 1;
-    }
+    public static bool IsArgsCall(Program program) => program.IsAtom && program.ToBigInt() == 1;
+
     public static Program ConsQuoteApplyOptimizer(Program program, Eval _evalAsProgram)
     {
         var matched = Bindings.Match(Program.FromSource("(a (q . (: . sexp)) (: . args))"), program);
@@ -48,6 +53,7 @@ internal static class Optimize
         {
             return matched["sexp"];
         }
+
         return program;
     }
 
@@ -58,6 +64,7 @@ internal static class Optimize
         {
             return matched["first"];
         }
+
         return Program.FromList(new List<Program> { Program.FromBigInt(KeywordConstants.Keywords["f"]), args });
     }
 
@@ -68,8 +75,10 @@ internal static class Optimize
         {
             return matched["rest"];
         }
+
         return Program.FromList(new List<Program> { Program.FromBigInt(KeywordConstants.Keywords["r"]), args });
     }
+
     public static Program PathFromArgs(Program program, Program args)
     {
         var value = program.ToBigInt();
@@ -77,11 +86,13 @@ internal static class Optimize
         {
             return args;
         }
+
         program = Program.FromBigInt(value >> 1);
         if ((value & 1) == 1)
         {
             return PathFromArgs(program, ConsRest(args));
         }
+
         return PathFromArgs(program, ConsFirst(args));
     }
 
@@ -91,6 +102,7 @@ internal static class Optimize
         {
             return PathFromArgs(program, args);
         }
+
         var first = program.First;
         if (first.IsCons)
         {
@@ -100,6 +112,7 @@ internal static class Optimize
         {
             return program;
         }
+
         return Program.FromList(new List<Program> { first }.Concat(program.Rest.ToList().Select(item => SubArgs(item, args))).ToList());
     }
 
@@ -110,6 +123,7 @@ internal static class Optimize
         {
             return program;
         }
+
         var originalArgs = matched["args"];
         var originalCall = matched["sexp"];
         var newEvalProgramArgs = SubArgs(originalCall, originalArgs);
@@ -117,6 +131,7 @@ internal static class Optimize
         {
             return OptimizeProgram(newEvalProgramArgs, evalAsProgram);
         }
+
         var newOperands = newEvalProgramArgs.ToList();
         var optOperands = newOperands.Select(item => OptimizeProgram(item, evalAsProgram)).ToList();
         var nonConstantCount = optOperands.Count(item => item.IsCons && (item.First.IsCons || !ByteUtils.BytesEqual(item.First.Atom, Atoms.QuoteAtom)));
@@ -124,6 +139,7 @@ internal static class Optimize
         {
             return Program.FromList(optOperands);
         }
+
         return program;
     }
 
@@ -139,7 +155,7 @@ internal static class Optimize
         {
             return program;
         }
-        
+
         return Program.FromList(program.ToList().Select(item => OptimizeProgram(item, evalAsProgram)).ToList());
     }
 
@@ -150,11 +166,13 @@ internal static class Optimize
         {
             return matched["first"];
         }
+
         matched = Bindings.Match(Program.FromSource("(r (c (: . first) (: . rest)))"), program);
         if (matched != null)
         {
             return matched["rest"];
         }
+
         return program;
     }
 
@@ -166,12 +184,14 @@ internal static class Optimize
             var node = new NodePath(matched["atom"].ToBigInt()).Add(NodePath.Left);
             return Program.FromBytes(node.AsPath());
         }
+
         matched = Bindings.Match(Program.FromSource("(r ($ . atom))"), program);
         if (matched != null && !matched["atom"].IsNull)
         {
             var node = new NodePath(matched["atom"].ToBigInt()).Add(NodePath.Right);
             return Program.FromBytes(node.AsPath());
         }
+
         return program;
     }
 
@@ -182,6 +202,7 @@ internal static class Optimize
         {
             return Program.Nil;
         }
+
         return program;
     }
 
@@ -192,6 +213,7 @@ internal static class Optimize
         {
             return Program.Nil;
         }
+
         return program;
     }
 
@@ -201,36 +223,40 @@ internal static class Optimize
         {
             return program;
         }
+
         var optimizers = new List<Func<Program, Eval, Program>>
-    {
-        ConsOptimizer,
-        ConstantOptimizer,
-        ConsQuoteApplyOptimizer,
-        VarChangeOptimizerConsEval,
-        ChildrenOptimizer,
-        PathOptimizer,
-        QuoteNullOptimizer,
-        ApplyNullOptimizer,
-    };
+        {
+            ConsOptimizer,
+            ConstantOptimizer,
+            ConsQuoteApplyOptimizer,
+            VarChangeOptimizerConsEval,
+            ChildrenOptimizer,
+            PathOptimizer,
+            QuoteNullOptimizer,
+            ApplyNullOptimizer,
+        };
         while (program.IsCons)
         {
             var startProgram = program;
             foreach (var optimizer in optimizers)
             {
                 program = optimizer(program, evalAsProgram);
-                if (!startProgram.Equals(program)) break;
+                if (!startProgram.Equals(program))
+                {
+                    break;
+                }
             }
+
             if (startProgram.Equals(program))
             {
                 return program;
             }
         }
+
         return program;
     }
 
-    public static Operator MakeDoOpt(Eval runProgram)
-    {
-        return args =>
+    public static Operator MakeDoOpt(Eval runProgram) => (args) =>
         {
             return new ProgramOutput
             {
@@ -238,5 +264,4 @@ internal static class Optimize
                 Cost = 1
             };
         };
-    }
 }

@@ -4,7 +4,6 @@ using chia.dotnet.bls;
 
 namespace chia.dotnet.clvm;
 
-
 /// <summary>
 /// Represents a CLVM program.
 /// </summary>
@@ -40,14 +39,61 @@ public class Program
     /// <returns>The created program.</returns>
     public static Program FromBytes(byte[] value) => new(value);
 
+    /// <summary>
+    /// Creates a new Program from a JacobianPoint.
+    /// </summary>
+    /// <param name="value">The JacobianPoint to convert.</param>
+    /// <returns>A new Program.</returns>
     public static Program FromJacobianPoint(JacobianPoint value) => new(value.ToBytes());
+
+    /// <summary>
+    /// Creates a new Program from a PrivateKey.
+    /// </summary>
+    /// <param name="value">The PrivateKey to convert.</param>
+    /// <returns>A new Program.</returns>
     public static Program FromPrivateKey(PrivateKey value) => new(value.ToBytes());
+
+    /// <summary>
+    /// Creates a new Program from a hexadecimal string.
+    /// </summary>
+    /// <param name="value">The hexadecimal string to convert.</param>
+    /// <returns>A new Program.</returns>
     public static Program FromHex(string value) => new(value.HexStringToByteArray());
+
+    /// <summary>
+    /// Creates a new Program from a boolean value.
+    /// </summary>
+    /// <param name="value">The boolean value to convert.</param>
+    /// <returns>A new Program.</returns>
     public static Program FromBool(bool value) => value ? True : False;
+
+    /// <summary>
+    /// Creates a new Program from a long integer.
+    /// </summary>
+    /// <param name="value">The long integer to convert.</param>
+    /// <returns>A new Program.</returns>
     public static Program FromInt(long value) => new(value.EncodeInt());
-    public static Program FromBigInt(BigInteger value) => new(ByteUtils.EncodeBigInt(value));
+
+    /// <summary>
+    /// Creates a new Program from a BigInteger.
+    /// </summary>
+    /// <param name="value">The BigInteger to convert.</param>
+    /// <returns>A new Program.</returns>
+    public static Program FromBigInt(BigInteger value) => new(value.EncodeBigInt());
+
+    /// <summary>
+    /// Creates a new Program from a text string.
+    /// </summary>
+    /// <param name="value">The text string to convert.</param>
+    /// <returns>A new Program.</returns>
     public static Program FromText(string value) => new(value.ToBytes());
 
+    /// <summary>
+    /// Creates a new Program from a source string.
+    /// </summary>
+    /// <param name="source">The source string to parse.</param>
+    /// <returns>A new Program parsed from the source string.</returns>
+    /// <exception cref="ParseError">Thrown when the source string is unexpectedly empty.</exception>
     public static Program FromSource(string source)
     {
         var stream = Parser.TokenStream(source);
@@ -60,7 +106,12 @@ public class Program
         throw new ParseError("Unexpected end of source.");
     }
 
-    public static Program FromList(Program[] programs)
+    /// <summary>
+    /// Creates a new Program from a list of Programs.
+    /// </summary>
+    /// <param name="programs">The list of Programs to convert.</param>
+    /// <returns>A new Program created from the list of Programs.</returns>
+    public static Program FromList(IEnumerable<Program> programs)
     {
         Program result = Nil;
         foreach (Program program in programs.Reverse())
@@ -71,8 +122,12 @@ public class Program
         return result;
     }
 
-    public static Program FromList(IList<Program> value) => FromList(value.Cast<Program>().ToArray());
-
+    /// <summary>
+    /// Deserializes a byte array into a Program.
+    /// </summary>
+    /// <param name="bytes">The byte array to deserialize.</param>
+    /// <returns>A new Program deserialized from the byte array.</returns>
+    /// <exception cref="ParseError">Thrown when the byte array is unexpectedly empty.</exception>
     public static Program Deserialize(byte[] bytes)
     {
         if (bytes.Length == 0)
@@ -81,33 +136,94 @@ public class Program
         return Serialization.Deserialize([.. bytes]);
     }
 
+    /// <summary>
+    /// Deserializes a hexadecimal string into a Program.
+    /// </summary>
+    /// <param name="hex">The hexadecimal string to deserialize.</param>
+    /// <returns>A new Program deserialized from the hexadecimal string.</returns>
     public static Program DeserializeHex(string hex) => Deserialize(hex.FromHex());
 
+    /// <summary>
+    /// Initializes a new instance of the Program class with a Cons value.
+    /// </summary>
+    /// <param name="value">The Cons value to initialize with.</param>
     public Program(Cons value) => Value = value;
+
+    /// <summary>
+    /// Initializes a new instance of the Program class with a byte array value.
+    /// </summary>
+    /// <param name="value">The byte array value to initialize with.</param>
     public Program(byte[] value) => Value = value;
 
+    /// <summary>
+    /// Gets the value of the Program.
+    /// </summary>
     public object Value { get; }
 
+    /// <summary>
+    /// Gets a value indicating whether the Program is an atom.
+    /// </summary>
     public bool IsAtom => Value is byte[];
+
+    /// <summary>
+    /// Gets a value indicating whether the Program is a Cons.
+    /// </summary>
     public bool IsCons => Value is Cons;
+
+    /// <summary>
+    /// Gets a value indicating whether the Program is null.
+    /// </summary>
     public bool IsNull => IsAtom && Atom.Length == 0;
 
+    /// <summary>
+    /// Gets the atom value of the Program.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown when the Program is not an atom.</exception>
     public byte[] Atom => Value as byte[] ?? throw new InvalidOperationException("Program is not an atom");
+
+    /// <summary>
+    /// Gets the Cons value of the Program.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown when the Program is not a Cons.</exception>
     public Cons Cons => Value as Cons ?? throw new InvalidOperationException("Program is not a cons");
 
+    /// <summary>
+    /// Gets the first Program in the Cons.
+    /// </summary>
     public Program First => Cons.Item1;
+
+    /// <summary>
+    /// Gets the rest of the Programs in the Cons.
+    /// </summary>
     public Program Rest => Cons.Item2;
 
+    /// <summary>
+    /// Gets the position suffix of the Program.
+    /// </summary>
     public string PositionSuffix => Position is not null ? $" at {Position}" : "";
+
+    /// <summary>
+    /// Gets or privately sets the position of the Program.
+    /// </summary>
     public Position? Position { get; private set; }
 
+    /// <summary>
+    /// Sets the position of the Program and returns the Program.
+    /// </summary>
+    /// <param name="position">The position to set.</param>
+    /// <returns>The Program with the set position.</returns>
     public Program At(Position position)
     {
         Position = position;
         return this;
     }
 
-    public Program Curry(IList<Program> args)
+    /// <summary>
+    /// Curries the Program with a list of arguments.
+    /// </summary>
+    /// <param name="args">The list of arguments to curry the Program with.</param>
+    /// <returns>A new Program that is the result of currying the original Program with the arguments.</returns>
+    public Program Curry(IEnumerable<Program> args)
     {
         return FromSource(
             "(a (q #a 4 (c 2 (c 5 (c 7 0)))) (c (q (c (q . 2) (c (c (q . 1) 5) (c (a 6 (c 2 (c 11 (q 1)))) 0))) #a (i 5 (q 4 (q . 4) (c (c (q . 1) 9) (c (a 6 (c 2 (c 13 (c 11 0)))) 0))) (q . 11)) 1) 1))"
@@ -115,7 +231,11 @@ public class Program
         ))).Value;
     }
 
-    public Tuple<Program, List<Program>>? Uncurry()
+    /// <summary>
+    /// Uncurries the Program into a tuple containing the original Program and a list of arguments.
+    /// </summary>
+    /// <returns>A tuple containing the original Program and a list of arguments, or null if the Program cannot be uncurried.</returns>
+    public Tuple<Program, IEnumerable<Program>>? Uncurry()
     {
         var uncurryPatternFunction = FromSource("(a (q . (: . function)) (: . core))");
         var uncurryPatternCore = FromSource("(c (q . (: . parm)) (: . core))");
@@ -145,18 +265,31 @@ public class Program
 
         if (core.IsAtom && core.ToBigInt() == 1)
         {
-            return new Tuple<Program, List<Program>>(fn, args);
+            return new Tuple<Program, IEnumerable<Program>>(fn, args);
         }
 
         return null;
     }
 
+    /// <summary>
+    /// Computes the hash of the Program.
+    /// </summary>
+    /// <returns>A byte array representing the hash of the Program.</returns>
     public byte[] Hash() => IsAtom
             ? Hmac.Hash256([1, .. Atom])
             : Hmac.Hash256([2, .. First.Hash(), .. Rest.Hash()]);
 
+    /// <summary>
+    /// Computes the hash of the Program and returns it as a hexadecimal string.
+    /// </summary>
+    /// <returns>A string representing the hash of the Program in hexadecimal.</returns>
     public string HashHex() => Hash().ToHex();
 
+    /// <summary>
+    /// Defines a new Program within the current Program.
+    /// </summary>
+    /// <param name="program">The Program to define within the current Program.</param>
+    /// <returns>A new Program with the defined Program inserted.</returns>
     public Program Define(Program program)
     {
         var result = this;
@@ -171,7 +304,12 @@ public class Program
         return FromList([.. items]);
     }
 
-    public Program DefineAll(IList<Program> programs)
+    /// <summary>
+    /// Defines multiple Programs within the current Program.
+    /// </summary>
+    /// <param name="programs">The Programs to define within the current Program.</param>
+    /// <returns>A new Program with all the defined Programs inserted.</returns>
+    public Program DefineAll(IEnumerable<Program> programs)
     {
         var result = this;
         foreach (var program in programs.AsEnumerable().Reverse())
@@ -182,6 +320,11 @@ public class Program
         return result;
     }
 
+    /// <summary>
+    /// Compiles the Program with the given options.
+    /// </summary>
+    /// <param name="options">The options to use when compiling the Program. If null, default options are used.</param>
+    /// <returns>A ProgramOutput representing the result of the compilation.</returns>
     public ProgramOutput Compile(CompileOptions? options = null)
     {
         var fullOptions = Bindings.Merge(new CompileOptions(), options);
@@ -256,6 +399,12 @@ public class Program
         );
     }
 
+    /// <summary>
+    /// Runs the Program with the given environment and options.
+    /// </summary>
+    /// <param name="environment">The environment to use when running the Program.</param>
+    /// <param name="options">The options to use when running the Program. If null, default options are used.</param>
+    /// <returns>A ProgramOutput representing the result of the run.</returns>
     public ProgramOutput Run(Program environment, RunOptions? options = null)
     {
         var fullOptions = Bindings.Merge(new CompileOptions(), options);
@@ -286,6 +435,11 @@ public class Program
         };
     }
 
+    /// <summary>
+    /// Converts the Program to a byte array.
+    /// </summary>
+    /// <returns>A byte array representing the Program.</returns>
+    /// <exception cref="Exception">Thrown when the Program is a Cons.</exception>
     public byte[] ToBytes()
     {
         if (IsCons)
@@ -294,6 +448,11 @@ public class Program
         return Atom;
     }
 
+    /// <summary>
+    /// Converts the Program to a JacobianPoint.
+    /// </summary>
+    /// <returns>A JacobianPoint representing the Program.</returns>
+    /// <exception cref="Exception">Thrown when the Program is a Cons or the Atom length is not 48 or 96.</exception>
     public JacobianPoint ToJacobianPoint()
     {
         if (IsCons || (Atom.Length != 48 && Atom.Length != 96))
@@ -304,6 +463,11 @@ public class Program
             : JacobianPoint.FromBytesG2(Atom);
     }
 
+    /// <summary>
+    /// Converts the Program to a PrivateKey.
+    /// </summary>
+    /// <returns>A PrivateKey representing the Program.</returns>
+    /// <exception cref="Exception">Thrown when the Program is a Cons.</exception>
     public PrivateKey ToPrivateKey()
     {
         if (IsCons)
@@ -312,6 +476,10 @@ public class Program
         return PrivateKey.FromBytes(Atom);
     }
 
+    /// <summary>
+    /// Converts the Program to a hexadecimal string.
+    /// </summary>
+    /// <returns>A string representing the Program in hexadecimal.</returns>
     public string ToHex()
     {
         if (IsCons)
@@ -320,6 +488,11 @@ public class Program
         return Atom.ToHex();
     }
 
+    /// <summary>
+    /// Converts the Program to a boolean.
+    /// </summary>
+    /// <returns>A boolean representing the Program.</returns>
+    /// <exception cref="Exception">Thrown when the Program is a Cons.</exception>
     public bool ToBool()
     {
         if (IsCons)
@@ -328,6 +501,11 @@ public class Program
         return !IsNull;
     }
 
+    /// <summary>
+    /// Converts the Program to a long integer.
+    /// </summary>
+    /// <returns>A long integer representing the Program.</returns>
+    /// <exception cref="Exception">Thrown when the Program is a Cons.</exception>
     public long ToInt()
     {
         if (IsCons)
@@ -336,6 +514,11 @@ public class Program
         return Atom.DecodeInt();
     }
 
+    /// <summary>
+    /// Converts the Program to a BigInteger.
+    /// </summary>
+    /// <returns>A BigInteger representing the Program.</returns>
+    /// <exception cref="Exception">Thrown when the Program is a Cons.</exception>
     public BigInteger ToBigInt()
     {
         if (IsCons)
@@ -344,6 +527,11 @@ public class Program
         return Atom.DecodeBigInt();
     }
 
+    /// <summary>
+    /// Converts the Program to a text string.
+    /// </summary>
+    /// <returns>A string representing the Program in text.</returns>
+    /// <exception cref="Exception">Thrown when the Program is a Cons.</exception>
     public string ToText()
     {
         if (IsCons)
@@ -352,6 +540,11 @@ public class Program
         return Encoding.UTF8.GetString(Atom);
     }
 
+    /// <summary>
+    /// Converts the Program to its source code representation.
+    /// </summary>
+    /// <param name="showKeywords">A boolean indicating whether to include keywords in the source code representation. Defaults to true.</param>
+    /// <returns>A string representing the source code of the Program.</returns>
     public string ToSource(bool showKeywords = true)
     {
         if (IsAtom)
@@ -422,6 +615,12 @@ public class Program
         }
     }
 
+    /// <summary>
+    /// Converts the Program to a list of Programs.
+    /// </summary>
+    /// <param name="strict">A boolean indicating whether to enforce strict list conversion. Defaults to false.</param>
+    /// <returns>A list of Programs representing the Program.</returns>
+    /// <exception cref="Exception">Thrown when the Program is not a strict list and strict is true.</exception>
     public IList<Program> ToList(bool strict = false)
     {
         List<Program> result = [];
@@ -439,12 +638,29 @@ public class Program
         return result;
     }
 
+    /// <summary>
+    /// Serializes the Program to a byte array.
+    /// </summary>
+    /// <returns>A byte array representing the serialized Program.</returns>
     public byte[] Serialize() => Serialization.Serialize(this);
 
+    /// <summary>
+    /// Serializes the Program to a hexadecimal string.
+    /// </summary>
+    /// <returns>A string representing the serialized Program in hexadecimal.</returns>
     public string SerializeHex() => Serialize().ToHex();
 
+    /// <summary>
+    /// Determines whether the specified Program is equal to the current Program.
+    /// </summary>
+    /// <param name="value">The Program to compare with the current Program.</param>
+    /// <returns>true if the specified Program is equal to the current Program; otherwise, false.</returns>
     public bool Equals(Program value)
         => IsAtom == value.IsAtom && (IsAtom ? ByteUtils.BytesEqual(Atom, value.Atom) : First.Equals(value.First) && Rest.Equals(value.Rest));
 
+    /// <summary>
+    /// Returns a string that represents the current Program.
+    /// </summary>
+    /// <returns>A string that represents the current Program.</returns>
     public override string ToString() => ToSource();
 }
