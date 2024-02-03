@@ -19,7 +19,7 @@ internal static class Serialization
             }
 
             var size = program.Atom.Length;
-            var result = new List<byte>();
+            var result = new List<byte>(size + 4);
             if (size < 0x40)
             {
                 result.Add((byte)(0x80 | size));
@@ -72,11 +72,12 @@ internal static class Serialization
 
     public static Program Deserialize(List<byte> program)
     {
-        var sizeBytes = new List<byte>();
         if (program[0] <= 0x7f)
         {
             return Program.FromBytes([(program[0])]);
         }
+
+        var sizeBytes = new List<byte>();
 
         if (program[0] <= 0xbf)
         {
@@ -94,7 +95,7 @@ internal static class Serialization
         else if (program[0] <= 0xef)
         {
             sizeBytes.Add((byte)(program[0] & 0x0f));
-            for (int i = 0; i < 2; i++)
+            for (var i = 0; i < 2; i++)
             {
                 program.RemoveAt(0);
                 if (program.Count == 0)
@@ -106,7 +107,7 @@ internal static class Serialization
         else if (program[0] <= 0xf7)
         {
             sizeBytes.Add((byte)(program[0] & 0x07));
-            for (int i = 0; i < 3; i++)
+            for (var i = 0; i < 3; i++)
             {
                 program.RemoveAt(0);
                 if (program.Count == 0)
@@ -118,7 +119,7 @@ internal static class Serialization
         else if (program[0] <= 0xfb)
         {
             sizeBytes.Add((byte)(program[0] & 0x03));
-            for (int i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
             {
                 program.RemoveAt(0);
                 if (program.Count == 0)
@@ -146,9 +147,9 @@ internal static class Serialization
             throw new ParseError("Invalid encoding.");
         }
 
-        int size = (int)ByteUtils.DecodeInt([.. sizeBytes]);
-        List<byte> bytes = [];
-        for (int i = 0; i < size; i++)
+        var size = ByteUtils.DecodeInt([.. sizeBytes]);
+        var bytes = new List<byte>((int)size);
+        for (var i = 0; i < size; i++)
         {
             program.RemoveAt(0);
             if (program.Count == 0)
@@ -156,6 +157,6 @@ internal static class Serialization
             bytes.Add(program[0]);
         }
 
-        return Program.FromBytes(bytes.ToArray());
+        return Program.FromBytes([.. bytes]);
     }
 }
