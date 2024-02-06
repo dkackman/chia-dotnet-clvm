@@ -137,7 +137,6 @@ internal static class Operators
 
     private static ProgramOutput X(Program args) => throw new Exception($"The error {args} was raised{args.PositionSuffix}.");
 
-
     private static ProgramOutput Equal(Program args)
     {
         var list = args.ToList("=", 2, ArgumentType.Atom);
@@ -205,6 +204,7 @@ internal static class Operators
         var total = BigInteger.Zero;
         var sign = BigInteger.One;
         int argSize = 0;
+
         foreach (var item in list)
         {
             total += sign * item.ToBigInt();
@@ -230,7 +230,7 @@ internal static class Operators
             return ClvmHelper.MallocCost(new ProgramOutput { Value = Program.True, Cost = cost });
         }
 
-        BigInteger value = list[0].ToBigInt();
+        var value = list[0].ToBigInt();
         var size = list[0].Atom.Length;
         foreach (var item in list.Skip(1))
         {
@@ -286,6 +286,7 @@ internal static class Operators
         }
 
         var quotient = Program.FromBigInt(quotientValue);
+
         return ClvmHelper.MallocCost(new ProgramOutput { Value = quotient, Cost = cost });
     }
     private static ProgramOutput GreaterThan(Program args)
@@ -330,6 +331,7 @@ internal static class Operators
         var list = args.ToList("point_add", null, ArgumentType.Atom);
         var cost = Costs.PointAddBase;
         var point = JacobianPoint.InfinityG1();
+
         foreach (var item in list)
         {
             point = point.Add(JacobianPoint.FromBytes(item.Atom, false));
@@ -351,7 +353,7 @@ internal static class Operators
 
         return ClvmHelper.MallocCost(new ProgramOutput
         {
-            Value = Program.FromInt(size), // Assuming FromInt method is defined in Program
+            Value = Program.FromInt(size),
             Cost = cost
         });
     }
@@ -363,15 +365,15 @@ internal static class Operators
         if (list[1].Atom.Length > 4 || (list.Count == 3 && list[2].Atom.Length > 4))
             throw new Exception($"Expected 4 byte indices in \"substr\" operator{args.PositionSuffix}.");
 
-        var from = (int)list[1].ToInt(); // Assuming ToInt method is defined in Program
+        var from = (int)list[1].ToInt();
         var to = (int)(list.Count == 3 ? list[2].ToInt() : value.Length);
         if (to > value.Length || to < from || to < 0 || from < 0)
             throw new Exception($"Invalid indices in \"substr\" operator{args.PositionSuffix}.");
 
         return new ProgramOutput
         {
-            Value = Program.FromBytes(value.Skip(from).Take(to - from).ToArray()), // Assuming FromBytes method is defined in Program
-            Cost = 1 // Assuming cost is calculated as 1
+            Value = Program.FromBytes(value.Skip(from).Take(to - from).ToArray()),
+            Cost = 1
         };
     }
 
@@ -390,7 +392,7 @@ internal static class Operators
 
         return ClvmHelper.MallocCost(new ProgramOutput
         {
-            Value = Program.FromBytes(bytes.ToArray()), // Assuming FromBytes method is defined in Program
+            Value = Program.FromBytes(bytes.ToArray()),
             Cost = cost
         });
     }
@@ -442,7 +444,6 @@ internal static class Operators
     }
 
     private static ProgramOutput Logand(Program args) => ClvmHelper.BinopReduction("logand", BigInteger.MinusOne, args, (a, b) => a & b);
-
     private static ProgramOutput Logior(Program args) => ClvmHelper.BinopReduction("logior", BigInteger.Zero, args, (a, b) => a | b);
     private static ProgramOutput Logxor(Program args) => ClvmHelper.BinopReduction("logxor", BigInteger.Zero, args, (a, b) => a ^ b);
 
@@ -526,15 +527,15 @@ internal static class Operators
 
         return new ProgramOutput
         {
-            Value = Program.False, // Assuming Program.False is defined
+            Value = Program.False,
             Cost = cost
         };
     }
 
     public static ProgramOutput RunOperator(Program op, Program args, RunOptions options)
     {
-        BigInteger symbol = op.ToBigInt();
-        string keyword = KeywordConstants.Keywords.FirstOrDefault(entry => entry.Value == symbol).Key ?? op.ToText();
+        var symbol = op.ToBigInt();
+        var keyword = KeywordConstants.Keywords.FirstOrDefault(entry => entry.Value == symbol).Key ?? op.ToText();
         if (options.Operators.Operators.TryGetValue(keyword, out Operator? value))
         {
             ProgramOutput result = value(args);
