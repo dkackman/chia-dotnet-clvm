@@ -3,6 +3,7 @@
 [![.NET](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/dotnet.yml/badge.svg)](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/dotnet.yml)
 [![CodeQL](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/dkackman/chia-dotnet-clvm/actions/workflows/github-code-scanning/codeql)
 [![Nuget](https://img.shields.io/nuget/dt/chia-dotnet-clvm)](https://www.nuget.org/packages/chia-dotnet-clvm/)
+![NuGet Downloads](https://img.shields.io/nuget/dt/chia-dotnet-clvm)
 
 A direct port of [Rigidity](https://github.com/Rigidity)'s [node-clvm-lib](https://github.com/Chia-Network/node-clvm-lib).
 
