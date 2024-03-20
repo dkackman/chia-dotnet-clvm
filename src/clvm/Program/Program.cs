@@ -156,6 +156,21 @@ public class Program
     public Program(byte[] value) => Value = value;
 
     /// <summary>
+    /// Initializes a new instance of the Program class with an object.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">If the value isn't a Cons or byte array</exception>
+    /// <param name="value">The byte array or Cons value to initialize with.</param>
+    protected Program(object value)
+    {
+        Value = value;
+
+        if (!IsCons && !IsAtom)
+        {
+            throw new InvalidOperationException("The value argument must be a Cons or byte array");
+        }
+    }
+
+    /// <summary>
     /// Gets the value of the Program.
     /// </summary>
     public object Value { get; }
