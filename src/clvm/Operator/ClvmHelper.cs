@@ -16,19 +16,15 @@ internal static class ClvmHelper
         {
             length++;
         }
+
         return (length + 7) / 8;
     }
 
-    public static ProgramOutput BinopReduction(
-        string opName,
-        BigInteger initialValue,
-        Program args,
-        Func<BigInteger, BigInteger, BigInteger> opFunction)
+    public static ProgramOutput BinopReduction(string opName, BigInteger initialValue, Program args, Func<BigInteger, BigInteger, BigInteger> opFunction)
     {
         var total = initialValue;
         var argSize = 0;
         var cost = Costs.LogBase;
-
         var list = args.ToList(opName, null, ArgumentType.Atom);
 
         foreach (var item in list)
@@ -47,20 +43,13 @@ internal static class ClvmHelper
         });
     }
 
-    public static ProgramOutput MallocCost(ProgramOutput output)
+    public static ProgramOutput MallocCost(ProgramOutput output) => new()
     {
-        return new ProgramOutput
-        {
-            Value = output.Value,
-            Cost = output.Cost + (output.Value.Atom.Length * Costs.MallocPerByte)
-        };
-    }
+        Value = output.Value,
+        Cost = output.Cost + (output.Value.Atom.Length * Costs.MallocPerByte)
+    };
 
-    public static IList<Program> ToList(
-        this Program program,
-        string name,
-        int length,
-        ArgumentType? type = null)
+    public static IList<Program> ToList(this Program program, string name, int length, ArgumentType? type = null)
     {
         var list = program.ToList();
         if (list.Count != length)
@@ -69,13 +58,11 @@ internal static class ClvmHelper
         }
 
         ValidateListType(list, type, name);
+
         return list;
     }
 
-    public static IList<Program> ToList(
-            this Program program,
-            string name,
-            ArgumentType? type = null)
+    public static IList<Program> ToList(this Program program, string name, ArgumentType? type = null)
     {
         var list = program.ToList();
 
@@ -84,11 +71,7 @@ internal static class ClvmHelper
         return list;
     }
 
-    public static IList<Program> ToList(
-        this Program program,
-        string name,
-        int[]? lengthRange,
-        ArgumentType? type = null)
+    public static IList<Program> ToList(this Program program, string name, int[]? lengthRange, ArgumentType? type = null)
     {
         var list = program.ToList();
         lengthRange ??= [];
@@ -99,6 +82,7 @@ internal static class ClvmHelper
         }
 
         ValidateListType(list, type, name);
+
         return list;
     }
 
