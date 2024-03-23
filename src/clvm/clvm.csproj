@@ -21,7 +21,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/dkackman/chia-dotnet-clvm</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>88% unit test passings</PackageReleaseNotes>
+        <PackageReleaseNotes></PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
