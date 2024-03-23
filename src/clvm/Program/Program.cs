@@ -517,6 +517,12 @@ public class Program
     }
 
     /// <summary>
+    /// Converts the Program to a hint string.
+    /// </summary>
+    /// <returns>The hint</returns>
+    public string ToHint() => FromBigInt(ToBigInt() + 1).ToHex().PadLeft(64, '0')[..64];
+
+    /// <summary>
     /// Converts the Program to a long integer.
     /// </summary>
     /// <returns>A long integer representing the Program.</returns>
