@@ -72,14 +72,14 @@ public class Program
     /// </summary>
     /// <param name="value">The long integer to convert.</param>
     /// <returns>A new Program.</returns>
-    public static Program FromInt(long value) => new(value.EncodeInt());
+    public static Program FromInt(long value) => new(value.Encode());
 
     /// <summary>
     /// Creates a new Program from a BigInteger.
     /// </summary>
     /// <param name="value">The BigInteger to convert.</param>
     /// <returns>A new Program.</returns>
-    public static Program FromBigInt(BigInteger value) => new(value.EncodeBigInt());
+    public static Program FromBigInt(BigInteger value) => new(value.Encode());
 
     /// <summary>
     /// Creates a new Program from a text string.
@@ -141,7 +141,7 @@ public class Program
     /// </summary>
     /// <param name="hex">The hexadecimal string to deserialize.</param>
     /// <returns>A new Program deserialized from the hexadecimal string.</returns>
-    public static Program DeserializeHex(string hex) => Deserialize(hex.FromHex());
+    public static Program DeserializeHex(string hex) => Deserialize(hex.ToHexBytes());
 
     /// <summary>
     /// Initializes a new instance of the Program class with a Cons value.
@@ -601,7 +601,7 @@ public class Program
                     return $"0x{ToHex()}";
                 }
             }
-            else if (ByteUtils.BytesEqual(Atom.DecodeInt().EncodeInt(), Atom))
+            else if (ByteUtils.BytesEqual(Atom.DecodeInt().Encode(), Atom))
             {
                 return Atom.DecodeInt().ToString();
             }

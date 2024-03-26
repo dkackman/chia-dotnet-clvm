@@ -8,7 +8,7 @@ internal delegate ProgramOutput Eval(Program program, Program args);
 internal static class Compile
 {
     public static HashSet<string> PassThroughOperators = new(
-        KeywordConstants.Keywords.Values.Select(value => ByteUtils.ToHex(value.EncodeBigInt()))
+        KeywordConstants.Keywords.Values.Select(value => ByteUtils.ToHex(value.Encode()))
         .Concat(new[] { Encoding.UTF8.GetBytes("com").ToHex(), Encoding.UTF8.GetBytes("opt").ToHex() })
     );
 

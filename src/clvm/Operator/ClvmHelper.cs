@@ -11,7 +11,7 @@ internal static class ClvmHelper
 
     public static int LimbsForBigInt(BigInteger value)
     {
-        int length = value == 0 ? 0 : (int)ByteUtils.BigIntBitLength(value < 0 ? (-value) : value);
+        int length = value == 0 ? 0 : (int)ByteUtils.BitLength(value < 0 ? (-value) : value);
         if (value < 0)
         {
             length++;

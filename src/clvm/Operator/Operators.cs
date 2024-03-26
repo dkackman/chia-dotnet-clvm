@@ -316,7 +316,7 @@ internal static class Operators
     {
         var list = args.ToList("pubkey_for_exp", 1, ArgumentType.Atom);
         var value = ClvmHelper.Mod(list[0].ToBigInt(), Constants.N);
-        var exponent = PrivateKey.FromBytes(value.BigIntToBytes(32, Endian.Big));
+        var exponent = PrivateKey.FromBytes(value.ToBytes(32, Endian.Big));
         var cost = Costs.PubkeyBase + (ulong)list[0].Atom.Length * Costs.PubkeyPerByte;
 
         return ClvmHelper.MallocCost(new ProgramOutput
@@ -428,7 +428,7 @@ internal static class Operators
         if (BigInteger.Abs(shift) > 65535)
             throw new Exception($"Shift too large in \"lsh\" operator{args.PositionSuffix}.");
 
-        var value = list[0].Atom.BytesToBigInt();
+        var value = list[0].Atom.ToBigInt();
         if (value < BigInteger.Zero)
         {
             value = -value;
@@ -554,7 +554,7 @@ internal static class Operators
             throw new Exception($"Invalid operator {op.PositionSuffix}.");
 
         var costFunction = (op.Atom[^1] & 0xc0) >> 6;
-        var costMultiplier = ByteUtils.BytesToInt(op.Atom.Take(op.Atom.Length - 1).ToArray(), Endian.Big, false) + 1;
+        var costMultiplier = ByteUtils.ToInt(op.Atom.Take(op.Atom.Length - 1).ToArray(), Endian.Big, false) + 1;
         BigInteger cost;
 
         if (costFunction == 0)

@@ -9,15 +9,15 @@ internal class NodePath
     public static readonly NodePath Left = Top.First();
     public static readonly NodePath Right = Top.Rest();
 
-    private BigInteger index;
+    private readonly BigInteger index;
 
     public NodePath(BigInteger index)
     {
         if (index < 0)
         {
             var byteCount = (index.GetBitLength() + 7) >> 3;
-            var blob = index.BigIntToBytes((int)byteCount, Endian.Big, true);
-            index = ByteUtils.BytesToBigInt([0, .. blob]);
+            var blob = index.ToBytes((int)byteCount, Endian.Big, true);
+            index = ByteUtils.ToBigInt([0, .. blob]);
         }
         this.index = index;
     }
@@ -25,7 +25,7 @@ internal class NodePath
     public byte[] AsPath()
     {
         var byteCount = (index.GetBitLength() + 7) >> 3;
-        return index.BigIntToBytes((int)byteCount);
+        return index.ToBytes((int)byteCount);
     }
 
     public NodePath Add(NodePath other) => new(ComposePaths(index, other.index));
