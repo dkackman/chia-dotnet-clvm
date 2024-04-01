@@ -473,9 +473,7 @@ public class Program
         if (IsCons || (Atom.Length != 48 && Atom.Length != 96))
             throw new Exception($"Cannot convert {ToString()} to JacobianPoint{PositionSuffix}.");
 
-        return Atom.Length == 48
-            ? JacobianPoint.FromBytesG1(Atom)
-            : JacobianPoint.FromBytesG2(Atom);
+        return JacobianPoint.FromBytes(Atom);
     }
 
     /// <summary>

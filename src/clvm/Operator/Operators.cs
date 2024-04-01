@@ -321,7 +321,7 @@ internal static class Operators
 
         return ClvmHelper.MallocCost(new ProgramOutput
         {
-            Value = Program.FromBytes(exponent.GetG1().ToBytes()),
+            Value = Program.FromBytes(exponent.GetG1Element().ToBytes()),
             Cost = cost
         });
     }
@@ -330,11 +330,11 @@ internal static class Operators
     {
         var list = args.ToList("point_add", null, ArgumentType.Atom);
         var cost = Costs.PointAddBase;
-        var point = JacobianPoint.InfinityG1();
+        var point = G1Element.GetInfinity();
 
         foreach (var item in list)
         {
-            point = point.Add(JacobianPoint.FromBytes(item.Atom, false));
+            point += G1Element.FromBytes(item.Atom);
             cost += Costs.PointAddPerArg;
         }
 
