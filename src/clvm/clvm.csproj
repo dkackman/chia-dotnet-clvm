@@ -15,13 +15,13 @@
         <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <Authors>dkackman</Authors>
-        <Version>0.1.3</Version>
+        <Version>0.2.0</Version>
         <Copyright>2024 dkackman</Copyright>
         <PackageProjectUrl>https://dkackman.github.io/chia-dotnet-clvm/</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/dkackman/chia-dotnet-clvm</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>Add condition codes enum</PackageReleaseNotes>
+        <PackageReleaseNotes>Integrate blst version of chia.dotnet.bls</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
