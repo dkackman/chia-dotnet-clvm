@@ -15,7 +15,7 @@
         <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <Authors>dkackman</Authors>
-        <Version>0.2.2</Version>
+        <Version>0.2.2-alpha.1</Version>
         <Copyright>2024 dkackman</Copyright>
         <PackageProjectUrl>https://dkackman.github.io/chia-dotnet-clvm/</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -40,7 +40,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="chia-dotnet-bls" Version="2.0.8" />
+        <PackageReference Include="chia-dotnet-bls" Version="2.0.8-alpha.1" />
     </ItemGroup>
 
 </Project>
